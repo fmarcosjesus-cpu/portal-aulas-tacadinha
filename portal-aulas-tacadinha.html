@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal de Aulas | Tacadinha</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 1080px;
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .hero {
+      padding: 28px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+    .hero p {
+      margin: 0;
+      color: #cbd5e1;
+      line-height: 1.55;
+    }
+    .content {
+      padding: 28px;
+    }
+    .auth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    .box {
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .box h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .box p {
+      margin: 0 0 16px;
+      color: #cbd5e1;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .input {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: #111827;
+      color: #fff;
+      outline: none;
+      margin-bottom: 14px;
+    }
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      background: #22c55e;
+      color: #052e16;
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn-secondary {
+      background: #38bdf8;
+      color: #082f49;
+    }
+    .btn-ghost {
+      width: auto;
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 14px;
+    }
+    .hint, .error, .success, .warning {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .hint { color: #93c5fd; }
+    .error { color: #fca5a5; }
+    .success { color: #86efac; }
+    .warning {
+      color: #fde68a;
+      background: rgba(234,179,8,0.08);
+      border: 1px solid rgba(234,179,8,0.25);
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 22px;
+    }
+    .dashboard { display: none; }
+    .topbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.15);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .lesson {
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .lesson h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    .lesson p {
+      margin: 0 0 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .lesson a {
+      display: inline-block;
+      text-decoration: none;
+      background: #38bdf8;
+      color: #082f49;
+      font-weight: 700;
+      padding: 11px 14px;
+      border-radius: 10px;
+    }
+    .footer-note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .small-note {
+      margin-top: 10px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 26px; }
+      .content, .hero { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hero">
+        <h1>Portal de Aulas do Tacadinha</h1>
+        <p>Área reservada para alunos com acesso liberado. Faça seu cadastro ou login para acessar as aulas.</p>
+      </div>
+
+      <div class="content" id="authSection">
+        <div class="warning">
+          Este portal agora está preparado para usar login individual com Firebase. Você só precisa colar suas credenciais do projeto nos campos indicados no código.
+        </div>
+
+        <div class="auth-grid">
+          <div class="box">
+            <h2>Criar conta</h2>
+            <p>O aluno informa e-mail e senha para criar o acesso individual.</p>
+            <label class="label" for="registerName">Nome</label>
+            <input class="input" type="text" id="registerName" placeholder="Seu nome" />
+            <label class="label" for="registerEmail">E-mail</label>
+            <input class="input" type="email" id="registerEmail" placeholder="seuemail@exemplo.com" />
+            <label class="label" for="registerPassword">Senha</label>
+            <input class="input" type="password" id="registerPassword" placeholder="Crie uma senha" />
+            <button class="btn" id="registerBtn">Criar conta</button>
+            <div class="small-note">Você pode trocar esta lógica depois para liberar apenas alunos pagos.</div>
+          </div>
+
+          <div class="box">
+            <h2>Entrar</h2>
+            <p>Alunos já cadastrados podem fazer login para acessar as aulas.</p>
+            <label class="label" for="loginEmail">E-mail</label>
+            <input class="input" type="email" id="loginEmail" placeholder="seuemail@exemplo.com" />
+            <label class="label" for="loginPassword">Senha</label>
+            <input class="input" type="password" id="loginPassword" placeholder="Digite sua senha" />
+            <button class="btn btn-secondary" id="loginBtn">Entrar no portal</button>
+            <button class="btn btn-ghost" id="resetBtn" style="margin-top:12px;">Esqueci minha senha</button>
+          </div>
+        </div>
+
+        <div class="hint" id="infoMsg"></div>
+        <div class="success" id="successMsg"></div>
+        <div class="error" id="errorMsg"></div>
+      </div>
+
+      <div class="content dashboard" id="dashboardSection">
+        <div class="topbar">
+          <div>
+            <span class="badge">Acesso liberado</span>
+            <div class="small-note" id="userInfo"></div>
+          </div>
+          <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+        </div>
+
+        <div class="grid">
+          <div class="lesson">
+            <h3>Módulo 1</h3>
+            <p>Introdução ao jogo, visão geral da estratégia e primeiros fundamentos para evitar erros comuns.</p>
+            <a href="https://www.youtube.com/watch?v=SEU_VIDEO_1" target="_blank">Assistir aula</a>
+          </div>
+
+          <div class="lesson">
+            <h3>Módulo 2</h3>
+            <p>Leitura prática das situações do jogo e critérios para tomar decisões com mais consistência.</p>
+            <a href="https://www.youtube.com/watch?v=SEU_VIDEO_2" target="_blank">Assistir aula</a>
+          </div>
+
+          <div class="lesson">
+            <h3>Módulo 3</h3>
+            <p>Erros recorrentes dos iniciantes, disciplina, gerenciamento e organização da rotina de estudo.</p>
+            <a href="https://www.youtube.com/watch?v=SEU_VIDEO_3" target="_blank">Assistir aula</a>
+          </div>
+
+          <div class="lesson">
+            <h3>Suporte</h3>
+            <p>Canal de contato para dúvidas relacionadas às aulas e ao acesso da plataforma.</p>
+            <a href="https://wa.me/5599984488393?text=Olá,%20sou%20aluno%20e%20quero%20tirar%20uma%20dúvida%20sobre%20as%20aulas%20do%20Tacadinha." target="_blank">Falar no WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          Substitua os links de exemplo pelos links reais das suas aulas. Depois, publique novamente no Netlify para atualizar o site online.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged,
+      signOut,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
+  authDomain: "tacadinha-aulas-9a75b.firebaseapp.com",
+  projectId: "tacadinha-aulas-9a75b",
+  storageBucket: "tacadinha-aulas-9a75b.firebasestorage.app",
+  messagingSenderId: "957514767572",
+  appId: "1:957514767572:web:d077b7169c6d5652b9ef41",
+  measurementId: "G-FEMHWYVMPZ"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const authSection = document.getElementById("authSection");
+    const dashboardSection = document.getElementById("dashboardSection");
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+    const infoMsg = document.getElementById("infoMsg");
+    const userInfo = document.getElementById("userInfo");
+
+    function clearMessages() {
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+      infoMsg.textContent = "";
+    }
+
+    async function isAuthorized(email) {
+  if (!email) return false;
+
+  try {
+    const normalizedEmail = email.trim().toLowerCase();
+    console.log("Email original:", email);
+    console.log("Email normalizado:", normalizedEmail);
+
+    const ref = doc(db, "access", normalizedEmail);
+    const snap = await getDoc(ref);
+
+    console.log("Documento existe?", snap.exists());
+
+    if (snap.exists()) {
+      console.log("Dados do documento:", snap.data());
+      console.log("Campo paid:", snap.data().paid);
+    }
+
+    return snap.exists() && snap.data().paid === true;
+  } catch (error) {
+    console.error("Erro ao verificar acesso:", error);
+    return false;
+  }
+}
+
+    function showDashboard(user) {
+      authSection.style.display = "none";
+      dashboardSection.style.display = "block";
+      const nome = user.displayName ? user.displayName : "Aluno";
+      userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
+    }
+
+    function showAuth() {
+      authSection.style.display = "block";
+      dashboardSection.style.display = "none";
+    }
+
+    document.getElementById("registerBtn").addEventListener("click", async () => {
+      clearMessages();
+      const name = document.getElementById("registerName").value.trim();
+      const email = document.getElementById("registerEmail").value.trim();
+      const password = document.getElementById("registerPassword").value.trim();
+
+      if (!name || !email || !password) {
+        errorMsg.textContent = "Preencha nome, e-mail e senha para criar sua conta.";
+        return;
+      }
+
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: name });
+        successMsg.textContent = "Conta criada com sucesso. Você já pode acessar o portal.";
+      } catch (error) {
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      clearMessages();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (!email || !password) {
+        errorMsg.textContent = "Informe seu e-mail e sua senha para entrar.";
+        return;
+      }
+
+      infoMsg.textContent = "Verificando seus dados...";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        successMsg.textContent = "Login realizado com sucesso.";
+      } catch (error) {
+        infoMsg.textContent = "";
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", async () => {
+      clearMessages();
+      const email = document.getElementById("loginEmail").value.trim() || document.getElementById("registerEmail").value.trim();
+
+      if (!email) {
+        errorMsg.textContent = "Informe o e-mail para receber a redefinição de senha.";
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        successMsg.textContent = "Enviamos um e-mail para redefinição de senha.";
+      } catch (error) {
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      clearMessages();
+      await signOut(auth);
+      infoMsg.textContent = "Você saiu do portal.";
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", async () => {
+      clearMessages();
+      const email = document.getElementById("loginEmail").value.trim() || document.getElementById("registerEmail").value.trim();
+
+      if (!email) {
+        errorMsg.textContent = "Informe o e-mail para receber a redefinição de senha.";
+        return;
+      }
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        successMsg.textContent = "Enviamos um e-mail para redefinição de senha.";
+      } catch (error) {
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      clearMessages();
+      await signOut(auth);
+      infoMsg.textContent = "Você saiu do portal.";
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      clearMessages();
+      if (user) {
+        infoMsg.textContent = "Verificando liberação de acesso...";
+        const autorizado = await isAuthorized(user.email);
+
+        if (autorizado) {
+          infoMsg.textContent = "";
+          showDashboard(user);
+        } else {
+          await signOut(auth);
+          showAuth();
+          errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Após a confirmação do pagamento, sua entrada será liberada automaticamente.";
+        }
+      } else {
+        showAuth();
+      }
+    });
+
+    function traduzirErro(code) {
+      const erros = {
+        "auth/email-already-in-use": "Esse e-mail já está cadastrado.",
+        "auth/invalid-email": "O e-mail informado é inválido.",
+        "auth/weak-password": "A senha está muito fraca. Use pelo menos 6 caracteres.",
+        "auth/missing-password": "Informe uma senha válida.",
+        "auth/invalid-credential": "E-mail ou senha incorretos.",
+        "auth/user-not-found": "Usuário não encontrado.",
+        "auth/network-request-failed": "Falha de conexão. Verifique sua internet.",
+        "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente."
+      };
+      return erros[code] || `Ocorreu um erro: ${code}`;
+    }
+  </script>
+</body>
+</html>
+
+<a href="https://mpago.la/1E4wGEa" target="_blank">
+  <button style="padding:15px; background:#00c853; color:white; border:none; border-radius:8px; cursor:pointer;">
+    Comprar acesso
+  </button>
+</a>
