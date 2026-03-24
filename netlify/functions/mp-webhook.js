@@ -11,13 +11,31 @@ if (!admin.apps.length) {
 
 exports.handler = async (event) => {
   try {
+    // Evita erro ao abrir no navegador
+    if (!event.body) {
+      return {
+        statusCode: 200,
+        body: "Webhook ativo",
+      };
+    }
+
     const body = JSON.parse(event.body);
 
     console.log("Webhook recebido:", body);
 
-    const paymentId = body.data.id;
+    // 🔥 Pega ID corretamente (ESSENCIAL)
+    const paymentId = event.queryStringParameters?.id || body.data?.id;
 
-    // Buscar detalhes do pagamento
+    console.log("ID recebido:", paymentId);
+
+    if (!paymentId) {
+      return {
+        statusCode: 400,
+        body: "Sem ID",
+      };
+    }
+
+    // Buscar pagamento
     const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
       headers: {
         Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
@@ -28,8 +46,14 @@ exports.handler = async (event) => {
 
     console.log("Pagamento:", payment);
 
+    // 🔥 Só libera se aprovado
     if (payment.status === "approved") {
-      const email = payment.payer.email;
+      const email = payment.payer?.email;
+
+      if (!email) {
+        console.log("Email não encontrado");
+        return { statusCode: 200, body: "Sem email" };
+      }
 
       console.log("Liberando acesso para:", email);
 
