@@ -11,31 +11,35 @@ if (!admin.apps.length) {
 
 exports.handler = async (event) => {
   try {
-    // Evita erro ao abrir no navegador
-    if (!event.body) {
+    const qs = event.queryStringParameters || {};
+    const topic = qs.topic || qs.type || null;
+    const queryId = qs.id || qs["data.id"] || null;
+
+    let body = {};
+    if (event.body) {
+      try {
+        body = JSON.parse(event.body);
+      } catch (e) {
+        body = {};
+      }
+    }
+
+    console.log("Webhook query:", qs);
+    console.log("Webhook body:", body);
+
+    const bodyId = body?.data?.id || null;
+    const paymentId = queryId || bodyId;
+
+    if (!paymentId) {
       return {
         statusCode: 200,
         body: "Webhook ativo",
       };
     }
 
-    const body = JSON.parse(event.body);
-
-    console.log("Webhook recebido:", body);
-
-    // 🔥 Pega ID corretamente (ESSENCIAL)
-    const paymentId = event.queryStringParameters?.id || body.data?.id;
-
     console.log("ID recebido:", paymentId);
+    console.log("Topic recebido:", topic);
 
-    if (!paymentId) {
-      return {
-        statusCode: 400,
-        body: "Sem ID",
-      };
-    }
-
-    // Buscar pagamento
     const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
       headers: {
         Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
@@ -46,22 +50,31 @@ exports.handler = async (event) => {
 
     console.log("Pagamento:", payment);
 
-    // 🔥 Só libera se aprovado
     if (payment.status === "approved") {
-      const email = payment.payer?.email;
+      const email =
+        payment?.payer?.email ||
+        payment?.metadata?.email ||
+        payment?.external_reference ||
+        null;
 
       if (!email) {
-        console.log("Email não encontrado");
-        return { statusCode: 200, body: "Sem email" };
+        console.log("E-mail não encontrado no pagamento.");
+        return {
+          statusCode: 200,
+          body: "Sem email",
+        };
       }
 
       console.log("Liberando acesso para:", email);
 
       const db = admin.firestore();
 
-      await db.collection("access").doc(email.toLowerCase()).set({
-        paid: true,
-      });
+      await db.collection("access").doc(email.toLowerCase()).set(
+        {
+          paid: true,
+        },
+        { merge: true }
+      );
 
       console.log("Acesso liberado!");
     }
