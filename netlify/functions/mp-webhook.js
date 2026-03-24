@@ -28,29 +28,65 @@ exports.handler = async (event) => {
     console.log("Webhook body:", body);
 
     const bodyId = body?.data?.id || null;
-    const paymentId = queryId || bodyId;
+    const receivedId = queryId || bodyId;
 
-    if (!paymentId) {
+    if (!receivedId) {
       return {
         statusCode: 200,
         body: "Webhook ativo",
       };
     }
 
-    console.log("ID recebido:", paymentId);
+    console.log("ID recebido:", receivedId);
     console.log("Topic recebido:", topic);
 
-    const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
-      },
-    });
+    let payment = null;
 
-    const payment = await response.json();
+    if (topic === "merchant_order") {
+      const orderResponse = await fetch(
+        `https://api.mercadopago.com/merchant_orders/${receivedId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+          },
+        }
+      );
+
+      const order = await orderResponse.json();
+      console.log("Merchant order:", order);
+
+      if (order.payments && order.payments.length > 0) {
+        const realPaymentId = order.payments[0].id;
+
+        const paymentResponse = await fetch(
+          `https://api.mercadopago.com/v1/payments/${realPaymentId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+            },
+          }
+        );
+
+        payment = await paymentResponse.json();
+      } else {
+        console.log("Nenhum pagamento encontrado dentro do merchant_order.");
+      }
+    } else {
+      const paymentResponse = await fetch(
+        `https://api.mercadopago.com/v1/payments/${receivedId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+          },
+        }
+      );
+
+      payment = await paymentResponse.json();
+    }
 
     console.log("Pagamento:", payment);
 
-    if (payment.status === "approved") {
+    if (payment && payment.status === "approved") {
       const email =
         payment?.payer?.email ||
         payment?.metadata?.email ||
@@ -91,4 +127,4 @@ exports.handler = async (event) => {
       body: "Erro",
     };
   }
-};
+};	
