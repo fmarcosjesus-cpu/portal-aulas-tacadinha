@@ -1,7 +1,7 @@
-const mercadopago = require("mercadopago");
+const { MercadoPagoConfig, Preference } = require("mercadopago");
 
-mercadopago.configure({
-  access_token: process.env.MP_ACCESS_TOKEN,
+const client = new MercadoPagoConfig({
+  accessToken: process.env.MP_ACCESS_TOKEN,
 });
 
 exports.handler = async (event) => {
@@ -23,34 +23,36 @@ exports.handler = async (event) => {
       };
     }
 
-    const preference = {
-      items: [
-        {
-          title: "Acesso ao curso Tacadinha",
-          quantity: 1,
-          unit_price: 10,
-          currency_id: "BRL",
-        },
-      ],
-      payer: {
-        email,
-      },
-      external_reference: email,
-      notification_url: "https://snazzy-raindrop-a62381.netlify.app/.netlify/functions/mp-webhook",
-      back_urls: {
-        success: "https://snazzy-raindrop-a62381.netlify.app/",
-        failure: "https://snazzy-raindrop-a62381.netlify.app/",
-        pending: "https://snazzy-raindrop-a62381.netlify.app/",
-      },
-      auto_return: "approved",
-    };
+    const preferenceClient = new Preference(client);
 
-    const response = await mercadopago.preferences.create(preference);
+    const response = await preferenceClient.create({
+      body: {
+        items: [
+          {
+            title: "Acesso ao curso Tacadinha",
+            quantity: 1,
+            unit_price: 10,
+            currency_id: "BRL",
+          },
+        ],
+        payer: {
+          email,
+        },
+        external_reference: email,
+        notification_url: "https://snazzy-raindrop-a62381.netlify.app/.netlify/functions/mp-webhook",
+        back_urls: {
+          success: "https://snazzy-raindrop-a62381.netlify.app/",
+          failure: "https://snazzy-raindrop-a62381.netlify.app/",
+          pending: "https://snazzy-raindrop-a62381.netlify.app/",
+        },
+        auto_return: "approved",
+      },
+    });
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        init_point: response.body.init_point,
+        init_point: response.init_point,
       }),
     };
   } catch (error) {
@@ -58,7 +60,10 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Erro ao criar preferência" }),
+      body: JSON.stringify({
+        error: "Erro ao criar preferência",
+        detalhe: error.message || null,
+      }),
     };
   }
 };
