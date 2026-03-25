@@ -325,20 +325,16 @@ const firebaseConfig = {
 
   try {
     const normalizedEmail = email.trim().toLowerCase();
-    console.log("Email original:", email);
-    console.log("Email normalizado:", normalizedEmail);
 
     const ref = doc(db, "access", normalizedEmail);
     const snap = await getDoc(ref);
 
+    console.log("Verificando acesso para:", normalizedEmail);
     console.log("Documento existe?", snap.exists());
 
-    if (snap.exists()) {
-      console.log("Dados do documento:", snap.data());
-      console.log("Campo paid:", snap.data().paid);
-    }
+    // 🔥 Agora basta existir para liberar
+    return snap.exists();
 
-    return snap.exists() && snap.data().paid === true;
   } catch (error) {
     console.error("Erro ao verificar acesso:", error);
     return false;
