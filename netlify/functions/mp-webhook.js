@@ -88,9 +88,9 @@ exports.handler = async (event) => {
 
     if (payment && payment.status === "approved") {
       const email =
-        payment?.payer?.email ||
         payment?.metadata?.email ||
         payment?.external_reference ||
+        payment?.payer?.email ||
         null;
 
       if (!email) {
@@ -101,13 +101,16 @@ exports.handler = async (event) => {
         };
       }
 
-      console.log("Liberando acesso para:", email);
+      const normalizedEmail = email.trim().toLowerCase();
+
+      console.log("Liberando acesso para:", normalizedEmail);
 
       const db = admin.firestore();
 
-      await db.collection("access").doc(email.toLowerCase()).set(
+      await db.collection("access").doc(normalizedEmail).set(
         {
           paid: true,
+          email: normalizedEmail,
         },
         { merge: true }
       );
@@ -127,4 +130,4 @@ exports.handler = async (event) => {
       body: "Erro",
     };
   }
-};	
+};
