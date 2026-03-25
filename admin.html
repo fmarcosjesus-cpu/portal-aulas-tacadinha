@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -201,87 +202,90 @@
       <div class="hero">
         <h1>Painel administrativo do Tacadinha</h1>
         <p>Área para consulta dos alunos com acesso liberado, status de pagamento, valor e data da última atualização.</p>
-      </div><div class="content" id="loginSection">
-    <div class="login-box">
-      <span class="pill">Acesso restrito</span>
-      <div style="height:12px"></div>
-      <label class="label" for="adminEmail">E-mail do administrador</label>
-      <input class="input" type="email" id="adminEmail" placeholder="seuemail@exemplo.com" />
+      </div>
 
-      <label class="label" for="adminPassword">Senha</label>
-      <input class="input" type="password" id="adminPassword" placeholder="Digite sua senha" />
+      <div class="content" id="loginSection">
+        <div class="login-box">
+          <span class="pill">Acesso restrito</span>
+          <div style="height:12px"></div>
+          <label class="label" for="adminEmail">E-mail do administrador</label>
+          <input class="input" type="email" id="adminEmail" placeholder="seuemail@exemplo.com" />
 
-      <button class="btn" id="adminLoginBtn">Entrar no painel</button>
+          <label class="label" for="adminPassword">Senha</label>
+          <input class="input" type="password" id="adminPassword" placeholder="Digite sua senha" />
 
-      <div class="info" id="loginInfo"></div>
-      <div class="error" id="loginError"></div>
+          <button class="btn" id="adminLoginBtn">Entrar no painel</button>
+
+          <div class="info" id="loginInfo"></div>
+          <div class="error" id="loginError"></div>
+        </div>
+      </div>
+
+      <div class="content hidden" id="adminSection">
+        <div class="topbar">
+          <div>
+            <span class="pill">Consulta de acessos</span>
+            <div class="muted" id="adminUserInfo"></div>
+          </div>
+          <button class="btn-ghost" id="logoutBtn">Sair</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <div class="label-small">Total de registros</div>
+            <div class="value" id="totalRegistros">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="label-small">Pagos ativos</div>
+            <div class="value" id="totalAtivos">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="label-small">Revogados</div>
+            <div class="value" id="totalRevogados">0</div>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input class="input" type="text" id="searchInput" placeholder="Buscar por e-mail..." />
+          <select class="input" id="statusFilter">
+            <option value="todos">Todos os status</option>
+            <option value="approved">Aprovados</option>
+            <option value="refunded">Estornados</option>
+            <option value="charged_back">Chargeback</option>
+            <option value="cancelled">Cancelados</option>
+          </select>
+          <button class="btn" id="refreshBtn">Atualizar lista</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>E-mail</th>
+                <th>Status</th>
+                <th>Pago?</th>
+                <th>Valor</th>
+                <th>Payment ID</th>
+                <th>Pago em</th>
+                <th>Revogado em</th>
+                <th>Última atualização</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr>
+                <td colspan="8" class="muted">Carregando registros...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="success" id="adminSuccess"></div>
+        <div class="error" id="adminError"></div>
+      </div>
     </div>
   </div>
 
-  <div class="content hidden" id="adminSection">
-    <div class="topbar">
-      <div>
-        <span class="pill">Consulta de acessos</span>
-        <div class="muted" id="adminUserInfo"></div>
-      </div>
-      <button class="btn-ghost" id="logoutBtn">Sair</button>
-    </div>
-
-    <div class="stats">
-      <div class="stat-card">
-        <div class="label-small">Total de registros</div>
-        <div class="value" id="totalRegistros">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="label-small">Pagos ativos</div>
-        <div class="value" id="totalAtivos">0</div>
-      </div>
-      <div class="stat-card">
-        <div class="label-small">Revogados</div>
-        <div class="value" id="totalRevogados">0</div>
-      </div>
-    </div>
-
-    <div class="toolbar">
-      <input class="input" type="text" id="searchInput" placeholder="Buscar por e-mail..." />
-      <select class="input" id="statusFilter">
-        <option value="todos">Todos os status</option>
-        <option value="approved">Aprovados</option>
-        <option value="refunded">Estornados</option>
-        <option value="charged_back">Chargeback</option>
-        <option value="cancelled">Cancelados</option>
-      </select>
-      <button class="btn" id="refreshBtn">Atualizar lista</button>
-    </div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>E-mail</th>
-            <th>Status</th>
-            <th>Pago?</th>
-            <th>Valor</th>
-            <th>Payment ID</th>
-            <th>Pago em</th>
-            <th>Revogado em</th>
-            <th>Última atualização</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr>
-            <td colspan="8" class="muted">Carregando registros...</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="success" id="adminSuccess"></div>
-    <div class="error" id="adminError"></div>
-  </div>
-</div>
-
-  </div>  <script type="module">
+  <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getAuth,
@@ -292,9 +296,7 @@
     import {
       getFirestore,
       collection,
-      getDocs,
-      query,
-      orderBy
+      getDocs
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -307,8 +309,6 @@
       measurementId: "G-FEMHWYVMPZ"
     };
 
-    // IMPORTANTE:
-    // Troque este e-mail pelo seu e-mail de administrador.
     const ADMIN_EMAIL = "f.marcos.jesus@gmail.com";
 
     const app = initializeApp(firebaseConfig);
@@ -411,13 +411,18 @@
       tableBody.innerHTML = `<tr><td colspan="8" class="muted">Carregando registros...</td></tr>`;
 
       try {
-        const q = query(collection(db, "access"), orderBy("updatedAt", "desc"));
-        const snap = await getDocs(q);
+        const snap = await getDocs(collection(db, "access"));
 
         allRows = snap.docs.map(docItem => ({
           id: docItem.id,
           ...docItem.data()
         }));
+
+        allRows.sort((a, b) => {
+          const dateA = new Date(a.updatedAt || a.paidAt || 0).getTime();
+          const dateB = new Date(b.updatedAt || b.paidAt || 0).getTime();
+          return dateB - dateA;
+        });
 
         totalRegistros.textContent = allRows.length;
         totalAtivos.textContent = allRows.filter(item => item.paid === true).length;
