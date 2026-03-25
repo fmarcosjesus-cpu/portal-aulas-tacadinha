@@ -102,6 +102,13 @@ exports.handler = async (event) => {
       }
 
       const normalizedEmail = email.trim().toLowerCase();
+      const paymentId = payment?.id || null;
+      const amount = payment?.transaction_amount || null;
+      const status = payment?.status || null;
+      const paidAt =
+        payment?.date_approved ||
+        payment?.date_last_updated ||
+        new Date().toISOString();
 
       console.log("Liberando acesso para:", normalizedEmail);
 
@@ -111,6 +118,11 @@ exports.handler = async (event) => {
         {
           paid: true,
           email: normalizedEmail,
+          paymentId: paymentId,
+          status: status,
+          amount: amount,
+          paidAt: paidAt,
+          topic: topic || "payment",
         },
         { merge: true }
       );
