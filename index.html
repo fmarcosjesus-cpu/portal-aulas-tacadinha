@@ -194,18 +194,18 @@
     <div class="card">
       <div class="hero">
         <h1>Portal de Aulas do Tacadinha</h1>
-        <p>Área reservada para alunos com acesso liberado. Faça seu cadastro ou login para acessar as aulas.</p>
+        <p>Área reservada para alunos com acesso liberado. Para criar a conta, o e-mail precisa já ter sido liberado após a confirmação do pagamento.</p>
       </div>
 
       <div class="content" id="authSection">
         <div class="warning">
-          Este portal agora está preparado para usar login individual com Firebase. Você só precisa colar suas credenciais do projeto nos campos indicados no código.
+          Para criar sua conta, use o mesmo e-mail utilizado no pagamento. Se o pagamento ainda não tiver sido confirmado, aguarde alguns instantes e tente novamente.
         </div>
 
         <div class="auth-grid">
           <div class="box">
             <h2>Criar conta</h2>
-            <p>O aluno informa e-mail e senha para criar o acesso individual.</p>
+            <p>O cadastro só é permitido para e-mails que já tenham acesso liberado no sistema.</p>
             <label class="label" for="registerName">Nome</label>
             <input class="input" type="text" id="registerName" placeholder="Seu nome" />
             <label class="label" for="registerEmail">E-mail</label>
@@ -213,7 +213,7 @@
             <label class="label" for="registerPassword">Senha</label>
             <input class="input" type="password" id="registerPassword" placeholder="Crie uma senha" />
             <button class="btn" id="registerBtn">Criar conta</button>
-            <div class="small-note">Você pode trocar esta lógica depois para liberar apenas alunos pagos.</div>
+            <div class="small-note">Se o sistema informar que o e-mail ainda não está liberado, conclua o pagamento primeiro e depois volte para criar a conta.</div>
           </div>
 
           <div class="box">
@@ -262,9 +262,15 @@
           </div>
 
           <div class="lesson">
-            <h3>Suporte</h3>
-            <p>Canal de contato para dúvidas relacionadas às aulas e ao acesso da plataforma.</p>
-            <a href="https://wa.me/5599984488393?text=Olá,%20sou%20aluno%20e%20quero%20tirar%20uma%20dúvida%20sobre%20as%20aulas%20do%20Tacadinha." target="_blank">Falar no WhatsApp</a>
+            <h3>Módulo 4</h3>
+            <p>Aprofundamento de estratégias, leitura de padrões e refinamento de tomada de decisão.</p>
+            <a href="https://www.youtube.com/watch?v=SEU_VIDEO_4" target="_blank">Assistir aula</a>
+          </div>
+
+          <div class="lesson">
+            <h3>Módulo 5</h3>
+            <p>Aplicação prática, correção de erros avançados e consolidação do método de jogo.</p>
+            <a href="https://www.youtube.com/watch?v=SEU_VIDEO_5" target="_blank">Assistir aula</a>
           </div>
         </div>
 
@@ -292,16 +298,15 @@
       getDoc
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
-  authDomain: "tacadinha-aulas-9a75b.firebaseapp.com",
-  projectId: "tacadinha-aulas-9a75b",
-  storageBucket: "tacadinha-aulas-9a75b.firebasestorage.app",
-  messagingSenderId: "957514767572",
-  appId: "1:957514767572:web:d077b7169c6d5652b9ef41",
-  measurementId: "G-FEMHWYVMPZ"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
+      authDomain: "tacadinha-aulas-9a75b.firebaseapp.com",
+      projectId: "tacadinha-aulas-9a75b",
+      storageBucket: "tacadinha-aulas-9a75b.firebasestorage.app",
+      messagingSenderId: "957514767572",
+      appId: "1:957514767572:web:d077b7169c6d5652b9ef41",
+      measurementId: "G-FEMHWYVMPZ"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -321,25 +326,22 @@ const firebaseConfig = {
     }
 
     async function isAuthorized(email) {
-  if (!email) return false;
+      if (!email) return false;
 
-  try {
-    const normalizedEmail = email.trim().toLowerCase();
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
+        const ref = doc(db, "access", normalizedEmail);
+        const snap = await getDoc(ref);
 
-    const ref = doc(db, "access", normalizedEmail);
-    const snap = await getDoc(ref);
+        console.log("Verificando acesso para:", normalizedEmail);
+        console.log("Documento existe?", snap.exists());
 
-    console.log("Verificando acesso para:", normalizedEmail);
-    console.log("Documento existe?", snap.exists());
-
-    // 🔥 Agora basta existir para liberar
-    return snap.exists();
-
-  } catch (error) {
-    console.error("Erro ao verificar acesso:", error);
-    return false;
-  }
-}
+        return snap.exists();
+      } catch (error) {
+        console.error("Erro ao verificar acesso:", error);
+        return false;
+      }
+    }
 
     function showDashboard(user) {
       authSection.style.display = "none";
@@ -356,7 +358,7 @@ const firebaseConfig = {
     document.getElementById("registerBtn").addEventListener("click", async () => {
       clearMessages();
       const name = document.getElementById("registerName").value.trim();
-      const email = document.getElementById("registerEmail").value.trim();
+      const email = document.getElementById("registerEmail").value.trim().toLowerCase();
       const password = document.getElementById("registerPassword").value.trim();
 
       if (!name || !email || !password) {
@@ -364,18 +366,30 @@ const firebaseConfig = {
         return;
       }
 
+      infoMsg.textContent = "Verificando se o pagamento já foi confirmado...";
+
       try {
+        const autorizado = await isAuthorized(email);
+
+        if (!autorizado) {
+          infoMsg.textContent = "";
+          errorMsg.textContent = "Esse e-mail ainda não está liberado para cadastro. Conclua o pagamento primeiro e tente novamente em alguns instantes.";
+          return;
+        }
+
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: name });
+        infoMsg.textContent = "";
         successMsg.textContent = "Conta criada com sucesso. Você já pode acessar o portal.";
       } catch (error) {
+        infoMsg.textContent = "";
         errorMsg.textContent = traduzirErro(error.code);
       }
     });
 
     document.getElementById("loginBtn").addEventListener("click", async () => {
       clearMessages();
-      const email = document.getElementById("loginEmail").value.trim();
+      const email = document.getElementById("loginEmail").value.trim().toLowerCase();
       const password = document.getElementById("loginPassword").value.trim();
 
       if (!email || !password) {
@@ -396,30 +410,7 @@ const firebaseConfig = {
 
     document.getElementById("resetBtn").addEventListener("click", async () => {
       clearMessages();
-      const email = document.getElementById("loginEmail").value.trim() || document.getElementById("registerEmail").value.trim();
-
-      if (!email) {
-        errorMsg.textContent = "Informe o e-mail para receber a redefinição de senha.";
-        return;
-      }
-
-      try {
-        await sendPasswordResetEmail(auth, email);
-        successMsg.textContent = "Enviamos um e-mail para redefinição de senha.";
-      } catch (error) {
-        errorMsg.textContent = traduzirErro(error.code);
-      }
-    });
-
-    document.getElementById("logoutBtn").addEventListener("click", async () => {
-      clearMessages();
-      await signOut(auth);
-      infoMsg.textContent = "Você saiu do portal.";
-    });
-
-    document.getElementById("resetBtn").addEventListener("click", async () => {
-      clearMessages();
-      const email = document.getElementById("loginEmail").value.trim() || document.getElementById("registerEmail").value.trim();
+      const email = (document.getElementById("loginEmail").value.trim() || document.getElementById("registerEmail").value.trim()).toLowerCase();
 
       if (!email) {
         errorMsg.textContent = "Informe o e-mail para receber a redefinição de senha.";
@@ -444,7 +435,7 @@ const firebaseConfig = {
       clearMessages();
       if (user) {
         infoMsg.textContent = "Verificando liberação de acesso...";
-        const autorizado = await isAuthorized(user.email);
+        const autorizado = await isAuthorized((user.email || "").toLowerCase());
 
         if (autorizado) {
           infoMsg.textContent = "";
@@ -474,40 +465,39 @@ const firebaseConfig = {
     }
   </script>
 
-<button onclick="comprar()" style="padding:15px; background:#00c853; color:white; border:none; border-radius:8px; cursor:pointer;">
-  Comprar acesso
-</button>
+  <button onclick="comprar()" style="padding:15px; background:#00c853; color:white; border:none; border-radius:8px; cursor:pointer; width: calc(100% - 56px); margin: 0 28px 28px 28px;">
+    Comprar acesso
+  </button>
 
-<script>
-async function comprar() {
-  const emailInput = document.querySelector('input[type="email"]');
-  const email = emailInput ? emailInput.value : "";
+  <script>
+    async function comprar() {
+      const registerEmail = document.getElementById('registerEmail')?.value.trim().toLowerCase();
+      const loginEmail = document.getElementById('loginEmail')?.value.trim().toLowerCase();
+      const email = registerEmail || loginEmail;
 
-  if (!email) {
-    alert("Digite seu e-mail antes de comprar.");
-    return;
-  }
+      if (!email) {
+        alert("Digite seu e-mail antes de comprar.");
+        return;
+      }
 
-  try {
-    const response = await fetch("/.netlify/functions/create-preference", {
-      method: "POST",
-      body: JSON.stringify({ email }),
-    });
+      try {
+        const response = await fetch("/.netlify/functions/create-preference", {
+          method: "POST",
+          body: JSON.stringify({ email }),
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (data.init_point) {
-      window.location.href = data.init_point;
-    } else {
-      alert("Erro ao iniciar pagamento.");
+        if (data.init_point) {
+          window.location.href = data.init_point;
+        } else {
+          alert("Erro ao iniciar pagamento.");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Erro ao conectar com o pagamento.");
+      }
     }
-  } catch (error) {
-    console.error(error);
-    alert("Erro ao conectar com o pagamento.");
-  }
-}
-</script>
-
+  </script>
 </body>
 </html>
-
