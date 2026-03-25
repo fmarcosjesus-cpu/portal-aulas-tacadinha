@@ -86,48 +86,82 @@ exports.handler = async (event) => {
 
     console.log("Pagamento:", payment);
 
-    if (payment && payment.status === "approved") {
-      const email =
-        payment?.metadata?.email ||
-        payment?.external_reference ||
-        payment?.payer?.email ||
-        null;
+    if (!payment) {
+      return {
+        statusCode: 200,
+        body: "Sem pagamento",
+      };
+    }
 
-      if (!email) {
-        console.log("E-mail não encontrado no pagamento.");
-        return {
-          statusCode: 200,
-          body: "Sem email",
-        };
-      }
+    const email =
+      payment?.metadata?.email ||
+      payment?.external_reference ||
+      payment?.payer?.email ||
+      null;
 
-      const normalizedEmail = email.trim().toLowerCase();
-      const paymentId = payment?.id || null;
-      const amount = payment?.transaction_amount || null;
-      const status = payment?.status || null;
-      const paidAt =
-        payment?.date_approved ||
-        payment?.date_last_updated ||
-        new Date().toISOString();
+    if (!email) {
+      console.log("E-mail não encontrado no pagamento.");
+      return {
+        statusCode: 200,
+        body: "Sem email",
+      };
+    }
 
+    const normalizedEmail = email.trim().toLowerCase();
+    const paymentId = payment?.id || null;
+    const amount = payment?.transaction_amount || null;
+    const status = payment?.status || null;
+    const eventTime =
+      payment?.date_last_updated ||
+      payment?.date_approved ||
+      new Date().toISOString();
+
+    const db = admin.firestore();
+    const ref = db.collection("access").doc(normalizedEmail);
+
+    if (status === "approved") {
       console.log("Liberando acesso para:", normalizedEmail);
 
-      const db = admin.firestore();
-
-      await db.collection("access").doc(normalizedEmail).set(
+      await ref.set(
         {
           paid: true,
           email: normalizedEmail,
           paymentId: paymentId,
           status: status,
           amount: amount,
-          paidAt: paidAt,
+          paidAt: payment?.date_approved || eventTime,
           topic: topic || "payment",
+          revokedAt: null,
+          updatedAt: eventTime,
         },
         { merge: true }
       );
 
       console.log("Acesso liberado!");
+    }
+
+    if (
+      status === "refunded" ||
+      status === "charged_back" ||
+      status === "cancelled"
+    ) {
+      console.log("Revogando acesso de:", normalizedEmail, "Status:", status);
+
+      await ref.set(
+        {
+          paid: false,
+          email: normalizedEmail,
+          paymentId: paymentId,
+          status: status,
+          amount: amount,
+          topic: topic || "payment",
+          revokedAt: eventTime,
+          updatedAt: eventTime,
+        },
+        { merge: true }
+      );
+
+      console.log("Acesso revogado!");
     }
 
     return {
