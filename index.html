@@ -330,20 +330,21 @@
 
   try {
     const normalizedEmail = email.trim().toLowerCase();
-    const ref = doc(db, "access", normalizedEmail);
-    const snap = await getDoc(ref);
+
+    const response = await fetch("/.netlify/functions/check-access", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email: normalizedEmail })
+    });
+
+    const data = await response.json();
 
     console.log("Verificando acesso para:", normalizedEmail);
-    console.log("Documento existe?", snap.exists());
+    console.log("Resposta da função:", data);
 
-    if (!snap.exists()) {
-      return false;
-    }
-
-    const data = snap.data();
-    console.log("Dados do acesso:", data);
-
-    return data.paid === true;
+    return data.authorized === true;
   } catch (error) {
     console.error("Erro ao verificar acesso:", error);
     return false;
