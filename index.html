@@ -326,22 +326,29 @@
     }
 
     async function isAuthorized(email) {
-      if (!email) return false;
+  if (!email) return false;
 
-      try {
-        const normalizedEmail = email.trim().toLowerCase();
-        const ref = doc(db, "access", normalizedEmail);
-        const snap = await getDoc(ref);
+  try {
+    const normalizedEmail = email.trim().toLowerCase();
+    const ref = doc(db, "access", normalizedEmail);
+    const snap = await getDoc(ref);
 
-        console.log("Verificando acesso para:", normalizedEmail);
-        console.log("Documento existe?", snap.exists());
+    console.log("Verificando acesso para:", normalizedEmail);
+    console.log("Documento existe?", snap.exists());
 
-        return snap.exists();
-      } catch (error) {
-        console.error("Erro ao verificar acesso:", error);
-        return false;
-      }
+    if (!snap.exists()) {
+      return false;
     }
+
+    const data = snap.data();
+    console.log("Dados do acesso:", data);
+
+    return data.paid === true;
+  } catch (error) {
+    console.error("Erro ao verificar acesso:", error);
+    return false;
+  }
+}
 
     function showDashboard(user) {
       authSection.style.display = "none";
