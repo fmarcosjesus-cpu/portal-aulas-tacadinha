@@ -474,16 +474,25 @@
     statusFilter.addEventListener("change", applyFilters);
 
     onAuthStateChanged(auth, async (user) => {
-      clearLoginMessages();
-      clearAdminMessages();
+  clearLoginMessages();
+  clearAdminMessages();
 
-      if (user && (user.email || "").toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
-        adminUserInfo.textContent = `Logado como: ${user.email}`;
-        showAdmin();
-        await loadAccessData();
-      } else {
-        showLogin();
-      }
-    });
+  if (!user) {
+    showLogin();
+    return;
+  }
+
+  const email = (user.email || "").toLowerCase();
+
+  if (email !== ADMIN_EMAIL.toLowerCase()) {
+    await signOut(auth);
+    showLogin();
+    return;
+  }
+
+  adminUserInfo.textContent = `Logado como: ${user.email};`
+  showAdmin();
+  await loadAccessData();
+});
   </script></body>
 </html>
