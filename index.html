@@ -21,7 +21,7 @@
     }
     .card {
       width: 100%;
-      max-width: 1080px;
+      max-width: 1100px;
       background: #111827;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px;
@@ -45,6 +45,58 @@
     }
     .content {
       padding: 28px;
+    }
+    .notice {
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .notice-info {
+      background: rgba(56,189,248,0.08);
+      border-color: rgba(56,189,248,0.22);
+      color: #bae6fd;
+    }
+    .notice-warning {
+      background: rgba(234,179,8,0.08);
+      border-color: rgba(234,179,8,0.22);
+      color: #fde68a;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .step {
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .step-number {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.16);
+      color: #86efac;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .step p {
+      margin: 0;
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
     }
     .auth-grid {
       display: grid;
@@ -107,7 +159,7 @@
       border: 1px solid rgba(255,255,255,0.12);
       padding: 10px 14px;
     }
-    .hint, .error, .success, .warning {
+    .hint, .error, .success {
       margin-top: 12px;
       font-size: 14px;
       line-height: 1.5;
@@ -115,13 +167,11 @@
     .hint { color: #93c5fd; }
     .error { color: #fca5a5; }
     .success { color: #86efac; }
-    .warning {
-      color: #fde68a;
-      background: rgba(234,179,8,0.08);
-      border: 1px solid rgba(234,179,8,0.25);
-      padding: 12px 14px;
-      border-radius: 12px;
-      margin-bottom: 22px;
+    .small-note {
+      margin-top: 10px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.6;
     }
     .dashboard { display: none; }
     .topbar {
@@ -177,12 +227,6 @@
       color: #94a3b8;
       line-height: 1.6;
     }
-    .small-note {
-      margin-top: 10px;
-      color: #94a3b8;
-      font-size: 13px;
-      line-height: 1.5;
-    }
     @media (max-width: 640px) {
       .hero h1 { font-size: 26px; }
       .content, .hero { padding: 22px; }
@@ -194,37 +238,91 @@
     <div class="card">
       <div class="hero">
         <h1>Portal de Aulas do Tacadinha</h1>
-        <p>Área reservada para alunos com acesso liberado. Para criar a conta, o e-mail precisa já ter sido liberado após a confirmação do pagamento.</p>
+        <p>Pagamento confirmado, agora crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso às aulas.</p>
       </div>
 
       <div class="content" id="authSection">
-        <div class="warning">
-          Para criar sua conta, use o mesmo e-mail utilizado no pagamento. Se o pagamento ainda não tiver sido confirmado, aguarde alguns instantes e tente novamente.
+        <div class="notice notice-info">
+          *Importante:* use sempre o *mesmo e-mail* em todo o processo:
+          informar no site, pagar, criar conta e fazer login.
         </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Informe seu e-mail</h3>
+            <p>Digite o e-mail que você vai usar no pagamento. Esse mesmo e-mail será usado depois no cadastro e no login.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Conclua o pagamento</h3>
+            <p>Após pagar, aguarde a confirmação. Quando ela ocorrer, seu e-mail ficará liberado para criar a conta.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Crie sua conta</h3>
+            <p>Depois da confirmação, volte ao portal e crie sua senha usando o mesmo e-mail do pagamento.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Entre no portal</h3>
+            <p>Faça login e acesse suas aulas normalmente.</p>
+          </div>
+        </div>
+
+        <div class="notice notice-warning" id="paymentReturnNotice" style="display:none;"></div>
 
         <div class="auth-grid">
           <div class="box">
+            <h2>Comprar acesso</h2>
+            <p>Digite primeiro o e-mail que será usado no pagamento. Depois clique no botão abaixo para iniciar sua compra.</p>
+
+            <label class="label" for="buyEmail">E-mail para compra</label>
+            <input class="input" type="email" id="buyEmail" placeholder="seuemail@exemplo.com" />
+
+            <button class="btn" id="buyBtn">Comprar acesso</button>
+
+            <div class="small-note">
+              Depois de pagar, volte a esta página e crie sua conta com o mesmo e-mail.
+            </div>
+          </div>
+
+          <div class="box">
             <h2>Criar conta</h2>
-            <p>O cadastro só é permitido para e-mails que já tenham acesso liberado no sistema.</p>
+            <p>O cadastro só será liberado para e-mails cujo pagamento já tenha sido confirmado.</p>
+
             <label class="label" for="registerName">Nome</label>
             <input class="input" type="text" id="registerName" placeholder="Seu nome" />
+
             <label class="label" for="registerEmail">E-mail</label>
             <input class="input" type="email" id="registerEmail" placeholder="seuemail@exemplo.com" />
+
             <label class="label" for="registerPassword">Senha</label>
             <input class="input" type="password" id="registerPassword" placeholder="Crie uma senha" />
+
             <button class="btn" id="registerBtn">Criar conta</button>
-            <div class="small-note">Se o sistema informar que o e-mail ainda não está liberado, conclua o pagamento primeiro e depois volte para criar a conta.</div>
+
+            <div class="small-note">
+              Se o sistema informar que o e-mail ainda não está liberado, aguarde a confirmação do pagamento e tente novamente.
+            </div>
           </div>
 
           <div class="box">
             <h2>Entrar</h2>
-            <p>Alunos já cadastrados podem fazer login para acessar as aulas.</p>
+            <p>Se você já criou sua conta, use seu e-mail e senha para acessar as aulas.</p>
+
             <label class="label" for="loginEmail">E-mail</label>
             <input class="input" type="email" id="loginEmail" placeholder="seuemail@exemplo.com" />
+
             <label class="label" for="loginPassword">Senha</label>
             <input class="input" type="password" id="loginPassword" placeholder="Digite sua senha" />
+
             <button class="btn btn-secondary" id="loginBtn">Entrar no portal</button>
             <button class="btn btn-ghost" id="resetBtn" style="margin-top:12px;">Esqueci minha senha</button>
+
+            <div class="small-note">
+              Use exatamente o mesmo e-mail que você utilizou no pagamento e no cadastro.
+            </div>
           </div>
         </div>
 
@@ -275,7 +373,7 @@
         </div>
 
         <div class="footer-note">
-          Substitua os links de exemplo pelos links reais das suas aulas. Depois, publique novamente no Netlify para atualizar o site online.
+          Depois, basta substituir os links de exemplo pelos links reais das suas aulas.
         </div>
       </div>
     </div>
@@ -318,6 +416,11 @@
     const successMsg = document.getElementById("successMsg");
     const infoMsg = document.getElementById("infoMsg");
     const userInfo = document.getElementById("userInfo");
+    const paymentReturnNotice = document.getElementById("paymentReturnNotice");
+
+    const buyEmail = document.getElementById("buyEmail");
+    const registerEmail = document.getElementById("registerEmail");
+    const loginEmail = document.getElementById("loginEmail");
 
     function clearMessages() {
       errorMsg.textContent = "";
@@ -325,31 +428,95 @@
       infoMsg.textContent = "";
     }
 
+    function setAllEmailFields(email) {
+      if (!email) return;
+      const normalizedEmail = email.trim().toLowerCase();
+      buyEmail.value = normalizedEmail;
+      registerEmail.value = normalizedEmail;
+      loginEmail.value = normalizedEmail;
+    }
+
+    function getPreferredEmail() {
+      return (
+        buyEmail.value.trim().toLowerCase() ||
+        registerEmail.value.trim().toLowerCase() ||
+        loginEmail.value.trim().toLowerCase()
+      );
+    }
+
+    function handleReturnFromPayment() {
+      const params = new URLSearchParams(window.location.search);
+
+      const externalReference = (params.get("external_reference") || "").trim().toLowerCase();
+      const status = (params.get("status") || "").trim().toLowerCase();
+      const collectionStatus = (params.get("collection_status") || "").trim().toLowerCase();
+      const paymentId = (params.get("payment_id") || "").trim();
+
+      if (externalReference) {
+        setAllEmailFields(externalReference);
+      }
+
+      if (status || collectionStatus || paymentId) {
+        paymentReturnNotice.style.display = "block";
+
+        if (status === "approved" || collectionStatus === "approved") {
+          paymentReturnNotice.textContent =
+            "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
+        } else if (status === "pending" || collectionStatus === "pending") {
+          paymentReturnNotice.textContent =
+            "Seu pagamento ainda está em análise. Assim que for confirmado, seu e-mail será liberado para criar a conta.";
+        } else {
+          paymentReturnNotice.textContent =
+            "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
+        }
+      }
+    }
+
     async function isAuthorized(email) {
-  if (!email) return false;
+      if (!email) return false;
 
-  try {
-    const normalizedEmail = email.trim().toLowerCase();
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
 
-    const response = await fetch("/.netlify/functions/check-access", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email: normalizedEmail })
-    });
+        const response = await fetch("/.netlify/functions/check-access", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email: normalizedEmail })
+        });
 
-    const data = await response.json();
+        const data = await response.json();
 
-    console.log("Verificando acesso para:", normalizedEmail);
-    console.log("Resposta da função:", data);
+        console.log("Verificando acesso para:", normalizedEmail);
+        console.log("Resposta da função:", data);
 
-    return data.authorized === true;
-  } catch (error) {
-    console.error("Erro ao verificar acesso:", error);
-    return false;
-  }
-}
+        return data.authorized === true;
+      } catch (error) {
+        console.error("Erro ao verificar acesso:", error);
+        return false;
+      }
+    }
+
+    async function isAuthorizedForLogin(email) {
+      if (!email) return false;
+
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
+        const ref = doc(db, "access", normalizedEmail);
+        const snap = await getDoc(ref);
+
+        if (!snap.exists()) {
+          return false;
+        }
+
+        const data = snap.data();
+        return data.paid === true;
+      } catch (error) {
+        console.error("Erro ao verificar acesso no login:", error);
+        return false;
+      }
+    }
 
     function showDashboard(user) {
       authSection.style.display = "none";
@@ -363,10 +530,45 @@
       dashboardSection.style.display = "none";
     }
 
+    document.getElementById("buyBtn").addEventListener("click", async () => {
+      clearMessages();
+
+      const email = getPreferredEmail();
+
+      if (!email) {
+        errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
+        return;
+      }
+
+      setAllEmailFields(email);
+      infoMsg.textContent = "Iniciando pagamento...";
+
+      try {
+        const response = await fetch("/.netlify/functions/create-preference", {
+          method: "POST",
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (data.init_point) {
+          window.location.href = data.init_point;
+        } else {
+          infoMsg.textContent = "";
+          errorMsg.textContent = "Não foi possível iniciar o pagamento.";
+        }
+      } catch (error) {
+        console.error(error);
+        infoMsg.textContent = "";
+        errorMsg.textContent = "Erro ao conectar com o pagamento.";
+      }
+    });
+
     document.getElementById("registerBtn").addEventListener("click", async () => {
       clearMessages();
+
       const name = document.getElementById("registerName").value.trim();
-      const email = document.getElementById("registerEmail").value.trim().toLowerCase();
+      const email = registerEmail.value.trim().toLowerCase();
       const password = document.getElementById("registerPassword").value.trim();
 
       if (!name || !email || !password) {
@@ -374,6 +576,7 @@
         return;
       }
 
+      setAllEmailFields(email);
       infoMsg.textContent = "Verificando se o pagamento já foi confirmado...";
 
       try {
@@ -381,14 +584,15 @@
 
         if (!autorizado) {
           infoMsg.textContent = "";
-          errorMsg.textContent = "Esse e-mail ainda não está liberado para cadastro. Conclua o pagamento primeiro e tente novamente em alguns instantes.";
+          errorMsg.textContent = "Esse e-mail ainda não está liberado para cadastro. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
           return;
         }
 
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: name });
+
         infoMsg.textContent = "";
-        successMsg.textContent = "Conta criada com sucesso. Você já pode acessar o portal.";
+        successMsg.textContent = "Conta criada com sucesso. Agora você já pode acessar o portal com esse mesmo e-mail e senha.";
       } catch (error) {
         infoMsg.textContent = "";
         errorMsg.textContent = traduzirErro(error.code);
@@ -397,7 +601,8 @@
 
     document.getElementById("loginBtn").addEventListener("click", async () => {
       clearMessages();
-      const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+
+      const email = loginEmail.value.trim().toLowerCase();
       const password = document.getElementById("loginPassword").value.trim();
 
       if (!email || !password) {
@@ -405,6 +610,7 @@
         return;
       }
 
+      setAllEmailFields(email);
       infoMsg.textContent = "Verificando seus dados...";
 
       try {
@@ -418,16 +624,19 @@
 
     document.getElementById("resetBtn").addEventListener("click", async () => {
       clearMessages();
-      const email = (document.getElementById("loginEmail").value.trim() || document.getElementById("registerEmail").value.trim()).toLowerCase();
+
+      const email = getPreferredEmail();
 
       if (!email) {
-        errorMsg.textContent = "Informe o e-mail para receber a redefinição de senha.";
+        errorMsg.textContent = "Informe o e-mail para redefinir a senha.";
         return;
       }
 
+      setAllEmailFields(email);
+
       try {
         await sendPasswordResetEmail(auth, email);
-        successMsg.textContent = "Enviamos um e-mail para redefinição de senha.";
+        successMsg.textContent = "Enviamos um e-mail para redefinição de senha. Verifique também a caixa de spam.";
       } catch (error) {
         errorMsg.textContent = traduzirErro(error.code);
       }
@@ -441,9 +650,10 @@
 
     onAuthStateChanged(auth, async (user) => {
       clearMessages();
+
       if (user) {
         infoMsg.textContent = "Verificando liberação de acesso...";
-        const autorizado = await isAuthorized((user.email || "").toLowerCase());
+        const autorizado = await isAuthorizedForLogin((user.email || "").toLowerCase());
 
         if (autorizado) {
           infoMsg.textContent = "";
@@ -451,7 +661,7 @@
         } else {
           await signOut(auth);
           showAuth();
-          errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Após a confirmação do pagamento, sua entrada será liberada automaticamente.";
+          errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
         }
       } else {
         showAuth();
@@ -460,7 +670,7 @@
 
     function traduzirErro(code) {
       const erros = {
-        "auth/email-already-in-use": "Esse e-mail já está cadastrado.",
+        "auth/email-already-in-use": "Esse e-mail já está cadastrado. Se você já criou sua conta, use a área de login.",
         "auth/invalid-email": "O e-mail informado é inválido.",
         "auth/weak-password": "A senha está muito fraca. Use pelo menos 6 caracteres.",
         "auth/missing-password": "Informe uma senha válida.",
@@ -471,41 +681,8 @@
       };
       return erros[code] || `Ocorreu um erro: ${code}`;
     }
-  </script>
 
-  <button onclick="comprar()" style="padding:15px; background:#00c853; color:white; border:none; border-radius:8px; cursor:pointer; width: calc(100% - 56px); margin: 0 28px 28px 28px;">
-    Comprar acesso
-  </button>
-
-  <script>
-    async function comprar() {
-      const registerEmail = document.getElementById('registerEmail')?.value.trim().toLowerCase();
-      const loginEmail = document.getElementById('loginEmail')?.value.trim().toLowerCase();
-      const email = registerEmail || loginEmail;
-
-      if (!email) {
-        alert("Digite seu e-mail antes de comprar.");
-        return;
-      }
-
-      try {
-        const response = await fetch("/.netlify/functions/create-preference", {
-          method: "POST",
-          body: JSON.stringify({ email }),
-        });
-
-        const data = await response.json();
-
-        if (data.init_point) {
-          window.location.href = data.init_point;
-        } else {
-          alert("Erro ao iniciar pagamento.");
-        }
-      } catch (error) {
-        console.error(error);
-        alert("Erro ao conectar com o pagamento.");
-      }
-    }
+    handleReturnFromPayment();
   </script>
 </body>
 </html>
