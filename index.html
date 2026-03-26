@@ -297,6 +297,10 @@
             <label class="label" for="registerEmail">E-mail</label>
             <input class="input" type="email" id="registerEmail" placeholder="seuemail@exemplo.com" />
 
+            <div class="small-note">
+            ⚠️ Use exatamente o mesmo e-mail utilizado no pagamento.
+            </div>
+
             <label class="label" for="registerPassword">Senha</label>
             <input class="input" type="password" id="registerPassword" placeholder="Crie uma senha" />
 
@@ -342,9 +346,16 @@
 
         <div class="grid">
           <div class="lesson">
-            <h3>Módulo 1</h3>
-            <p>Introdução ao jogo, visão geral da estratégia e primeiros fundamentos para evitar erros comuns.</p>
-            <a href="https://www.youtube.com/watch?v=SEU_VIDEO_1" target="_blank">Assistir aula</a>
+            <h3>Aula 1</h3>
+
+          <iframe 
+       src="https://iframe.mediadelivery.net/embed/625484/5fd1f8c8-d240-4e44-a7b1-1e667f9fbd12"
+       loading="lazy"
+       style="width:100%; aspect-ratio:16/9; border:0;"
+       allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
+       allowfullscreen>
+          </iframe>
+
           </div>
 
           <div class="lesson">
@@ -460,11 +471,11 @@
         paymentReturnNotice.style.display = "block";
 
         if (status === "approved" || collectionStatus === "approved") {
+        paymentReturnNotice.textContent =
+        "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
+} else if (status === "pending" || collectionStatus === "pending") {
           paymentReturnNotice.textContent =
-            "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
-        } else if (status === "pending" || collectionStatus === "pending") {
-          paymentReturnNotice.textContent =
-            "Seu pagamento ainda está em análise. Assim que for confirmado, seu e-mail será liberado para criar a conta.";
+            "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
         } else {
           paymentReturnNotice.textContent =
             "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
