@@ -231,7 +231,153 @@
     @media (max-width: 640px) {
       .hero h1 { font-size: 26px; }
       .content, .hero { padding: 22px; }
-    }
+  .dashboard-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.sidebar {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar h3 {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.sidebar .side-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.sidebar .side-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.sidebar .side-item.active,
+.sidebar .side-item:hover {
+  background: rgba(56,189,248,0.14);
+  border-color: rgba(56,189,248,0.35);
+  color: #bae6fd;
+}
+
+.content-area {
+  display: grid;
+  gap: 22px;
+}
+
+.featured-player {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.featured-player h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+.featured-player p {
+  margin: 0 0 16px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.player-shell {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.player-shell iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.lesson-card {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
+}
+
+.lesson-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 30px rgba(0,0,0,0.28);
+  border-color: rgba(56,189,248,0.3);
+}
+
+.lesson-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #93c5fd;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.lesson-body {
+  padding: 16px;
+}
+
+.lesson-body h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.lesson-body p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+}  }
   </style>
 </head>
 <body>
@@ -337,96 +483,82 @@
       </div>
 
       <div class="content dashboard" id="dashboardSection">
-        <div class="topbar">
-          <div>
-            <span class="badge">Acesso liberado</span>
-            <div class="small-note" id="userInfo"></div>
+  <div class="topbar">
+    <div>
+      <span class="badge">Acesso liberado</span>
+      <div class="small-note" id="userInfo"></div>
+    </div>
+    <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+  </div>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3>Seu curso</h3>
+      <div class="side-note">
+        Selecione uma aula para assistir no player principal.
+      </div>
+
+      <button class="side-item active" data-video="0">Aula 1</button>
+      <button class="side-item" data-video="1">Aula 2</button>
+      <button class="side-item" data-video="2">Aula 3</button>
+      <button class="side-item" data-video="3">Aula 4</button>
+      <button class="side-item" data-video="4">Aula 5</button>
+    </aside>
+
+    <div class="content-area">
+      <section class="featured-player">
+        <h2 id="featuredTitle">Aula 1 — Fundamentos da Mira e Introdução ao Curso</h2>
+        <p id="featuredDescription">Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
+
+        <div class="player-shell" id="featuredPlayer"></div>
+      </section>
+
+      <section class="catalog-grid">
+        <article class="lesson-card" data-video="0">
+          <div class="lesson-thumb">Aula 1</div>
+          <div class="lesson-body">
+            <h3>Aula 1 — Fundamentos da Mira e Introdução ao Curso</h3>
+            <p>Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
           </div>
-          <button class="btn btn-ghost" id="logoutBtn">Sair</button>
-        </div>
+        </article>
 
-        <div class="grid">
+        <article class="lesson-card" data-video="1">
+          <div class="lesson-thumb">Aula 2</div>
+          <div class="lesson-body">
+            <h3>Aula 2 — Ajuste de Mira: A Técnica para Encaçapar com Precisão</h3>
+            <p>Aprenda a ajustar a mira com mais precisão e consistência nas jogadas.</p>
+          </div>
+        </article>
 
-  <div class="lesson">
-    <h3>Aula 1 — Fundamentos da Mira e Introdução ao Curso</h3>
+        <article class="lesson-card" data-video="2">
+          <div class="lesson-thumb">Aula 3</div>
+          <div class="lesson-body">
+            <h3>Aula 3 — Efeitos: Domínio Total da Bola Branca</h3>
+            <p>Entenda os efeitos e domine o controle da bola branca com mais segurança.</p>
+          </div>
+        </article>
 
-    <div style="width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;">
-      <iframe
-        src="https://iframe.mediadelivery.net/embed/625484/5fd1f8c8-d240-4e44-a7b1-1e667f9fbd12"
-        loading="lazy"
-        style="width:100%; height:100%; border:0;"
-        allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
-        allowfullscreen>
-      </iframe>
+        <article class="lesson-card" data-video="3">
+          <div class="lesson-thumb">Aula 4</div>
+          <div class="lesson-body">
+            <h3>Aula 4 — Planejamento e Estratégia: A Arte de Não Errar</h3>
+            <p>Desenvolva visão de jogo, planejamento e estratégia para reduzir erros.</p>
+          </div>
+        </article>
+
+        <article class="lesson-card" data-video="4">
+          <div class="lesson-thumb">Aula 5</div>
+          <div class="lesson-body">
+            <h3>Aula 5 — Técnica Avançada para Memorizar e Aplicar os Efeitos</h3>
+            <p>Aprenda um método prático para memorizar e aplicar os efeitos no jogo.</p>
+          </div>
+        </article>
+      </section>
     </div>
   </div>
-
-  <div class="lesson">
-    <h3>Aula 2 — Ajuste de Mira: A Técnica para Encaçapar com Precisão</h3>
-
-    <div style="width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;">
-      <iframe
-        src="https://iframe.mediadelivery.net/embed/625484/144e3546-9a1a-4096-a7c4-fdfeffbecda0"
-        loading="lazy"
-        style="width:100%; height:100%; border:0;"
-        allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <div class="lesson">
-    <h3>Aula 3 — Efeitos: Domínio Total da Bola Branca</h3>
-
-    <div style="width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;">
-      <iframe
-        src="https://iframe.mediadelivery.net/embed/625484/6633a79e-587e-4c0b-9309-5030630f560f"
-        loading="lazy"
-        style="width:100%; height:100%; border:0;"
-        allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <div class="lesson">
-    <h3>Aula 4 — Planejamento e Estratégia: A Arte de Não Errar</h3>
-
-    <div style="width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;">
-      <iframe
-        src="https://iframe.mediadelivery.net/embed/625484/2d80449b-836a-4a12-990e-0e2fb2d7f5f8"
-        loading="lazy"
-        style="width:100%; height:100%; border:0;"
-        allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
-  <div class="lesson">
-    <h3>Aula 5 — Técnica Avançada para Memorizar e Aplicar os Efeitos</h3>
-
-    <div style="width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000;">
-      <iframe
-        src="https://iframe.mediadelivery.net/embed/625484/c20da10e-3066-40dd-8b4e-e8d34b74b710"
-        loading="lazy"
-        style="width:100%; height:100%; border:0;"
-        allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
-        allowfullscreen>
-      </iframe>
-    </div>
-  </div>
-
 </div>
 
-        <div class="footer-note">
-          Depois, basta substituir os links de exemplo pelos links reais das suas aulas.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script type="module">
+          <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import {
       getAuth,
@@ -464,6 +596,73 @@
     const infoMsg = document.getElementById("infoMsg");
     const userInfo = document.getElementById("userInfo");
     const paymentReturnNotice = document.getElementById("paymentReturnNotice");
+    const lessons = [
+  {
+    title: "Aula 1 — Fundamentos da Mira e Introdução ao Curso",
+    description: "Base inicial do curso, com os fundamentos da mira e a introdução ao método.",
+    embed: "https://iframe.mediadelivery.net/embed/625484/5fd1f8c8-d240-4e44-a7b1-1e667f9fbd12"
+  },
+  {
+    title: "Aula 2 — Ajuste de Mira: A Técnica para Encaçapar com Precisão",
+    description: "Aprenda a ajustar a mira com mais precisão e consistência nas jogadas.",
+    embed: "https://iframe.mediadelivery.net/embed/625484/144e3546-9a1a-4096-a7c4-fdfeffbecda0"
+  },
+  {
+    title: "Aula 3 — Efeitos: Domínio Total da Bola Branca",
+    description: "Entenda os efeitos e domine o controle da bola branca com mais segurança.",
+    embed: "https://iframe.mediadelivery.net/embed/625484/6633a79e-587e-4c0b-9309-5030630f560f"
+  },
+  {
+    title: "Aula 4 — Planejamento e Estratégia: A Arte de Não Errar",
+    description: "Desenvolva visão de jogo, planejamento e estratégia para reduzir erros.",
+    embed: "https://iframe.mediadelivery.net/embed/625484/2d80449b-836a-4a12-990e-0e2fb2d7f5f8"
+  },
+  {
+    title: "Aula 5 — Técnica Avançada para Memorizar e Aplicar os Efeitos",
+    description: "Aprenda um método prático para memorizar e aplicar os efeitos no jogo.",
+    embed: "https://iframe.mediadelivery.net/embed/625484/c20da10e-3066-40dd-8b4e-e8d34b74b710"
+  }
+];
+
+function loadFeaturedLesson(index) {
+  const lesson = lessons[index];
+  if (!lesson) return;
+
+  const titleEl = document.getElementById("featuredTitle");
+  const descEl = document.getElementById("featuredDescription");
+  const playerEl = document.getElementById("featuredPlayer");
+
+  titleEl.textContent = lesson.title;
+  descEl.textContent = lesson.description;
+
+  playerEl.innerHTML = `
+    <iframe
+      src="${lesson.embed}"
+      loading="lazy"
+      allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
+      allowfullscreen>
+    </iframe>
+  `;
+
+  document.querySelectorAll(".side-item").forEach((btn, i) => {
+    btn.classList.toggle("active", i === index);
+  });
+}
+
+function setupLessonNavigation() {
+  const buttons = document.querySelectorAll(".side-item");
+
+  buttons.forEach((btn, index) => {
+    btn.addEventListener("click", () => {
+      loadFeaturedLesson(index);
+    });
+  });
+
+  // carregar primeira aula automaticamente
+  loadFeaturedLesson(0);
+}
+
+setupLessonNavigation();
 
     const buyEmail = document.getElementById("buyEmail");
     const registerEmail = document.getElementById("registerEmail");
