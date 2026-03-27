@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background: #0f172a;
+      background: radial-gradient(circle at top, #0f172a, #020617);
       color: #e5e7eb;
     }
     .wrap {
@@ -273,16 +273,22 @@
   transition: all 0.2s ease;
 }
 
+.sidebar .side-item {
+  transition: all 0.25s ease;
+}
+
 .sidebar .side-item:hover {
-  background: #1e293b;
+  background: rgba(59,130,246,0.15);
+  transform: translateX(4px);
 }
 
 .sidebar .side-item.active {
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
-  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(37,99,235,0.35);
   transform: scale(1.03);
 }
+
 .content-area {
   display: grid;
   gap: 22px;
@@ -349,14 +355,13 @@
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
 }
 
 .lesson-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 30px rgba(0,0,0,0.28);
-  border-color: rgba(56,189,248,0.3);
+  transform: scale(1.04);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
 .lesson-thumb {
@@ -404,8 +409,7 @@
     <div class="card">
       <div class="hero">
         <h1>Portal de Aulas do Tacadinha</h1>
-        <p>Pagamento confirmado, agora crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso às aulas.</p>
-      </div>
+          </div>
 
       <div class="content" id="authSection">
         <div class="notice notice-info">
