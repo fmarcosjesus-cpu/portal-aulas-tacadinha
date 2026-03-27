@@ -537,56 +537,7 @@
       </section>
 
       <section class="catalog-grid">
-        <article class="lesson-card" data-video="0">
-          <div class="lesson-thumb" style="background-image: url('https://via.placeholder.com/600x340'); background-size: cover; background-position: center;">
-        <span>Aula 1</span>
-          </div>
-          <div class="lesson-body">
-            <h3>Aula 1 — Fundamentos da Mira e Introdução ao Curso</h3>
-            <p>Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
-          </div>
-        </article>
-
-        <article class="lesson-card" data-video="1">
-          <div class="lesson-thumb" style="background-image: url('https://via.placeholder.com/600x340'); background-size: cover; background-position: center;">
-          <span>Aula 2</span>
-           </div>
-          <div class="lesson-body">
-            <h3>Aula 2 — Ajuste de Mira: A Técnica para Encaçapar com Precisão</h3>
-            <p>Aprenda a ajustar a mira com mais precisão e consistência nas jogadas.</p>
-          </div>
-        </article>
-
-        <article class="lesson-card" data-video="2">
-          <div class="lesson-thumb" style="background-image: url('https://via.placeholder.com/600x340'); background-size: cover; background-position: center;">
-          <span>Aula 3</span>
-           </div>
-          <div class="lesson-body">
-            <h3>Aula 3 — Efeitos: Domínio Total da Bola Branca</h3>
-            <p>Entenda os efeitos e domine o controle da bola branca com mais segurança.</p>
-          </div>
-        </article>
-
-        <article class="lesson-card" data-video="3">
-          <div class="lesson-thumb" style="background-image: url('https://via.placeholder.com/600x340'); background-size: cover; background-position: center;">
-          <span>Aula 4</span>
-            </div>
-          <div class="lesson-body">
-            <h3>Aula 4 — Planejamento e Estratégia: A Arte de Não Errar</h3>
-            <p>Desenvolva visão de jogo, planejamento e estratégia para reduzir erros.</p>
-          </div>
-        </article>
-
-        <article class="lesson-card" data-video="4">
-          <div class="lesson-thumb" style="background-image: url('https://via.placeholder.com/600x340'); background-size: cover; background-position: center;">
-         <span>Aula 5</span>
-           </div>
-          <div class="lesson-body">
-            <h3>Aula 5 — Técnica Avançada para Memorizar e Aplicar os Efeitos</h3>
-            <p>Aprenda um método prático para memorizar e aplicar os efeitos no jogo.</p>
-          </div>
-        </article>
-      </section>
+              </section>
     </div>
   </div>
 </div>
@@ -697,16 +648,14 @@ playerEl.classList.add("fade-in");
 }
 
 function setupLessonNavigation() {
-  const buttons = document.querySelectorAll(".side-item");
+  const items = document.querySelectorAll(".side-item, .lesson-card");
 
-  buttons.forEach((btn, index) => {
-    btn.addEventListener("click", () => {
+  items.forEach(item => {
+    item.addEventListener("click", () => {
+      const index = Number(item.dataset.video);
       loadFeaturedLesson(index);
     });
   });
-
-  // carregar primeira aula automaticamente
-  loadFeaturedLesson(0);
 }
 
 function renderLessonCatalog() {
