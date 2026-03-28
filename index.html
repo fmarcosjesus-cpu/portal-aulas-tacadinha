@@ -654,6 +654,14 @@ function setupLessonNavigation() {
     item.addEventListener("click", () => {
       const index = Number(item.dataset.video);
       loadFeaturedLesson(index);
+
+      const featuredSection = document.querySelector(".featured-player");
+      if (featuredSection) {
+        featuredSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
     });
   });
 }
