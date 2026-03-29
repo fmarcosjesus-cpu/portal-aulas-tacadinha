@@ -4,11 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Giz do Taco | Sinuca Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+   :root {
+  --bg-main: #020617;
+  --bg-card: #0b1220;
+  --bg-soft: #0f172a;
+
+  --text-main: #e5e7eb;
+  --text-soft: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --gold-main: #d4af37;
+  --gold-soft: #f0d27a;
+  --gold-glow: rgba(212, 175, 55, 0.25);
+
+  --green-main: #22c55e;
+  --green-dark: #16a34a;
+
+  --border-soft: rgba(255,255,255,0.08);
+  --shadow-main: 0 20px 60px rgba(0,0,0,0.45);
+} 
+   
+   * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Inter', sans-serif;
       background: radial-gradient(circle at top, #0f172a, #020617);
       color: #e5e7eb;
     }
@@ -338,11 +359,24 @@
 }
 
 #featuredPlayer {
+  width: 100%;
+  aspect-ratio: 16/9;
+
+  background: #000;
+
   border-radius: 14px;
   overflow: hidden;
-  background: #000;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+
   transition: opacity 0.25s ease;
+}
+
+#featuredPlayer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 
 .fade-out {
@@ -375,17 +409,21 @@
 }
 
 .lesson-card {
-  background: #0b1220;
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(145deg, #0b1220, #111827);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 16px;
   overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
   cursor: pointer;
 }
 
 .lesson-card:hover {
-  transform: scale(1.04);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  border: 1px solid rgba(212,175,55,0.25);
 }
 
 .lesson-thumb {
@@ -398,7 +436,7 @@
   background-position: center;
   background-repeat: no-repeat;
 
-  border-radius: 8px;
+  border-radius: 12px;
 
   display: flex;
   align-items: center;
@@ -485,6 +523,40 @@
 #registerBox {
   display: none;
 }
+
+.lesson-card.active {
+  border: 1px solid rgba(212,175,55,0.45);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(212,175,55,0.15),
+    0 0 24px rgba(212,175,55,0.12);
+}
+
+button,
+.btn-primary {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+button:hover,
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+}
+
+button,
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-main), var(--green-dark));
+  color: white;
+}
+
   </style>
 </head>
 <body>
@@ -751,19 +823,30 @@ function setupLessonNavigation() {
   const items = document.querySelectorAll(".side-item, .lesson-card");
 
   items.forEach(item => {
-    item.addEventListener("click", () => {
-      const index = Number(item.dataset.video);
-      loadFeaturedLesson(index);
+  item.addEventListener("click", () => {
+    const index = Number(item.dataset.video);
 
-      const featuredSection = document.querySelector(".featured-player");
-      if (featuredSection) {
-        featuredSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
+    // 🔥 REMOVE active de todos
+    document.querySelectorAll(".lesson-card").forEach(card => {
+      card.classList.remove("active");
     });
+
+    // 🔥 ADICIONA active no clicado (se for card)
+    if (item.classList.contains("lesson-card")) {
+      item.classList.add("active");
+    }
+
+    loadFeaturedLesson(index);
+
+    const featuredSection = document.querySelector(".featured-player");
+    if (featuredSection) {
+      featuredSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
   });
+});
 }
 
 async function renderLessonCatalog() {
@@ -1089,7 +1172,11 @@ setupLessonNavigation();
         infoMsg.textContent = "";
         document.getElementById("startRegisterBtn").style.display = "none";        
         showDashboard(user);
-        renderLessonCatalog();
+        await renderLessonCatalog();
+        const firstCard = document.querySelector('.lesson-card[data-video="0"]');
+        if (firstCard) {
+        firstCard.classList.add("active");
+       }
         setupLessonNavigation();
         loadFeaturedLesson(0);
        } else {
