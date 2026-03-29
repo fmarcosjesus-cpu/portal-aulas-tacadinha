@@ -835,7 +835,7 @@ setupLessonNavigation();
       );
     }
 
-    function handleReturnFromPayment() {
+    async function handleReturnFromPayment() {
       const params = new URLSearchParams(window.location.search);
 
       const externalReference = (params.get("external_reference") || "").trim().toLowerCase();
