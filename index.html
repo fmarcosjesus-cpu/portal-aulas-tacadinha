@@ -311,7 +311,7 @@
   padding: 10px;
   margin-bottom: 8px;
   border-radius: 10px;
-  background: #0b1220;
+  background: rgba(255,255,255,0.02);
   color: #cbd5e1;
   border: 1px solid rgba(255,255,255,0.05);
   cursor: pointer;
@@ -323,14 +323,21 @@
 }
 
 .sidebar .side-item:hover {
-  background: rgba(59,130,246,0.15);
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.25);
+  color: #f0d27a;
   transform: translateX(4px);
 }
 
 .sidebar .side-item.active {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  color: white;
-  box-shadow: 0 10px 30px rgba(37,99,235,0.35);
+  background: rgba(212,175,55,0.15);
+  border: 1px solid rgba(212,175,55,0.35);
+  color: #f0d27a;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.4),
+    0 0 20px rgba(212,175,55,0.12);
+
   transform: scale(1.03);
 }
 
