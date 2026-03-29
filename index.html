@@ -124,11 +124,26 @@
       margin-bottom: 20px;
     }
     .step {
-      background: #0b1220;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 16px;
-    }
+  background:
+    radial-gradient(circle at top, rgba(255,140,40,0.12), transparent 35%),
+    linear-gradient(180deg, #2a140a 0%, #120c08 40%, #0d0907 100%);
+  border: 1px solid rgba(255,170,60,0.15);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow:
+    0 18px 50px rgba(0,0,0,0.55),
+    0 0 22px rgba(255,140,40,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.step:hover {
+  border: 1px solid rgba(255,170,60,0.25);
+  box-shadow:
+    0 22px 60px rgba(0,0,0,0.6),
+    0 0 26px rgba(255,140,40,0.12);
+  transform: translateY(-2px);
+}
+
     .step-number {
       display: inline-block;
       width: 28px;
@@ -160,7 +175,7 @@
     .box {
     background:
     radial-gradient(circle at top, rgba(255,140,40,0.12), transparent 35%),
-    linear-gradient(180deg, #2a140a 0%, #120c08 40%, #0b1220 100%);
+    linear-gradient(180deg, #2a140a 0%, #120c08 40%, #0d0907 100%);
     border: 1px solid rgba(255,170,60,0.15);
     border-radius: 16px;
     padding: 22px;
@@ -202,7 +217,25 @@
       color: #fff;
       outline: none;
       margin-bottom: 14px;
+      .input {
+      transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
     }
+
+    .input,
+    .input:hover,
+    .input:focus {
+     transform: none !important;
+    }
+
+   .input:focus {
+   border: 1px solid rgba(255,170,60,0.35);
+   box-shadow:
+    0 0 0 1px rgba(255,140,40,0.15),
+    0 0 20px rgba(255,140,40,0.12);
+   background: rgba(10,10,10,0.85);
+   }
+
     .btn {
       width: 100%;
       border: 0;
