@@ -854,23 +854,36 @@ setupLessonNavigation();
       }
 
       if (status || collectionStatus || paymentId) {
-        paymentReturnNotice.style.display = "block";
+  paymentReturnNotice.style.display = "block";
 
-        if (status === "approved" || collectionStatus === "approved") {
+  if (status === "approved" || collectionStatus === "approved") {
+    showRegisterFlow();
+    successMsg.textContent = "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
+
+    paymentReturnNotice.textContent =
+      "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
+
+  } else if (status === "pending" || collectionStatus === "pending") {
+    const emailToCheck = externalReference || pendingEmail;
+
+    if (emailToCheck) {
+      const autorizado = await isAuthorized(emailToCheck);
+
+      if (autorizado) {
         showRegisterFlow();
-        successMsg.textContent = "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
-
-        paymentReturnNotice.textContent =
-        "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
-        } else if (status === "pending" || collectionStatus === "pending") {
-          paymentReturnNotice.textContent =
-            "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
-        } else {
-          paymentReturnNotice.textContent =
-            "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
-        }
+        successMsg.textContent = "Pagamento confirmado. Agora crie sua conta.";
+        return;
       }
     }
+
+    paymentReturnNotice.textContent =
+      "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
+
+  } else {
+    paymentReturnNotice.textContent =
+      "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
+  }
+}
 
     async function isAuthorized(email) {
       if (!email) return false;
