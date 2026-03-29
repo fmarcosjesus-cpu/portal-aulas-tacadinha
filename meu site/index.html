@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giz do Taco | Sinuca Online</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617);
+      color: #e5e7eb;
+    }
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 1100px;
+      background: #111827;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    .hero {
+      padding: 28px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+    .brand-hero p {
+  color: #e0e6ed;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+    .brand-hero {
+  background-image: url("capa.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 40px 30px;
+  border-radius: 16px;
+}
+
+.brand-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.brand-hero {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+}
+     .content {
+      padding: 28px;
+    }
+    .notice {
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .notice-info {
+      background: rgba(56,189,248,0.08);
+      border-color: rgba(56,189,248,0.22);
+      color: #bae6fd;
+    }
+    .notice-warning {
+      background: rgba(234,179,8,0.08);
+      border-color: rgba(234,179,8,0.22);
+      color: #fde68a;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .step {
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .step-number {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.16);
+      color: #86efac;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .step p {
+      margin: 0;
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .auth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    .box {
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 22px;
+    }
+    .box h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .box p {
+      margin: 0 0 16px;
+      color: #cbd5e1;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .input {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: #111827;
+      color: #fff;
+      outline: none;
+      margin-bottom: 14px;
+    }
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      background: #22c55e;
+      color: #052e16;
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn-secondary {
+      background: #38bdf8;
+      color: #082f49;
+    }
+    .btn-ghost {
+      width: auto;
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 14px;
+    }
+    .hint, .error, .success {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .hint { color: #93c5fd; }
+    .error { color: #fca5a5; }
+    .success { color: #86efac; }
+    .small-note {
+      margin-top: 10px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .dashboard { display: none; }
+    .topbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.15);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .lesson {
+    background: #0b1220;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 18px;
+    overflow: hidden;
+    }
+    .lesson h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    .lesson p {
+      margin: 0 0 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .lesson a {
+      display: inline-block;
+      text-decoration: none;
+      background: #38bdf8;
+      color: #082f49;
+      font-weight: 700;
+      padding: 11px 14px;
+      border-radius: 10px;
+    }
+    .footer-note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 26px; }
+      .content, .hero { padding: 22px; }
+}
+  .dashboard-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.sidebar {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar h3 {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.sidebar .side-note {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+.sidebar .side-item {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  background: #0b1220;
+  color: #cbd5e1;
+  border: 1px solid rgba(255,255,255,0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar .side-item {
+  transition: all 0.25s ease;
+}
+
+.sidebar .side-item:hover {
+  background: rgba(59,130,246,0.15);
+  transform: translateX(4px);
+}
+
+.sidebar .side-item.active {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  box-shadow: 0 10px 30px rgba(37,99,235,0.35);
+  transform: scale(1.03);
+}
+
+.content-area {
+  display: grid;
+  gap: 22px;
+}
+
+.featured-player {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.featured-player h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+.featured-player p {
+  margin: 0 0 16px;
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+#featuredPlayer {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: opacity 0.25s ease;
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.player-shell {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.player-shell iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.lesson-card {
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.lesson-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.lesson-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #93c5fd;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.lesson-body {
+  padding: 16px;
+}
+
+.lesson-body h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.lesson-body p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+}
+
+.brand-logo {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(240, 200, 121, 0.95);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.brand-top h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+
+  color: #f5d06f;
+
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.6),
+    0 0 12px rgba(212,175,55,0.4);
+}
+
+.brand-top h2 {
+  margin: 6px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffe2a3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  letter-spacing: 1px;
+}
+
+.brand-sub {
+  margin-top: 14px;
+  color: #f3f4f6;
+  line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.brand-hero h2 {
+  color: #f0d27a;
+  text-shadow:
+    0 1px 4px rgba(0,0,0,0.7),
+    0 0 8px rgba(212,175,55,0.25);
+}
+
+#purchaseBox,
+#registerBox {
+  display: none;
+}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+  <div class="card">
+
+    <div class="hero brand-hero">
+      <div class="brand-content">
+
+        <div class="brand-top">
+          <img src="logo.png" class="brand-logo">
+          <div>
+            <h1>Giz do Taco</h1>
+            <h2>Sinuca Online</h2>
+          </div>
+        </div>
+
+        <p class="brand-sub">
+          Domine a partida. Controle o jogo. Aprenda técnica, efeitos e estratégia com método profissional.
+        </p>
+
+      </div>
+    </div>
+
+      <div class="content" id="authSection">
+        <div class="notice notice-info">
+          *Importante:* use sempre o *mesmo e-mail* em todo o processo:
+          informar no site, pagar, criar conta e fazer login.
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Informe seu e-mail</h3>
+            <p>Digite o e-mail que você vai usar no pagamento. Esse mesmo e-mail será usado depois no cadastro e no login.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Conclua o pagamento</h3>
+            <p>Após pagar, aguarde a confirmação. Quando ela ocorrer, seu e-mail ficará liberado para criar a conta.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Crie sua conta</h3>
+            <p>Depois da confirmação, volte ao portal e crie sua senha usando o mesmo e-mail do pagamento.</p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Entre no portal</h3>
+            <p>Faça login e acesse suas aulas normalmente.</p>
+          </div>
+        </div>
+
+        <div class="notice notice-warning" id="paymentReturnNotice" style="display:none;"></div>
+
+        <div style="margin-bottom: 12px;">
+            <button class="btn" id="startRegisterBtn" style="background: #22c55e;"> Criar conta
+            </button>
+          </div>
+
+        <div class="auth-grid">
+          <div class="box" id="purchaseBox">
+            <p>Digite primeiro o e-mail que será usado no pagamento. Depois clique no botão abaixo para iniciar sua compra.</p>
+
+            <label class="label" for="buyEmail">E-mail para compra</label>
+            <input class="input" type="email" id="buyEmail" placeholder="seuemail@exemplo.com" />
+
+            <button class="btn" id="buyBtn">Comprar acesso</button>
+
+            <div class="small-note">
+              Depois de pagar, volte a esta página e crie sua conta com o mesmo e-mail.
+            </div>
+          </div>
+
+          <div class="box" id="registerBox">
+            <p>O cadastro só será liberado para e-mails cujo pagamento já tenha sido confirmado.</p>
+
+            <label class="label" for="registerName">Nome</label>
+            <input class="input" type="text" id="registerName" placeholder="Seu nome" />
+
+            <label class="label" for="registerEmail">E-mail</label>
+            <input class="input" type="email" id="registerEmail" placeholder="seuemail@exemplo.com" />
+
+            <div class="small-note">
+            ⚠️ Use exatamente o mesmo e-mail utilizado no pagamento.
+            </div>
+
+            <label class="label" for="registerPassword">Senha</label>
+            <input class="input" type="password" id="registerPassword" placeholder="Crie uma senha" />
+
+            <button class="btn" id="registerBtn">Criar conta</button>
+
+            <div class="small-note">
+              Se o sistema informar que o e-mail ainda não está liberado, aguarde a confirmação do pagamento e tente novamente.
+            </div>
+          </div>
+
+          <div class="box" id="loginBox">
+            <p>Se você já criou sua conta, use seu e-mail e senha para acessar as aulas.</p>
+
+            <label class="label" for="loginEmail">E-mail</label>
+            <input class="input" type="email" id="loginEmail" placeholder="seuemail@exemplo.com" />
+
+            <label class="label" for="loginPassword">Senha</label>
+            <input class="input" type="password" id="loginPassword" placeholder="Digite sua senha" />
+
+            <button class="btn btn-secondary" id="loginBtn">Entrar no portal</button>
+            <button class="btn btn-ghost" id="resetBtn" style="margin-top:12px;">Esqueci minha senha</button>
+
+            <div class="small-note">
+              Use exatamente o mesmo e-mail que você utilizou no pagamento e no cadastro.
+            </div>
+          </div>
+        </div>
+
+        <div class="hint" id="infoMsg"></div>
+        <div class="success" id="successMsg"></div>
+        <div class="error" id="errorMsg"></div>
+      </div>
+
+      <div class="content dashboard" id="dashboardSection">
+  <div class="topbar">
+    <div>
+      <span class="badge">Acesso liberado</span>
+      <div class="small-note" id="userInfo"></div>
+    </div>
+    <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+  </div>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3>Seu curso</h3>
+      <div class="side-note">
+        Selecione uma aula para assistir no player principal.
+      </div>
+
+      <button class="side-item active" data-video="0">Aula 1</button>
+      <button class="side-item" data-video="1">Aula 2</button>
+      <button class="side-item" data-video="2">Aula 3</button>
+      <button class="side-item" data-video="3">Aula 4</button>
+      <button class="side-item" data-video="4">Aula 5</button>
+    </aside>
+
+    <div class="content-area">
+      <section class="featured-player">
+        <h2 id="featuredTitle">Aula 1 — Fundamentos da Mira e Introdução ao Curso</h2>
+        <p id="featuredDescription">Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
+
+        <div class="player-shell" id="featuredPlayer"></div>
+      </section>
+
+      <section class="catalog-grid">
+              </section>
+    </div>
+  </div>
+</div>
+
+          <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged,
+      signOut,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
+      authDomain: "tacadinha-aulas-9a75b.firebaseapp.com",
+      projectId: "tacadinha-aulas-9a75b",
+      storageBucket: "tacadinha-aulas-9a75b.firebasestorage.app",
+      messagingSenderId: "957514767572",
+      appId: "1:957514767572:web:d077b7169c6d5652b9ef41",
+      measurementId: "G-FEMHWYVMPZ"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const authSection = document.getElementById("authSection");
+    const dashboardSection = document.getElementById("dashboardSection");
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+    const infoMsg = document.getElementById("infoMsg");
+    const userInfo = document.getElementById("userInfo");
+    const paymentReturnNotice = document.getElementById("paymentReturnNotice");
+const purchaseBox = document.getElementById("purchaseBox");
+const registerBox = document.getElementById("registerBox");
+const loginBox = document.getElementById("loginBox");
+const startRegisterBtn = document.getElementById("startRegisterBtn");
+
+function showOnlyBox(target) {
+  purchaseBox.style.display = target === "purchase" ? "block" : "none";
+  registerBox.style.display = target === "register" ? "block" : "none";
+  loginBox.style.display = target === "login" ? "block" : "none";
+}
+
+function showLoginFlow() {
+  showOnlyBox("login");
+  startRegisterBtn.style.display = "block";
+}
+
+function showPurchaseFlow() {
+  showOnlyBox("purchase");
+  startRegisterBtn.style.display = "none";
+}
+
+function showRegisterFlow() {
+  showOnlyBox("register");
+  startRegisterBtn.style.display = "none";
+}
+
+startRegisterBtn.addEventListener("click", () => {
+  clearMessages();
+  showPurchaseFlow();
+  infoMsg.textContent = "Informe o e-mail que será usado na compra. Após a confirmação do pagamento, o cadastro será liberado.";
+});
+
+    const lessons = [
+{
+  title: "Aula 1 — Fundamentos da Mira e Introdução ao Curso",
+  description: "Base inicial do curso, com os fundamentos da mira e a introdução ao método.",
+  embed: "https://iframe.mediadelivery.net/embed/625484/5fd1f8c8-d240-4e44-a7b1-1e667f9fbd12",
+  thumb: "https://vz-da02adc7-ceb.b-cdn.net/5fd1f8c8-d240-4e44-a7b1-1e667f9fbd12/thumbnail_653b3e67.jpg"
+},
+{
+  title: "Aula 2 — Ajuste de Mira: A Técnica para Encaçapar com Precisão",
+  description: "Aprenda a ajustar a mira com mais precisão e consistência nas jogadas.",
+  embed: "https://iframe.mediadelivery.net/embed/625484/144e3546-9a1a-4096-a7c4-fdfeffbecda0",
+  thumb: "https://vz-da02adc7-ceb.b-cdn.net/144e3546-9a1a-4096-a7c4-fdfeffbecda0/thumbnail_688265d6.jpg"
+},
+{
+  title: "Aula 3 — Efeitos: Domínio Total da Bola Branca",
+  description: "Entenda os efeitos e domine o controle da bola branca com mais segurança.",
+  embed: "https://iframe.mediadelivery.net/embed/625484/6633a79e-587e-4c0b-9309-5030630f560f",
+  thumb: "https://vz-da02adc7-ceb.b-cdn.net/6633a79e-587e-4c0b-9309-5030630f560f/thumbnail_f07f7dff.jpg"
+},
+{
+  title: "Aula 4 — Planejamento e Estratégia: A Arte de Não Errar",
+  description: "Desenvolva visão de jogo, planejamento e estratégia para reduzir erros.",
+  embed: "https://iframe.mediadelivery.net/embed/625484/2d80449b-836a-4a12-990e-0e2fb2d7f5f8",
+  thumb: "https://vz-da02adc7-ceb.b-cdn.net/2d80449b-836a-4a12-990e-0e2fb2d7f5f8/thumbnail_39e378c5.jpg"
+},
+{
+  title: "Aula 5 — Técnica Avançada para Memorizar e Aplicar os Efeitos",
+  description: "Aprenda um método prático para memorizar e aplicar os efeitos no jogo.",
+  embed: "https://iframe.mediadelivery.net/embed/625484/c20da10e-3066-40dd-8b4e-e8d34b74b710",
+  thumb: "https://vz-da02adc7-ceb.b-cdn.net/c20da10e-3066-40dd-8b4e-e8d34b74b710/thumbnail_04a3fc76.jpg"
+}
+];
+
+function loadFeaturedLesson(index) {
+  const lesson = lessons[index];
+  if (!lesson) return;
+
+  const titleEl = document.getElementById("featuredTitle");
+  const descEl = document.getElementById("featuredDescription");
+  const playerEl = document.getElementById("featuredPlayer");
+
+  titleEl.textContent = lesson.title;
+  descEl.textContent = lesson.description;
+
+  playerEl.classList.add("fade-out");
+
+setTimeout(() => {
+  playerEl.innerHTML = `
+    <iframe
+      src="${lesson.embed}"
+      loading="lazy"
+      allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
+      allowfullscreen>
+    </iframe>
+  `;
+
+  playerEl.classList.remove("fade-out");
+playerEl.classList.remove("fade-in");
+void playerEl.offsetWidth;
+playerEl.classList.add("fade-in");
+}, 200);
+
+  document.querySelectorAll(".side-item").forEach((btn, i) => {
+    btn.classList.toggle("active", i === index);
+  });
+}
+
+function setupLessonNavigation() {
+  const items = document.querySelectorAll(".side-item, .lesson-card");
+
+  items.forEach(item => {
+    item.addEventListener("click", () => {
+      const index = Number(item.dataset.video);
+      loadFeaturedLesson(index);
+
+      const featuredSection = document.querySelector(".featured-player");
+      if (featuredSection) {
+        featuredSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    });
+  });
+}
+
+function renderLessonCatalog() {
+  const catalog = document.querySelector(".catalog-grid");
+  if (!catalog) return;
+
+  catalog.innerHTML = lessons.map((lesson, index) => `
+    <article class="lesson-card" data-video="${index}">
+      <div class="lesson-thumb" style="background-image: url('${lesson.thumb}'); background-size: cover; background-position: center;">
+        <span>Aula ${index + 1}</span>
+      </div>
+      <div class="lesson-body">
+        <h3>${lesson.title}</h3>
+        <p>${lesson.description}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+setupLessonNavigation();
+
+    const buyEmail = document.getElementById("buyEmail");
+    const registerEmail = document.getElementById("registerEmail");
+    const loginEmail = document.getElementById("loginEmail");
+
+    function clearMessages() {
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+      infoMsg.textContent = "";
+    }
+
+    function setAllEmailFields(email) {
+      if (!email) return;
+      const normalizedEmail = email.trim().toLowerCase();
+      buyEmail.value = normalizedEmail;
+      registerEmail.value = normalizedEmail;
+      loginEmail.value = normalizedEmail;
+    }
+
+    function getPreferredEmail() {
+      return (
+        buyEmail.value.trim().toLowerCase() ||
+        registerEmail.value.trim().toLowerCase() ||
+        loginEmail.value.trim().toLowerCase()
+      );
+    }
+
+    function handleReturnFromPayment() {
+      const params = new URLSearchParams(window.location.search);
+
+      const externalReference = (params.get("external_reference") || "").trim().toLowerCase();
+      const status = (params.get("status") || "").trim().toLowerCase();
+      const collectionStatus = (params.get("collection_status") || "").trim().toLowerCase();
+      const paymentId = (params.get("payment_id") || "").trim();
+
+      if (externalReference) {
+        setAllEmailFields(externalReference);
+      }
+
+      const pendingEmail = localStorage.getItem("pendingPurchaseEmail");
+
+      if (pendingEmail && !externalReference) {
+      setAllEmailFields(pendingEmail);
+      }
+
+      if (status || collectionStatus || paymentId) {
+        paymentReturnNotice.style.display = "block";
+
+        if (status === "approved" || collectionStatus === "approved") {
+        showRegisterFlow();
+        successMsg.textContent = "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
+
+        paymentReturnNotice.textContent =
+        "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
+        } else if (status === "pending" || collectionStatus === "pending") {
+          paymentReturnNotice.textContent =
+            "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
+        } else {
+          paymentReturnNotice.textContent =
+            "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
+        }
+      }
+    }
+
+    async function isAuthorized(email) {
+      if (!email) return false;
+
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
+
+        const response = await fetch("/.netlify/functions/check-access", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email: normalizedEmail })
+        });
+
+        const data = await response.json();
+
+        console.log("Verificando acesso para:", normalizedEmail);
+        console.log("Resposta da função:", data);
+
+        return data.authorized === true;
+      } catch (error) {
+        console.error("Erro ao verificar acesso:", error);
+        return false;
+      }
+    }
+
+    async function isAuthorizedForLogin(email) {
+      if (!email) return false;
+
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
+        const ref = doc(db, "access", normalizedEmail);
+        const snap = await getDoc(ref);
+
+        if (!snap.exists()) {
+          return false;
+        }
+
+        const data = snap.data();
+        return data.paid === true;
+      } catch (error) {
+        console.error("Erro ao verificar acesso no login:", error);
+        return false;
+      }
+    }
+
+    function showDashboard(user) {
+      authSection.style.display = "none";
+      dashboardSection.style.display = "block";
+      const nome = user.displayName ? user.displayName : "Aluno";
+      userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
+    }
+
+    function showAuth() {
+      authSection.style.display = "block";
+      dashboardSection.style.display = "none";
+    }
+
+    document.getElementById("buyBtn").addEventListener("click", async () => {
+      clearMessages();
+
+      const email = getPreferredEmail();
+
+      localStorage.setItem("pendingPurchaseEmail", email.trim());
+
+      if (!email) {
+        errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
+        return;
+      }
+
+      setAllEmailFields(email);
+      infoMsg.textContent = "Iniciando pagamento...";
+
+      try {
+        const response = await fetch("/.netlify/functions/create-preference", {
+          method: "POST",
+          body: JSON.stringify({ email })
+        });
+
+        const data = await response.json();
+
+        if (data.init_point) {
+          window.location.href = data.init_point;
+        } else {
+          infoMsg.textContent = "";
+          errorMsg.textContent = "Não foi possível iniciar o pagamento.";
+        }
+      } catch (error) {
+        console.error(error);
+        infoMsg.textContent = "";
+        errorMsg.textContent = "Erro ao conectar com o pagamento.";
+      }
+    });
+
+    document.getElementById("registerBtn").addEventListener("click", async () => {
+      clearMessages();
+
+      const name = document.getElementById("registerName").value.trim();
+      const email = registerEmail.value.trim().toLowerCase();
+      const password = document.getElementById("registerPassword").value.trim();
+
+      if (!name || !email || !password) {
+        errorMsg.textContent = "Preencha nome, e-mail e senha para criar sua conta.";
+        return;
+      }
+
+      setAllEmailFields(email);
+      infoMsg.textContent = "Verificando se o pagamento já foi confirmado...";
+
+      try {
+        const autorizado = await isAuthorized(email);
+
+        if (!autorizado) {
+          infoMsg.textContent = "";
+          errorMsg.textContent = "Esse e-mail ainda não está liberado para cadastro. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+          return;
+        }
+
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: name });
+
+        infoMsg.textContent = "";
+        successMsg.textContent = "Conta criada com sucesso. Agora você já pode acessar o portal com esse mesmo e-mail e senha.";
+        localStorage.removeItem("pendingPurchaseEmail");
+        loginEmail.value = email;
+        showLoginFlow();
+      } catch (error) {
+        infoMsg.textContent = "";
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      clearMessages();
+
+      const email = loginEmail.value.trim().toLowerCase();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      if (!email || !password) {
+        errorMsg.textContent = "Informe seu e-mail e sua senha para entrar.";
+        return;
+      }
+
+      setAllEmailFields(email);
+      infoMsg.textContent = "Verificando seus dados...";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        successMsg.textContent = "Login realizado com sucesso.";
+      } catch (error) {
+        infoMsg.textContent = "";
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", async () => {
+      clearMessages();
+
+      const email = getPreferredEmail();
+
+      if (!email) {
+        errorMsg.textContent = "Informe o e-mail para redefinir a senha.";
+        return;
+      }
+
+      setAllEmailFields(email);
+
+      try {
+        await sendPasswordResetEmail(auth, email);
+        successMsg.textContent = "Enviamos um e-mail para redefinição de senha. Verifique também a caixa de spam.";
+      } catch (error) {
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      clearMessages();
+      await signOut(auth);
+      infoMsg.textContent = "Você saiu do portal.";
+    });
+
+    onAuthStateChanged(auth, async (user) => {
+      clearMessages();
+
+      if (user) {
+        infoMsg.textContent = "Verificando liberação de acesso...";
+        const autorizado = await isAuthorizedForLogin((user.email || "").toLowerCase());
+
+        if (autorizado) {
+          infoMsg.textContent = "";
+          showDashboard(user);
+        } else {
+          await signOut(auth);
+          showAuth();
+          errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+        }
+      } else {
+        showAuth();
+      }
+    });
+
+    function traduzirErro(code) {
+      const erros = {
+        "auth/email-already-in-use": "Esse e-mail já está cadastrado. Se você já criou sua conta, use a área de login.",
+        "auth/invalid-email": "O e-mail informado é inválido.",
+        "auth/weak-password": "A senha está muito fraca. Use pelo menos 6 caracteres.",
+        "auth/missing-password": "Informe uma senha válida.",
+        "auth/invalid-credential": "E-mail ou senha incorretos.",
+        "auth/user-not-found": "Usuário não encontrado.",
+        "auth/network-request-failed": "Falha de conexão. Verifique sua internet.",
+        "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente."
+      };
+      return erros[code] || `Ocorreu um erro: ${code}`;
+    }
+
+    handleReturnFromPayment();
+    renderLessonCatalog();
+    setupLessonNavigation();
+    loadFeaturedLesson(0);
+    showLoginFlow();
+
+
+
+  </script>
+</body>
+</html>
