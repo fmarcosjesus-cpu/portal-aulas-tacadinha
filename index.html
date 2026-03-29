@@ -46,7 +46,7 @@
 
   background:
     radial-gradient(circle at top center, rgba(212,175,55,0.10), transparent 28%),
-    linear-gradient(180deg, rgba(32,17,8,0.88) 0%, rgba(11,18,32,0.96) 22%, rgba(11,18,32,1) 100%);
+    linear-gradient(180deg, rgba(40,20,10,0.92) 0%, rgba(22,14,10,0.96) 25%, rgba(15,10,8,1) 100%);
 
   border: 1px solid rgba(212,175,55,0.16);
   border-radius: 18px;
@@ -59,9 +59,9 @@
   overflow: hidden;
 }
     .hero {
-      padding: 28px;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 28px;
+  background: linear-gradient(135deg, #2a140a, #0f0a08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .hero h1 {
       margin: 0 0 10px;
@@ -571,6 +571,15 @@ button,
 .btn-primary {
   background: linear-gradient(135deg, var(--green-main), var(--green-dark));
   color: white;
+}
+
+.featured-player {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-player:hover {
+  transform: scale(1.01);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
 }
 
   </style>
