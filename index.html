@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portal de Aulas | Tacadinha</title>
+  <title>Giz do Taco | Sinuca Online</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -38,12 +38,36 @@
       font-size: 32px;
       line-height: 1.15;
     }
-    .hero p {
-      margin: 0;
-      color: #cbd5e1;
-      line-height: 1.55;
-    }
-    .content {
+    .brand-hero p {
+  color: #e0e6ed;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+    .brand-hero {
+  background-image: url("capa.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 40px 30px;
+  border-radius: 16px;
+}
+
+.brand-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.brand-hero {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+.brand-content {
+  position: relative;
+  z-index: 2;
+}
+     .content {
       padding: 28px;
     }
     .notice {
@@ -401,15 +425,81 @@
   .sidebar {
     position: static;
   }
-}  }
+
+}
+
+.brand-logo {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(240, 200, 121, 0.95);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+.brand-top h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1;
+
+  color: #f5d06f;
+
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.6),
+    0 0 12px rgba(212,175,55,0.4);
+}
+
+.brand-top h2 {
+  margin: 6px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffe2a3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  letter-spacing: 1px;
+}
+
+.brand-sub {
+  margin-top: 14px;
+  color: #f3f4f6;
+  line-height: 1.6;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.brand-hero h2 {
+  color: #f0d27a;
+  text-shadow:
+    0 1px 4px rgba(0,0,0,0.7),
+    0 0 8px rgba(212,175,55,0.25);
+}
+
+#purchaseBox,
+#registerBox {
+  display: none;
+}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
-      <div class="hero">
-        <h1>Portal de Aulas do Tacadinha</h1>
+  <div class="card">
+
+    <div class="hero brand-hero">
+      <div class="brand-content">
+
+        <div class="brand-top">
+          <img src="logo.png" class="brand-logo">
+          <div>
+            <h1>Giz do Taco</h1>
+            <h2>Sinuca Online</h2>
           </div>
+        </div>
+
+        <p class="brand-sub">
+          Domine a partida. Controle o jogo. Aprenda técnica, efeitos e estratégia com método profissional.
+        </p>
+
+      </div>
+    </div>
 
       <div class="content" id="authSection">
         <div class="notice notice-info">
@@ -442,9 +532,13 @@
 
         <div class="notice notice-warning" id="paymentReturnNotice" style="display:none;"></div>
 
+        <div style="margin-bottom: 12px;">
+            <button class="btn" id="startRegisterBtn" style="background: #22c55e;"> Criar conta
+            </button>
+          </div>
+
         <div class="auth-grid">
-          <div class="box">
-            <h2>Comprar acesso</h2>
+          <div class="box" id="purchaseBox">
             <p>Digite primeiro o e-mail que será usado no pagamento. Depois clique no botão abaixo para iniciar sua compra.</p>
 
             <label class="label" for="buyEmail">E-mail para compra</label>
@@ -457,8 +551,7 @@
             </div>
           </div>
 
-          <div class="box">
-            <h2>Criar conta</h2>
+          <div class="box" id="registerBox">
             <p>O cadastro só será liberado para e-mails cujo pagamento já tenha sido confirmado.</p>
 
             <label class="label" for="registerName">Nome</label>
@@ -481,8 +574,7 @@
             </div>
           </div>
 
-          <div class="box">
-            <h2>Entrar</h2>
+          <div class="box" id="loginBox">
             <p>Se você já criou sua conta, use seu e-mail e senha para acessar as aulas.</p>
 
             <label class="label" for="loginEmail">E-mail</label>
@@ -580,6 +672,38 @@
     const infoMsg = document.getElementById("infoMsg");
     const userInfo = document.getElementById("userInfo");
     const paymentReturnNotice = document.getElementById("paymentReturnNotice");
+const purchaseBox = document.getElementById("purchaseBox");
+const registerBox = document.getElementById("registerBox");
+const loginBox = document.getElementById("loginBox");
+const startRegisterBtn = document.getElementById("startRegisterBtn");
+
+function showOnlyBox(target) {
+  purchaseBox.style.display = target === "purchase" ? "block" : "none";
+  registerBox.style.display = target === "register" ? "block" : "none";
+  loginBox.style.display = target === "login" ? "block" : "none";
+}
+
+function showLoginFlow() {
+  showOnlyBox("login");
+  startRegisterBtn.style.display = "block";
+}
+
+function showPurchaseFlow() {
+  showOnlyBox("purchase");
+  startRegisterBtn.style.display = "none";
+}
+
+function showRegisterFlow() {
+  showOnlyBox("register");
+  startRegisterBtn.style.display = "none";
+}
+
+startRegisterBtn.addEventListener("click", () => {
+  clearMessages();
+  showPurchaseFlow();
+  infoMsg.textContent = "Informe o e-mail que será usado na compra. Após a confirmação do pagamento, o cadastro será liberado.";
+});
+
     const lessons = [
 {
   title: "Aula 1 — Fundamentos da Mira e Introdução ao Curso",
@@ -723,13 +847,22 @@ setupLessonNavigation();
         setAllEmailFields(externalReference);
       }
 
+      const pendingEmail = localStorage.getItem("pendingPurchaseEmail");
+
+      if (pendingEmail && !externalReference) {
+      setAllEmailFields(pendingEmail);
+      }
+
       if (status || collectionStatus || paymentId) {
         paymentReturnNotice.style.display = "block";
 
         if (status === "approved" || collectionStatus === "approved") {
+        showRegisterFlow();
+        successMsg.textContent = "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
+
         paymentReturnNotice.textContent =
         "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
-} else if (status === "pending" || collectionStatus === "pending") {
+        } else if (status === "pending" || collectionStatus === "pending") {
           paymentReturnNotice.textContent =
             "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
         } else {
@@ -802,6 +935,8 @@ setupLessonNavigation();
 
       const email = getPreferredEmail();
 
+      localStorage.setItem("pendingPurchaseEmail", email.trim());
+
       if (!email) {
         errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
         return;
@@ -860,6 +995,9 @@ setupLessonNavigation();
 
         infoMsg.textContent = "";
         successMsg.textContent = "Conta criada com sucesso. Agora você já pode acessar o portal com esse mesmo e-mail e senha.";
+        localStorage.removeItem("pendingPurchaseEmail");
+        loginEmail.value = email;
+        showLoginFlow();
       } catch (error) {
         infoMsg.textContent = "";
         errorMsg.textContent = traduzirErro(error.code);
@@ -953,6 +1091,10 @@ setupLessonNavigation();
     renderLessonCatalog();
     setupLessonNavigation();
     loadFeaturedLesson(0);
+    showLoginFlow();
+
+
+
   </script>
 </body>
 </html>
