@@ -884,7 +884,7 @@ setupLessonNavigation();
       "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
   }
 }
-
+}
     async function isAuthorized(email) {
       if (!email) return false;
 
@@ -1100,7 +1100,7 @@ setupLessonNavigation();
       return erros[code] || `Ocorreu um erro: ${code}`;
     }
 
-    handleReturnFromPayment();
+handleReturnFromPayment();
 renderLessonCatalog();
 setupLessonNavigation();
 loadFeaturedLesson(0);
