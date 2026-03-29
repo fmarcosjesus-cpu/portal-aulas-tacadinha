@@ -1105,15 +1105,6 @@ renderLessonCatalog();
 setupLessonNavigation();
 loadFeaturedLesson(0);
 
-const params = new URLSearchParams(window.location.search);
-const hasPaymentReturn =
-  params.get("status") ||
-  params.get("collection_status") ||
-  params.get("payment_id");
-
-if (!hasPaymentReturn) {
-  showLoginFlow();
-}
-  </script>
+</script>
 </body>
 </html>
