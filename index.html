@@ -209,33 +209,30 @@
       color: #cbd5e1;
     }
     .input {
-      width: 100%;
-      padding: 14px 15px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: #111827;
-      color: #fff;
-      outline: none;
-      margin-bottom: 14px;
-      .input {
-      transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  width: 100%;
+  padding: 14px 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: #111827;
+  color: #fff;
+  outline: none;
+  margin-bottom: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
 
-    }
+.input,
+.input:hover,
+.input:focus {
+  transform: none !important;
+}
 
-    .input,
-    .input:hover,
-    .input:focus {
-     transform: none !important;
-    }
-
-   .input:focus {
-   border: 1px solid rgba(255,170,60,0.35);
-   box-shadow:
+.input:focus {
+  border: 1px solid rgba(255,170,60,0.35);
+  box-shadow:
     0 0 0 1px rgba(255,140,40,0.15),
     0 0 20px rgba(255,140,40,0.12);
-   background: rgba(10,10,10,0.85);
-   }
-
+  background: rgba(10,10,10,0.85);
+}
     .btn {
       width: 100%;
       border: 0;
@@ -531,8 +528,10 @@
   }
 
   .sidebar {
-    position: static;
-  }
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+}
 
 }
 
