@@ -41,14 +41,23 @@
       padding: 24px;
     }
     .card {
-      width: 100%;
-      max-width: 1100px;
-      background: #111827;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-      overflow: hidden;
-    }
+  width: 100%;
+  max-width: 1100px;
+
+  background:
+    radial-gradient(circle at top center, rgba(212,175,55,0.10), transparent 28%),
+    linear-gradient(180deg, rgba(32,17,8,0.88) 0%, rgba(11,18,32,0.96) 22%, rgba(11,18,32,1) 100%);
+
+  border: 1px solid rgba(212,175,55,0.16);
+  border-radius: 18px;
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.60),
+    0 0 0 1px rgba(212,175,55,0.05),
+    inset 0 1px 0 rgba(255,220,140,0.06);
+
+  overflow: hidden;
+}
     .hero {
       padding: 28px;
       background: linear-gradient(135deg, #1e293b, #0f172a);
