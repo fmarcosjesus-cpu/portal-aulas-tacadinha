@@ -1060,10 +1060,15 @@ setupLessonNavigation();
     });
 
     document.getElementById("logoutBtn").addEventListener("click", async () => {
-      clearMessages();
-      await signOut(auth);
-      infoMsg.textContent = "Você saiu do portal.";
-    });
+  clearMessages();
+  await signOut(auth);
+
+  showAuth();
+  showPurchaseFlow();
+  document.getElementById("startRegisterBtn").style.display = "block";
+
+  infoMsg.textContent = "Você saiu do portal.";
+});
 
     onAuthStateChanged(auth, async (user) => {
       clearMessages();
