@@ -737,70 +737,65 @@ button,
   }
 
   .hero {
-  padding: 10px !important;
-  border-radius: 12px;
+    padding: 10px !important;
+    border-radius: 12px;
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
 
-  height: 220px;
+  .hero:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.0) 0%,
+      rgba(0,0,0,0.5) 55%,
+      rgba(0,0,0,0.85) 100%
+    );
+    border-radius: 12px;
+  }
 
-  display: flex;
-  align-items: flex-end;
+  .hero > * {
+    position: relative;
+    z-index: 2;
+  }
 
-  background-size: cover;
-  background-position: center;
+  .brand-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-  position: relative;
-  overflow: hidden;
-}
+  .brand-logo {
+    width: 42px;
+    height: 42px;
+    margin: 0;
+  }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+  .brand-top h1,
+  .hero h1 {
+    font-size: 16px !important;
+    line-height: 1.1;
+  }
 
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.1) 0%,
-    rgba(0,0,0,0.6) 60%,
-    rgba(0,0,0,0.9) 100%
-  );
+  .brand-top h2 {
+    font-size: 13px;
+    margin-top: 2px;
+  }
 
-  border-radius: 12px;
-}
-
-.hero > * {
-  position: relative;
-  z-index: 2;
-}
-
-.brand-content {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-logo {
-  width: 42px;
-  height: 42px;
-  margin: 0;
-}
-
-.brand-top h1,
-.hero h1 {
-  font-size: 16px !important;
-  line-height: 1.1;
-}
-
-.brand-top h2 {
-  font-size: 13px;
-  margin-top: 2px;
-}
-
-.hero p,
-.brand-sub {
-  font-size: 12px;
-  line-height: 1.4;
-  margin-top: 6px;
-}
+  .hero p,
+  .brand-sub {
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 6px;
+  }
 
   .sidebar h3,
   .featured-player h2 {
@@ -820,16 +815,8 @@ button,
     font-size: 13px;
     line-height: 1.45;
   }
-
-  .featured-player iframe,
-  .featured-player video,
-  .featured-thumb,
-  .lesson-thumb {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
 }
+
   </style>
 </head>
 <body>
