@@ -40,12 +40,17 @@ const valor = [50, 99].includes(valorRaw) ? valorRaw : 99;
         payer: {
           email,
         },
+        payment_methods: {
+          installments: 1,
+          default_installments: 1
+        },
         external_reference: email,
-        notification_url: "https://snazzy-raindrop-a62381.netlify.app/.netlify/functions/mp-webhook",
+        notification_url: "https://gizdotacosinucaonline.netlify.app/.netlify/functions/mp-webhook",
+
         back_urls: {
-          success: "https://snazzy-raindrop-a62381.netlify.app/",
-          failure: "https://snazzy-raindrop-a62381.netlify.app/",
-          pending: "https://snazzy-raindrop-a62381.netlify.app/",
+        success: "https://gizdotacosinucaonline.netlify.app/",
+        failure: "https://gizdotacosinucaonline.netlify.app/",
+        pending: "https://gizdotacosinucaonline.netlify.app/",
         },
         auto_return: "approved",
       },
