@@ -1104,7 +1104,25 @@ button,
             <input class="input" type="email" id="loginEmail" placeholder="seuemail@exemplo.com" />
 
             <label class="label" for="loginPassword">Senha</label>
-            <input class="input" type="password" id="loginPassword" placeholder="Digite sua senha" />
+            <div class="password-wrap">
+  <input class="input password-input" type="password" id="loginPassword" placeholder="Digite sua senha" />
+
+  <button type="button" id="toggleLoginPassword" class="toggle-password" aria-label="Mostrar ou ocultar senha">
+    <span class="eye-icon">
+      <svg id="eyeOpenLogin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+
+      <svg id="eyeClosedLogin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="display: none;">
+        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94"></path>
+        <path d="M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.79 21.79 0 0 1-3.22 4.19"></path>
+        <path d="M1 1l22 22"></path>
+        <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"></path>
+      </svg>
+    </span>
+  </button>
+</div>
 
             <button class="btn btn-secondary" id="loginBtn">Entrar no portal</button>
             <button class="btn btn-ghost" id="resetBtn" style="margin-top:12px;">Esqueci minha senha</button>
@@ -1243,6 +1261,23 @@ function loadFeaturedLesson(index) {
   playerEl.classList.add("fade-out");
 
 setTimeout(() => {
+  if (!lesson.embed) {
+  playerEl.innerHTML = `
+    <div style="
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100%;
+      min-height:250px;
+      font-size:18px;
+      color:#cbd5e1;
+      background:#111827;
+      border-radius:12px;
+    ">
+      🔒 Aula disponível em breve
+    </div>
+  `;
+} else {
   playerEl.innerHTML = `
     <iframe
       src="${lesson.embed}"
@@ -1251,6 +1286,7 @@ setTimeout(() => {
       allowfullscreen>
     </iframe>
   `;
+}
 
   playerEl.classList.remove("fade-out");
 playerEl.classList.remove("fade-in");
@@ -1543,6 +1579,22 @@ document.getElementById("togglePassword").addEventListener("click", () => {
   const input = document.getElementById("registerPassword");
   const eyeOpen = document.getElementById("eyeOpen");
   const eyeClosed = document.getElementById("eyeClosed");
+
+  if (input.type === "password") {
+    input.type = "text";
+    eyeOpen.style.display = "none";
+    eyeClosed.style.display = "block";
+  } else {
+    input.type = "password";
+    eyeOpen.style.display = "block";
+    eyeClosed.style.display = "none";
+  }
+});
+
+document.getElementById("toggleLoginPassword").addEventListener("click", () => {
+  const input = document.getElementById("loginPassword");
+  const eyeOpen = document.getElementById("eyeOpenLogin");
+  const eyeClosed = document.getElementById("eyeClosedLogin");
 
   if (input.type === "password") {
     input.type = "text";
