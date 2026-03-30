@@ -45,15 +45,17 @@
   max-width: 1100px;
 
   background:
-    radial-gradient(circle at top center, rgba(255,140,40,0.12), transparent 30%),
-    linear-gradient(180deg, #2a140a 0%, #120c08 40%, #0b1220 100%);
+    radial-gradient(circle at top center, rgba(255,210,120,0.12), transparent 30%),
+    linear-gradient(180deg, #1a0f07 0%, #120904 30%, #0a0502 100%);
 
-  border: 1px solid rgba(255,170,60,0.15);
+  border: 1px solid rgba(255, 210, 140, 0.25);
+
   border-radius: 18px;
 
- box-shadow:
-  0 30px 90px rgba(0,0,0,0.7),
-  0 0 25px rgba(255,140,40,0.10);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.85),
+    0 0 60px rgba(255,190,90,0.12),
+    inset 0 1px 0 rgba(255,230,160,0.20);
 
   overflow: hidden;
 }
@@ -616,23 +618,6 @@ button,
   color: white;
 }
 
-.featured-player {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.content-area,
-.featured-player {
-  border: 1px solid rgba(255,170,60,0.15);
-  box-shadow: 0 0 25px rgba(255,140,40,0.08);
-}
-
-.featured-player:hover {
-  transform: scale(1.01);
-  box-shadow:
-    0 25px 60px rgba(0,0,0,0.6),
-    0 0 30px rgba(255,140,40,0.2);
-}
-
 #purchaseBox,
 #registerBox {
   border: 1px solid rgba(255,170,60,0.15);
@@ -644,21 +629,41 @@ button,
 .sidebar,
 .lesson-list,
 .player-card,
-.player,
 .video-player,
 .main-player,
 .content-area {
   background:
-    radial-gradient(circle at top, rgba(255,200,100,0.20), transparent 40%),
-    linear-gradient(180deg, #2a1608 0%, #140d07 40%, #0a0705 100%) !important;
+    radial-gradient(circle at top, rgba(255, 200, 120, 0.15), transparent 45%),
+    linear-gradient(180deg, #1c1108 0%, #120803 45%, #070302 100%) !important;
 
-  border: 1px solid rgba(255,200,120,0.28) !important;
+  border: 1px solid rgba(255, 215, 120, 0.45) !important;
 
   box-shadow:
-    0 25px 80px rgba(0,0,0,0.75),
-    0 0 35px rgba(255,190,90,0.20) !important;
+    0 30px 90px rgba(0,0,0,0.75),
+    0 0 40px rgba(255,190,90,0.15),
+    inset 0 1px 0 rgba(255,240,180,0.35),
+    inset 0 -1px 0 rgba(255,200,100,0.15) !important;
 
   border-radius: 16px;
+
+  backdrop-filter: blur(6px) !important;
+}
+
+  section.featured-player {
+  background:
+    radial-gradient(circle at top, rgba(255, 200, 120, 0.18), transparent 45%),
+    linear-gradient(180deg, #1c1007 0%, #140b05 40%, #090503 100%) !important;
+
+  border: 1px solid rgba(255, 220, 150, 0.45) !important;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,0.85),
+    0 0 60px rgba(255,200,100,0.18),
+    inset 0 1px 0 rgba(255,235,170,0.30) !important;
+
+  border-radius: 16px;
+
+  backdrop-filter: blur(6px) !important;
 }
   </style>
 </head>
