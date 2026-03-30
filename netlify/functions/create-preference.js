@@ -14,7 +14,9 @@ exports.handler = async (event) => {
     }
 
     const body = JSON.parse(event.body || "{}");
-    const email = (body.email || "").trim().toLowerCase();
+const email = (body.email || "").trim().toLowerCase();
+const valorRaw = Number(body.valor);
+const valor = [50, 99].includes(valorRaw) ? valorRaw : 99;
 
     if (!email) {
       return {
@@ -31,7 +33,7 @@ exports.handler = async (event) => {
           {
             title: "Acesso ao curso Tacadinha",
             quantity: 1,
-            unit_price: 10,
+            unit_price: valor,
             currency_id: "BRL",
           },
         ],

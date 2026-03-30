@@ -654,6 +654,90 @@ button,
   backdrop-filter: blur(6px) !important;
 }
 
+.payment-options {
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at top, rgba(255,200,120,0.10), transparent 55%),
+    linear-gradient(180deg, #140904 0%, #090302 100%);
+  border: 1px solid rgba(255,210,140,0.20);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,240,180,0.08);
+}
+
+.payment-options-title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.35;
+  color: #f6e0a0;
+  font-weight: 700;
+}
+
+.payment-options-subtitle {
+  margin: 0 0 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cdb5a1;
+}
+
+.btn-gold-option,
+.btn-green-option {
+  width: 100%;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-gold-option {
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #f5d06f, #d4af37);
+  color: #2a1805;
+  box-shadow:
+    0 10px 24px rgba(212,175,55,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.btn-green-option {
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #ffffff;
+  box-shadow:
+    0 10px 24px rgba(34,197,94,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.btn-gold-option:hover,
+.btn-green-option:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+@media (max-width: 640px) {
+  .payment-options {
+    padding: 14px;
+    border-radius: 12px;
+  }
+
+  .payment-options-title {
+    font-size: 15px;
+  }
+
+  .payment-options-subtitle {
+    font-size: 12px;
+  }
+
+  .btn-gold-option,
+  .btn-green-option {
+    font-size: 14px;
+    padding: 12px 14px;
+  }
+}
+
 @media (max-width: 900px) {
 
   /* Layout geral */
@@ -885,6 +969,24 @@ button,
             <input class="input" type="email" id="buyEmail" placeholder="seuemail@exemplo.com" />
 
             <button class="btn" id="buyBtn">Comprar acesso</button>
+
+            <div id="paymentOptions" class="payment-options" style="display: none;">
+            <p class="payment-options-title">
+            Aqui, você decide o valor que deseja pagar.
+            </p>
+
+            <p class="payment-options-subtitle">
+            O acesso ao curso é exatamente o mesmo em qualquer opção.
+            </p>
+
+            <button type="button" class="btn btn-gold-option" onclick="pagar(99)">
+           🎱 Fortalecer – R$ 99
+            </button>
+
+            <button type="button" class="btn btn-green-option" onclick="pagar(50)">
+            Valor com desconto – R$ 50
+           </button>
+           </div>
 
             <div class="small-note">
               Depois de pagar, volte a esta página e crie sua conta com o mesmo e-mail.
@@ -1288,46 +1390,71 @@ setupLessonNavigation();
     }
 
     function showAuth() {
-      authSection.style.display = "block";
-      dashboardSection.style.display = "none";
-    }
+  authSection.style.display = "block";
+  dashboardSection.style.display = "none";
+}
 
-    document.getElementById("buyBtn").addEventListener("click", async () => {
-      clearMessages();
+function togglePaymentOptions() {
+  clearMessages();
 
-      const email = getPreferredEmail();
+  const email = getPreferredEmail();
 
-      localStorage.setItem("pendingPurchaseEmail", email.trim());
+  if (!email) {
+    errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
+    return;
+  }
 
-      if (!email) {
-        errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
-        return;
-      }
+  const panel = document.getElementById("paymentOptions");
 
-      setAllEmailFields(email);
-      infoMsg.textContent = "Iniciando pagamento...";
+  if (!panel) return;
 
-      try {
-        const response = await fetch("/.netlify/functions/create-preference", {
-          method: "POST",
-          body: JSON.stringify({ email })
-        });
+  panel.style.display =
+    panel.style.display === "none" || panel.style.display === ""
+      ? "block"
+      : "none";
+}
 
-        const data = await response.json();
+    async function pagar(valor) {
+  clearMessages();
 
-        if (data.init_point) {
-          window.location.href = data.init_point;
-        } else {
-          infoMsg.textContent = "";
-          errorMsg.textContent = "Não foi possível iniciar o pagamento.";
-        }
-      } catch (error) {
-        console.error(error);
-        infoMsg.textContent = "";
-        errorMsg.textContent = "Erro ao conectar com o pagamento.";
-      }
+  const email = getPreferredEmail();
+
+  localStorage.setItem("pendingPurchaseEmail", email.trim());
+
+  if (!email) {
+    errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
+    return;
+  }
+
+  setAllEmailFields(email);
+  infoMsg.textContent = "Iniciando pagamento...";
+
+  try {
+    const response = await fetch("/.netlify/functions/create-preference", {
+      method: "POST",
+      body: JSON.stringify({ email, valor })
     });
 
+    const data = await response.json();
+
+    if (data.init_point) {
+      window.location.href = data.init_point;
+    } else {
+      infoMsg.textContent = "";
+      errorMsg.textContent = "Não foi possível iniciar o pagamento.";
+    }
+
+  } catch (error) {
+    console.error(error);
+    infoMsg.textContent = "";
+    errorMsg.textContent = "Erro ao conectar com o pagamento.";
+  }
+}
+
+document.getElementById("buyBtn").addEventListener("click", () => {
+  togglePaymentOptions();
+});
+    
     document.getElementById("registerBtn").addEventListener("click", async () => {
       clearMessages();
 
