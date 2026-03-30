@@ -30,7 +30,11 @@
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #0f172a, #020617);
+      background:
+      radial-gradient(circle at 20% 30%, rgba(255,120,40,0.15), transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(255,80,20,0.12), transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(255,140,60,0.10), transparent 50%),
+      linear-gradient(180deg, #0b0502 0%, #020101 100%);
       color: #e5e7eb;
     }
     .wrap {
@@ -586,12 +590,12 @@
 }
 
 .lesson-card.active {
-  border: 1px solid rgba(212,175,55,0.45);
-  transform: translateY(-4px) scale(1.02);
+  border: 1px solid rgba(255,235,160,1) !important;
+
   box-shadow:
-    0 18px 40px rgba(0,0,0,0.45),
-    0 0 0 1px rgba(212,175,55,0.15),
-    0 0 24px rgba(212,175,55,0.12);
+    0 0 25px rgba(255,210,100,0.6),
+    0 0 60px rgba(255,160,50,0.35),
+    inset 0 1px 0 rgba(255,255,230,1) !important;
 }
 
 button,
@@ -628,34 +632,34 @@ button,
 .sidebar,
 .lesson-card {
   background:
-    radial-gradient(circle at top, rgba(255,190,90,0.10), transparent 42%),
-    linear-gradient(180deg, #160b06 0%, #0c0603 48%, #040201 100%) !important;
+    radial-gradient(circle at top, rgba(255,200,80,0.25), transparent 55%),
+    linear-gradient(180deg, #1a0d05 0%, #0a0502 60%, #020101 100%) !important;
 
-  border: 1px solid rgba(255,220,140,0.42) !important;
+  border: 1px solid rgba(255,220,120,0.85) !important;
 
   box-shadow:
-    0 24px 70px rgba(0,0,0,0.78),
-    0 0 18px rgba(255,190,90,0.10),
-    inset 0 0 0 1px rgba(255,235,170,0.12),
-    inset 0 1px 0 rgba(255,245,200,0.26),
-    inset 0 -1px 0 rgba(120,70,20,0.16) !important;
+    0 0 35px rgba(255,180,60,0.25),
+    0 0 80px rgba(255,140,40,0.15),
+    inset 0 1px 0 rgba(255,245,200,0.9),
+    inset 0 -1px 0 rgba(120,60,10,0.4),
+    inset 0 0 12px rgba(255,200,100,0.25) !important;
 
   border-radius: 16px;
   backdrop-filter: blur(6px) !important;
 }
   section.featured-player {
   background:
-    radial-gradient(circle at top, rgba(255,205,110,0.14), transparent 44%),
-    linear-gradient(180deg, #170c06 0%, #0b0503 48%, #020101 100%) !important;
+    radial-gradient(circle at top, rgba(255,210,100,0.30), transparent 60%),
+    linear-gradient(180deg, #1c0e05 0%, #0a0402 55%, #010101 100%) !important;
 
-  border: 1px solid rgba(255,228,155,0.72) !important;
+  border: 1px solid rgba(255,230,150,1) !important;
 
   box-shadow:
-    0 35px 100px rgba(0,0,0,0.88),
-    0 0 26px rgba(255,205,110,0.12),
-    inset 0 0 0 1px rgba(255,240,180,0.18),
-    inset 0 1px 0 rgba(255,245,210,0.42),
-    inset 0 -1px 0 rgba(120,70,20,0.18) !important;
+    0 0 45px rgba(255,200,90,0.35),
+    0 0 120px rgba(255,150,50,0.18),
+    inset 0 1px 0 rgba(255,250,220,1),
+    inset 0 -1px 0 rgba(120,60,10,0.45),
+    inset 0 0 20px rgba(255,210,120,0.35) !important;
 
   border-radius: 16px;
   backdrop-filter: blur(6px) !important;
