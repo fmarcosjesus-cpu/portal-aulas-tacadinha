@@ -590,12 +590,18 @@
 }
 
 .lesson-card.active {
-  border: 1px solid rgba(255,235,160,1) !important;
+  background:
+    radial-gradient(circle at top, rgba(255,210,110,0.28), transparent 58%),
+    linear-gradient(180deg, #221208 0%, #120904 52%, #050202 100%) !important;
+
+  border: 1px solid rgba(255,225,150,0.72) !important;
 
   box-shadow:
-    0 0 25px rgba(255,210,100,0.6),
-    0 0 60px rgba(255,160,50,0.35),
-    inset 0 1px 0 rgba(255,255,230,1) !important;
+    0 10px 30px rgba(0,0,0,0.45),
+    0 0 18px rgba(255,190,90,0.16),
+    inset 0 0 18px rgba(255,210,120,0.12),
+    inset 0 1px 0 rgba(255,245,210,0.35),
+    inset 0 -1px 0 rgba(120,70,20,0.14) !important;
 }
 
 button,
@@ -649,17 +655,17 @@ button,
 }
   section.featured-player {
   background:
-    radial-gradient(circle at top, rgba(255,210,100,0.30), transparent 60%),
-    linear-gradient(180deg, #1c0e05 0%, #0a0402 55%, #010101 100%) !important;
+    radial-gradient(circle at top, rgba(255,205,110,0.18), transparent 50%),
+    linear-gradient(180deg, #1a0d06 0%, #0b0503 50%, #020101 100%) !important;
 
-  border: 1px solid rgba(255,230,150,1) !important;
+  border: 1px solid rgba(255,225,150,0.60) !important;
 
   box-shadow:
-    0 0 45px rgba(255,200,90,0.35),
-    0 0 120px rgba(255,150,50,0.18),
-    inset 0 1px 0 rgba(255,250,220,1),
-    inset 0 -1px 0 rgba(120,60,10,0.45),
-    inset 0 0 20px rgba(255,210,120,0.35) !important;
+    0 20px 55px rgba(0,0,0,0.58),
+    0 0 18px rgba(255,190,90,0.12),
+    inset 0 0 24px rgba(255,210,120,0.08),
+    inset 0 1px 0 rgba(255,245,210,0.30),
+    inset 0 -1px 0 rgba(120,70,20,0.12) !important;
 
   border-radius: 16px;
   backdrop-filter: blur(6px) !important;
