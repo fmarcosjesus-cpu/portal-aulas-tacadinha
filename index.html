@@ -737,44 +737,70 @@ button,
   }
 
   .hero {
-    padding: 14px;
-    border-radius: 14px;
-  }
+  padding: 10px !important;
+  border-radius: 12px;
 
-  .brand-content {
-    display: block;
-  }
+  height: 220px;
 
-  .brand-logo {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 10px;
-  }
+  display: flex;
+  align-items: flex-end;
 
-  .brand-top h1,
-  .hero h1 {
-    font-size: 18px;
-    line-height: 1.15;
-  }
+  background-size: cover;
+  background-position: center;
 
-  .brand-top h2 {
-    font-size: 14px;
-    line-height: 1.2;
-    margin-top: 4px;
-  }
+  position: relative;
+  overflow: hidden;
+}
 
-  .brand-sub,
-  .hero p {
-    font-size: 13px;
-    line-height: 1.45;
-  }
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
 
-  .hero,
-  .content,
-  .sidebar,
-  .featured-player {
-    padding: 14px;
-  }
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.1) 0%,
+    rgba(0,0,0,0.6) 60%,
+    rgba(0,0,0,0.9) 100%
+  );
+
+  border-radius: 12px;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.brand-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  margin: 0;
+}
+
+.brand-top h1,
+.hero h1 {
+  font-size: 16px !important;
+  line-height: 1.1;
+}
+
+.brand-top h2 {
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.hero p,
+.brand-sub {
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 6px;
+}
 
   .sidebar h3,
   .featured-player h2 {
