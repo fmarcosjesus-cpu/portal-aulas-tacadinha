@@ -71,8 +71,7 @@ exports.handler = async (event) => {
         description: "Aprenda um método prático para memorizar e aplicar os efeitos no jogo.",
         embed: "https://iframe.mediadelivery.net/embed/625484/c20da10e-3066-40dd-8b4e-e8d34b74b710",
         thumb: "https://vz-da02adc7-ceb.b-cdn.net/c20da10e-3066-40dd-8b4e-e8d34b74b710/thumbnail_04a3fc76.jpg"
-      }
-
+      },
       {
       title: "ATUALIZAÇÃO - TUDO SOBRE PEQUENAS MUDANÇAS APÓS RECENTES ATUALIZAÇÕES DO JOGO",
       description: "Conteúdo em breve. Esta aula será adicionada na próxima atualização do curso.",
