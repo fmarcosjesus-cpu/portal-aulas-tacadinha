@@ -41,7 +41,12 @@ exports.handler = async (event) => {
       };
     }
 
-    const lessons = [
+    const courses = [
+  {
+    id: "tacadinha",
+    title: "Curso Tacadinha",
+    description: "Aulas completas sobre o jogo Tacadinha.",
+    lessons: [
       {
         title: "Aula 1 – Fundamentos da Mira e Introdução ao Curso",
         description: "Base inicial do curso, com os fundamentos da mira e a introdução ao método.",
@@ -73,18 +78,33 @@ exports.handler = async (event) => {
         thumb: "https://vz-da02adc7-ceb.b-cdn.net/c20da10e-3066-40dd-8b4e-e8d34b74b710/thumbnail_04a3fc76.jpg"
       },
       {
-      title: "ATUALIZAÇÃO - TUDO SOBRE PEQUENAS MUDANÇAS APÓS RECENTES ATUALIZAÇÕES DO JOGO",
-      description: "Conteúdo em breve. Esta aula será adicionada na próxima atualização do curso.",
-      embed: "",
-      thumb: "capa.png",
-      comingSoon: true
+        title: "ATUALIZAÇÃO - TUDO SOBRE PEQUENAS MUDANÇAS APÓS RECENTES ATUALIZAÇÕES DO JOGO",
+        description: "Conteúdo em breve. Esta aula será adicionada na próxima atualização do curso.",
+        embed: "",
+        thumb: "capa.png",
+        comingSoon: true
       }
-
-    ];
+    ]
+  },
+  {
+    id: "8ball",
+    title: "Curso 8 Ball",
+    description: "Conteúdo exclusivo sobre 8 Ball.",
+    lessons: [
+      {
+        title: "Em breve",
+        description: "As primeiras aulas de 8 Ball serão adicionadas em breve.",
+        embed: "",
+        thumb: "capa.png",
+        comingSoon: true
+      }
+    ]
+  }
+];
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ lessons }),
+      body: JSON.stringify({ courses }),
     };
   } catch (error) {
     console.error("Erro em get-lessons:", error);

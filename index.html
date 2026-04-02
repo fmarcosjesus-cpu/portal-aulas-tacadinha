@@ -1149,17 +1149,12 @@ button,
 
   <div class="dashboard-layout">
     <aside class="sidebar">
-      <h3>Seu curso</h3>
+      <h3>Seus cursos</h3>
       <div class="side-note">
-        Selecione uma aula para assistir no player principal.
+        Selecione um curso.
       </div>
 
-      <button class="side-item active" data-video="0">Aula 1</button>
-      <button class="side-item" data-video="1">Aula 2</button>
-      <button class="side-item" data-video="2">Aula 3</button>
-      <button class="side-item" data-video="3">Aula 4</button>
-      <button class="side-item" data-video="4">Aula 5</button>
-    </aside>
+      <div id="courseList"></div>
 
     <div class="content-area">
       <section class="featured-player">
@@ -1245,7 +1240,13 @@ startRegisterBtn.addEventListener("click", () => {
   infoMsg.textContent = "Informe o e-mail que será usado na compra. Após a confirmação do pagamento, o cadastro será liberado.";
 });
 
+let courses = [];
+let currentCourseId = "tacadinha";
 let lessons = [];
+
+function getCurrentCourse() {
+  return courses.find(course => course.id === currentCourseId) || null;
+}
 
 function loadFeaturedLesson(index) {
   const lesson = lessons[index];
@@ -1329,6 +1330,28 @@ function setupLessonNavigation() {
 });
 }
 
+function renderCourseList() {
+  const container = document.getElementById("courseList");
+  if (!container) return;
+
+  container.innerHTML = courses.map(course => `
+    <button 
+      class="side-item ${course.id === currentCourseId ? "active" : ""}" 
+      data-course="${course.id}">
+      ${course.title}
+    </button>
+  `).join("");
+
+  document.querySelectorAll("[data-course]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentCourseId = btn.dataset.course;
+
+      renderCourseList();
+      renderLessonCatalog();
+    });
+  });
+}
+
 async function renderLessonCatalog() {
   const catalog = document.querySelector(".catalog-grid");
   if (!catalog) return;
@@ -1350,31 +1373,46 @@ async function renderLessonCatalog() {
 
     if (!response.ok) {
     console.error("Acesso negado às aulas:", data.error);
+    courses = [];
     lessons = [];
     catalog.innerHTML = "";
     return;
+
    }
 
-lessons = data.lessons || [];
+courses = data.courses || [];
 
-    catalog.innerHTML = lessons.map((lesson, index) => `
-      <article class="lesson-card" data-video="${index}">
-        <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
-          <span>Aula ${index + 1}</span>
-        </div>
-        <div class="lesson-body">
-          <h3>${lesson.title}</h3>
-          <p>${lesson.description}</p>
-        </div>
-      </article>
-    `).join("");
+renderCourseList();
+
+const currentCourse = getCurrentCourse();
+
+if (!currentCourse) {
+  lessons = [];
+  catalog.innerHTML = "";
+  return;
+}
+
+lessons = currentCourse.lessons || [];
+
+catalog.innerHTML = lessons.map((lesson, index) => `
+  <article class="lesson-card" data-video="${index}">
+    <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
+      <span>Aula ${index + 1}</span>
+    </div>
+    <div class="lesson-body">
+      <h3>${lesson.title}</h3>
+      <p>${lesson.description}</p>
+    </div>
+  </article>
+`).join("");
+
+setupLessonNavigation();
+loadFeaturedLesson(0);
 
   } catch (error) {
     console.error("Erro ao carregar aulas:", error);
   }
 }
-
-setupLessonNavigation();
 
     const buyEmail = document.getElementById("buyEmail");
     const registerEmail = document.getElementById("registerEmail");
