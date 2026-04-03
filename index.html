@@ -1241,7 +1241,7 @@ startRegisterBtn.addEventListener("click", () => {
 });
 
 let courses = [];
-let currentCourseId = "tacadinha";
+let currentCourseId = null;
 let lessons = [];
 
 function getCurrentCourse() {
@@ -1407,7 +1407,6 @@ catalog.innerHTML = lessons.map((lesson, index) => `
 `).join("");
 
 setupLessonNavigation();
-loadFeaturedLesson(0);
 
   } catch (error) {
     console.error("Erro ao carregar aulas:", error);
