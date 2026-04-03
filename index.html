@@ -1404,6 +1404,25 @@ const currentCourse = getCurrentCourse();
 if (!currentCourse) {
   lessons = [];
   catalog.innerHTML = "";
+
+  document.getElementById("featuredTitle").textContent = "Bem-vindo";
+  document.getElementById("featuredDescription").textContent = "Selecione um curso para começar.";
+  document.getElementById("featuredPlayer").innerHTML = `
+  <div style="
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    min-height:250px;
+    font-size:18px;
+    color:#cbd5e1;
+    background:#111827;
+    border-radius:12px;
+  ">
+    🎯 Escolha um curso acima
+  </div>
+`;
+
   return;
 }
 
@@ -1766,12 +1785,10 @@ document.getElementById("toggleLoginPassword").addEventListener("click", () => {
         document.getElementById("startRegisterBtn").style.display = "none";        
         showDashboard(user);
         await renderLessonCatalog();
-        const firstCard = document.querySelector('.lesson-card[data-video="0"]');
-        if (firstCard) {
-        firstCard.classList.add("active");
        }
+
         setupLessonNavigation();
-        loadFeaturedLesson(0);
+
        } else {
           await signOut(auth);
           showAuth();
