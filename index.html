@@ -1150,7 +1150,7 @@ button,
   <div id="courseList" style="margin-bottom: 20px;"></div>
 
   <div class="dashboard-layout">
-    <aside class="sidebar">
+    <aside class="sidebar" id="lessonSidebar">
   <h3>Suas aulas</h3>
 
   <div class="side-note">
@@ -1161,14 +1161,14 @@ button,
   </aside>
 
     <div class="content-area">
-      <section class="featured-player">
+      <section class="featured-player" id="featuredSection">
         <h2 id="featuredTitle">Aula 1 — Fundamentos da Mira e Introdução ao Curso</h2>
         <p id="featuredDescription">Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
 
         <div class="player-shell" id="featuredPlayer"></div>
       </section>
 
-      <section class="catalog-grid">
+      <section class="catalog-grid" id="catalogSection">
               </section>
     </div>
   </div>
@@ -1406,28 +1406,18 @@ if (!currentCourse) {
   renderLessonSidebar();
   catalog.innerHTML = "";
 
-  document.getElementById("featuredTitle").textContent = "Bem-vindo";
-  document.getElementById("featuredDescription").textContent = "Selecione um curso para começar.";
-  document.getElementById("featuredPlayer").innerHTML = ` 
-      <div style="
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:100%;
-      min-height:250px;
-      font-size:18px;
-      color:#cbd5e1;
-      background:#111827;
-      border-radius:12px;
-    ">
-      🎯 Escolha um curso acima
-    </div>
-  `;
+  document.getElementById("lessonSidebar").style.display = "none";
+  document.getElementById("featuredSection").style.display = "none";
+  document.getElementById("catalogSection").style.display = "none";
 
   return;
 }
 
 lessons = currentCourse.lessons || [];
+
+document.getElementById("lessonSidebar").style.display = "block";
+document.getElementById("featuredSection").style.display = "block";
+document.getElementById("catalogSection").style.display = "grid";
 
 renderLessonSidebar();
 
