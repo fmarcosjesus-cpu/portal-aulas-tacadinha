@@ -88,7 +88,7 @@ exports.handler = async (event) => {
   },
   {
     id: "8ball",
-    title: "Curso 8 Ball",
+    title: "Curso 8 Ball Pool",
     description: "Conteúdo exclusivo sobre 8 Ball.",
     lessons: [
       {
