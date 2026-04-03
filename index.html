@@ -1058,7 +1058,39 @@ button,
             </div>
           </div>
 
-          <div class="box" id="registerBox">            
+          <div class="box" id="registerBox">
+
+          <button id="backToLoginBtn"
+  style="
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f4c95d;
+    background: rgba(244,201,93,0.08);
+    border: 1px solid rgba(244,201,93,0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  "
+  onmouseover="
+    this.style.background='rgba(244,201,93,0.18)';
+    this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
+    this.style.transform='scale(1.02)';
+  "
+  onmouseout="
+    this.style.background='rgba(244,201,93,0.08)';
+    this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
+    this.style.transform='translateY(0)';
+  "
+  onmousedown="this.style.transform='scale(0.95)'"
+  onmouseup="this.style.transform='translateY(-1px)'"
+>
+  ← Voltar ao login
+</button>            
 
             <label class="label" for="registerName">Nome</label>
             <input class="input" type="text" id="registerName" placeholder="Seu nome" />
@@ -1138,7 +1170,15 @@ button,
         <div class="error" id="errorMsg"></div>
       </div>
 
-      <div class="content dashboard" id="dashboardSection">
+      <div class="content dashboard" id="dashboardSection" style="
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,180,60,0.18), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,140,40,0.15), transparent 45%),
+    radial-gradient(circle at 50% 80%, rgba(255,200,100,0.12), transparent 50%),
+    linear-gradient(180deg, #140804 0%, #1a0d06 50%, #0f0704 100%);
+    background-attachment: fixed;
+    background-blend-mode: screen;
+">
   <div class="topbar">
     <div>
       <span class="badge">Acesso liberado</span>
@@ -1148,7 +1188,37 @@ button,
   </div>
 
   <div id="courseActions" style="display:flex; justify-content:center; gap:16px; align-items:center; margin-bottom:20px;">
-  <button id="backToCourses" style="display:none;" class="btn btn-ghost">← Voltar aos cursos</button>
+  <button id="backToCourses"
+  style="
+    display: none;
+    margin: 20px auto;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f4c95d;
+    background: rgba(244,201,93,0.08);
+    border: 1px solid rgba(244,201,93,0.4);
+    border-radius: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  "
+  onmouseover="
+    this.style.background='rgba(244,201,93,0.18)';
+    this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
+    this.style.transform='translateY(-1px)';
+  "
+  onmouseout="
+    this.style.background='rgba(244,201,93,0.08)';
+    this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
+    this.style.transform='translateY(0)';
+  "
+  onmousedown="this.style.transform='scale(0.95)'"
+  onmouseup="this.style.transform='translateY(-1px)'"
+>
+  ← Voltar aos cursos
+</button>
   <div id="courseList"></div>
 </div>
 
@@ -1366,14 +1436,24 @@ function renderCourseList() {
     
      <div style="text-align:center; margin-bottom: 30px;">
     <h2 style="
-      color: #fbbf24;
-      text-shadow: 0 0 8px rgba(251,191,36,0.4);
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    ">
-      Selecione o curso
-    </h2>
+    color: #f4c95d;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 
+    0 0 6px rgba(244,201,93,0.4),
+    0 0 18px rgba(244,201,93,0.2);
+    margin: 0;
+   ">
+  Selecione o curso
+   </h2>
+  <div style="
+  width: 200px;
+  height: 2px;
+  margin: 12px auto 0;
+  background: linear-gradient(to right, transparent, #f4c95d, transparent);
+  "></div>
+
   </div>
 
      <div style="
@@ -1388,17 +1468,25 @@ function renderCourseList() {
           class="course-image-btn"
           data-course="${course.id}"
           style="
-            background: transparent;
-            border: none;
-            padding: 0;
+            background: linear-gradient(180deg, rgba(60,38,20,0.9), rgba(28,18,10,0.95));
+            border: 1px solid rgba(244,201,93,0.18);
+            padding: 18px;
+            border-radius: 20px;
             cursor: pointer;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.2s ease, opacity 0.2s ease, filter 0.25s ease;
             transform: translateZ(0);
+            will-change: transform;
           "
-          onmouseover="this.style.transform='scale(1.03)'"
-          onmouseout="this.style.transform='scale(1)'"
-          onmousedown="this.style.transform='scale(0.97)'"
-          onmouseup="this.style.transform='scale(1.03)'"
+          onmouseover="
+  this.style.transform='scale(1.05)';
+  this.style.filter='drop-shadow(0 0 18px ${course.id === "tacadinha" ? "rgba(34,197,94,0.35)" : "rgba(244,201,93,0.35)"})';
+"
+onmouseout="
+  this.style.transform='scale(1)';
+  this.style.filter='none';
+"
+onmousedown="this.style.transform='scale(0.96)'"
+onmouseup="this.style.transform='scale(1.05)'"
         >
           <img
             src="${course.id === "tacadinha" ? "assets-tacadinha-btn.png" : "assets-8ball-btn.png"}"
@@ -1410,6 +1498,9 @@ function renderCourseList() {
             height: auto;
             border-radius: 14px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            transition: transform 0.25s ease, filter 0.25s ease;
+            transform: translateZ(0);
+            will-change: transform;
             "
           >
         </button>
@@ -1694,6 +1785,11 @@ function togglePaymentOptions() {
 }
 
 window.pagar = pagar;
+
+document.getElementById("backToLoginBtn").addEventListener("click", () => {
+  clearMessages();
+  showLoginFlow();
+});
 
 document.getElementById("buyBtn").addEventListener("click", () => {
   togglePaymentOptions();
