@@ -1363,7 +1363,20 @@ function renderCourseList() {
   backBtn.style.display = "none";
 
   container.innerHTML = `
-    <div style="
+    
+     <div style="text-align:center; margin-bottom: 30px;">
+    <h2 style="
+      color: #fbbf24;
+      text-shadow: 0 0 8px rgba(251,191,36,0.4);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    ">
+      Selecione o curso
+    </h2>
+  </div>
+
+     <div style="
       display:flex;
       justify-content:center;
       gap:20px;
@@ -1381,10 +1394,10 @@ function renderCourseList() {
             cursor: pointer;
             transition: transform 0.2s ease, opacity 0.2s ease;
           "
-          onmouseover="this.style.opacity='0.9'"
-          onmouseout="this.style.opacity='1'"
-          onmousedown="this.style.transform='scale(0.98)'"
-          onmouseup="this.style.transform='scale(1)'"
+          onmouseover="this.style.transform='scale(1.03)'"
+          onmouseout="this.style.transform='scale(1)'"
+          onmousedown="this.style.transform='scale(0.97)'"
+          onmouseup="this.style.transform='scale(1.03)'"
         >
           <img
             src="${course.id === "tacadinha" ? "assets-tacadinha-btn.png" : "assets-8ball-btn.png"}"
