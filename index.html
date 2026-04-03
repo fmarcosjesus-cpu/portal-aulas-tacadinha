@@ -1060,7 +1060,7 @@ button,
 
           <div class="box" id="registerBox">
 
-          <button 
+          <button id="backToLoginBtn" 
   onclick="clearMessages(); showLoginFlow(); window.scrollTo(0,0);"
   style="
     display: inline-block;
@@ -1785,11 +1785,6 @@ function togglePaymentOptions() {
 }
 
 window.pagar = pagar;
-
-document.getElementById("backToLoginBtn").addEventListener("click", () => {
-  clearMessages();
-  showLoginFlow();
-});
 
 document.getElementById("buyBtn").addEventListener("click", () => {
   togglePaymentOptions();
