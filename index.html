@@ -1363,32 +1363,39 @@ function renderCourseList() {
   backBtn.style.display = "none";
 
   container.innerHTML = `
-    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+    <div style="
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      align-items:center;
+    ">
       ${courses.map(course => `
         <button
-          class="course-btn"
+          class="course-image-btn"
           data-course="${course.id}"
           style="
-            padding: 14px 28px;
-            font-size: 16px;
-            border-radius: 10px;
+            background: transparent;
             border: none;
+            padding: 0;
             cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
-            background: ${
-              course.id === "tacadinha" ? "#22c55e" :
-              course.id === "8ball" ? "#eab308" :
-              "#444"
-            };
-            color: #000;
+            transition: transform 0.2s ease, opacity 0.2s ease;
           "
-          onmouseover="this.style.opacity=0.8"
-          onmouseout="this.style.opacity=1"
-          onmousedown="this.style.transform='scale(0.97)'"
+          onmouseover="this.style.opacity='0.9'"
+          onmouseout="this.style.opacity='1'"
+          onmousedown="this.style.transform='scale(0.98)'"
           onmouseup="this.style.transform='scale(1)'"
         >
-          ${course.title}
+          <img
+            src="${course.id === "tacadinha" ? "assets-tacadinha-btn.png" : "assets-8ball-btn.png"}"
+            alt="${course.title}"
+            style="
+              display:block;
+              width: 320px;
+              max-width: 90vw;
+              height: auto;
+            "
+          >
         </button>
       `).join("")}
     </div>
