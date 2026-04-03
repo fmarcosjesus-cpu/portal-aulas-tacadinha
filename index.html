@@ -1403,25 +1403,26 @@ const currentCourse = getCurrentCourse();
 
 if (!currentCourse) {
   lessons = [];
+  renderLessonSidebar();
   catalog.innerHTML = "";
 
   document.getElementById("featuredTitle").textContent = "Bem-vindo";
   document.getElementById("featuredDescription").textContent = "Selecione um curso para começar.";
-  document.getElementById("featuredPlayer").innerHTML = `
-  <div style="
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    height:100%;
-    min-height:250px;
-    font-size:18px;
-    color:#cbd5e1;
-    background:#111827;
-    border-radius:12px;
-  ">
-    🎯 Escolha um curso acima
-  </div>
-`;
+  document.getElementById("featuredPlayer").innerHTML = ` 
+      <div style="
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100%;
+      min-height:250px;
+      font-size:18px;
+      color:#cbd5e1;
+      background:#111827;
+      border-radius:12px;
+    ">
+      🎯 Escolha um curso acima
+    </div>
+  `;
 
   return;
 }
@@ -1785,18 +1786,18 @@ document.getElementById("toggleLoginPassword").addEventListener("click", () => {
         document.getElementById("startRegisterBtn").style.display = "none";        
         showDashboard(user);
         await renderLessonCatalog();
-       }
 
-        setupLessonNavigation();
+       setupLessonNavigation();
+
+       }
 
        } else {
           await signOut(auth);
           showAuth();
           errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
         }
-      } else {
-        showAuth();
-      }
+      } 
+
     });
 
     function traduzirErro(code) {
