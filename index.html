@@ -1147,7 +1147,10 @@ button,
     <button class="btn btn-ghost" id="logoutBtn">Sair</button>
   </div>
 
-  <div id="courseList" style="margin-bottom: 20px;"></div>
+  <div id="courseActions" style="display:flex; justify-content:center; gap:16px; align-items:center; margin-bottom:20px;">
+  <button id="backToCourses" style="display:none;" class="btn btn-ghost">← Voltar aos cursos</button>
+  <div id="courseList"></div>
+</div>
 
   <div class="dashboard-layout">
     <aside class="sidebar" id="lessonSidebar">
@@ -1347,49 +1350,53 @@ function setupLessonNavigation() {
 
 function renderCourseList() {
   const container = document.getElementById("courseList");
-  if (!container) return;
+  const backBtn = document.getElementById("backToCourses");
+
+  if (!container || !backBtn) return;
+
+  if (currentCourseId) {
+    container.innerHTML = "";
+    backBtn.style.display = "inline-block";
+    return;
+  }
+
+  backBtn.style.display = "none";
 
   container.innerHTML = `
-  <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-    ${courses.map(course => `
-      <button 
-  class="course-btn"
-  data-course="${course.id}"
-  style="
-    padding: 14px 28px;
-    font-size: 16px;
-    border-radius: 10px;
-    border: ${
-  course.id === currentCourseId ? "2px solid #fff" : "none"
-};
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
-    background: ${
-      course.id === "tacadinha" ? "#22c55e" :
-      course.id === "8ball" ? "#eab308" :
-      "#444"
-    };
-    color: #000;
-  "
-  onmouseover="this.style.opacity=0.8"
-  onmouseout="this.style.opacity=1"
-
-  onmousedown="this.style.transform='scale(0.97)'"
-
-  onmouseup="this.style.transform='scale(1)'"
-
->
-  ${course.title}
-</button>
-    `).join("")}
-  </div>
-`;
+    <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      ${courses.map(course => `
+        <button
+          class="course-btn"
+          data-course="${course.id}"
+          style="
+            padding: 14px 28px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+            background: ${
+              course.id === "tacadinha" ? "#22c55e" :
+              course.id === "8ball" ? "#eab308" :
+              "#444"
+            };
+            color: #000;
+          "
+          onmouseover="this.style.opacity=0.8"
+          onmouseout="this.style.opacity=1"
+          onmousedown="this.style.transform='scale(0.97)'"
+          onmouseup="this.style.transform='scale(1)'"
+        >
+          ${course.title}
+        </button>
+      `).join("")}
+    </div>
+  `;
 
   document.querySelectorAll("[data-course]").forEach(btn => {
     btn.addEventListener("click", () => {
       currentCourseId = btn.dataset.course;
-
       renderCourseList();
       renderLessonCatalog();
     });
@@ -1792,6 +1799,12 @@ document.getElementById("toggleLoginPassword").addEventListener("click", () => {
   document.getElementById("startRegisterBtn").style.display = "block";
 
   infoMsg.textContent = "Você saiu do portal.";
+});
+
+document.getElementById("backToCourses").addEventListener("click", () => {
+  currentCourseId = null;
+  renderCourseList();
+  renderLessonCatalog();
 });
 
     onAuthStateChanged(auth, async (user) => {
