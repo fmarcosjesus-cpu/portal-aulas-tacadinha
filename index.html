@@ -1393,6 +1393,7 @@ function renderCourseList() {
             padding: 0;
             cursor: pointer;
             transition: transform 0.2s ease, opacity 0.2s ease;
+            transform: translateZ(0);
           "
           onmouseover="this.style.transform='scale(1.03)'"
           onmouseout="this.style.transform='scale(1)'"
@@ -1403,10 +1404,12 @@ function renderCourseList() {
             src="${course.id === "tacadinha" ? "assets-tacadinha-btn.png" : "assets-8ball-btn.png"}"
             alt="${course.title}"
             style="
-              display:block;
-              width: 320px;
-              max-width: 90vw;
-              height: auto;
+            display:block;
+            width: 320px;
+            max-width: 90vw;
+            height: auto;
+            border-radius: 14px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
             "
           >
         </button>
