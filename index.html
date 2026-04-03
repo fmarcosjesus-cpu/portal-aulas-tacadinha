@@ -1422,7 +1422,7 @@ document.getElementById("catalogSection").style.display = "grid";
 renderLessonSidebar();
 
 catalog.innerHTML = lessons.map((lesson, index) => `
-  <article class="lesson-card" data-video="${index}">
+  <article class="lesson-card ${index === 0 ? "active" : ""}" data-video="${index}">
     <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
       <span>Aula ${index + 1}</span>
     </div>
@@ -1434,6 +1434,7 @@ catalog.innerHTML = lessons.map((lesson, index) => `
 `).join("");
 
 setupLessonNavigation();
+loadFeaturedLesson(0);
 
   } catch (error) {
     console.error("Erro ao carregar aulas:", error);
