@@ -1927,46 +1927,28 @@ document.getElementById("backToCourses").addEventListener("click", () => {
 });
 
     onAuthStateChanged(auth, async (user) => {
-      clearMessages();
+  clearMessages();
 
-      if (user) {
-        infoMsg.textContent = "Verificando liberação de acesso...";
-        const autorizado = await isAuthorizedForLogin((user.email || "").toLowerCase());
+  if (user) {
+    infoMsg.textContent = "Verificando liberação de acesso...";
 
-        if (autorizado) {
-        infoMsg.textContent = "";
-        document.getElementById("startRegisterBtn").style.display = "none";        
-        showDashboard(user);
-        await renderLessonCatalog();
+    const autorizado = await isAuthorizedForLogin((user.email || "").toLowerCase());
 
-       setupLessonNavigation();
+    if (autorizado) {
+      infoMsg.textContent = "";
+      document.getElementById("startRegisterBtn").style.display = "none";
 
-       }
+      showDashboard(user);
+      await renderLessonCatalog();
+      setupLessonNavigation();
 
-       } else {
-          await signOut(auth);
-          showAuth();
-          errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
-        } 
-
-    });
-
-    function traduzirErro(code) {
-      const erros = {
-        "auth/email-already-in-use": "Esse e-mail já está cadastrado. Se você já criou sua conta, use a área de login.",
-        "auth/invalid-email": "O e-mail informado é inválido.",
-        "auth/weak-password": "A senha está muito fraca. Use pelo menos 6 caracteres.",
-        "auth/missing-password": "Informe uma senha válida.",
-        "auth/invalid-credential": "E-mail ou senha incorretos.",
-        "auth/user-not-found": "Usuário não encontrado.",
-        "auth/network-request-failed": "Falha de conexão. Verifique sua internet.",
-        "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente."
-      };
-      return erros[code] || `Ocorreu um erro: ${code}`;
+    } else {
+      await signOut(auth);
+      showAuth();
+      errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
     }
 
-handleReturnFromPayment();
-
-</script>
-</body>
-</html>
+  } else {
+    showAuth();
+  }
+});
