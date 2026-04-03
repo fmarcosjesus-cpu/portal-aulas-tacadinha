@@ -1349,13 +1349,42 @@ function renderCourseList() {
   const container = document.getElementById("courseList");
   if (!container) return;
 
-  container.innerHTML = courses.map(course => `
-    <button 
-      class="side-item ${course.id === currentCourseId ? "active" : ""}" 
-      data-course="${course.id}">
-      ${course.title}
-    </button>
-  `).join("");
+  container.innerHTML = `
+  <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+    ${courses.map(course => `
+      <button 
+  class="course-btn"
+  data-course="${course.id}"
+  style="
+    padding: 14px 28px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: ${
+  course.id === currentCourseId ? "2px solid #fff" : "none"
+};
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+    background: ${
+      course.id === "tacadinha" ? "#22c55e" :
+      course.id === "8ball" ? "#eab308" :
+      "#444"
+    };
+    color: #000;
+  "
+  onmouseover="this.style.opacity=0.8"
+  onmouseout="this.style.opacity=1"
+
+  onmousedown="this.style.transform='scale(0.97)'"
+
+  onmouseup="this.style.transform='scale(1)'"
+
+>
+  ${course.title}
+</button>
+    `).join("")}
+  </div>
+`;
 
   document.querySelectorAll("[data-course]").forEach(btn => {
     btn.addEventListener("click", () => {
