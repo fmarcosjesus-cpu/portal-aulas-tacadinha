@@ -1155,6 +1155,7 @@ button,
       </div>
 
       <div id="courseList"></div>
+      <div id="lessonList"></div>
 
     <div class="content-area">
       <section class="featured-player">
@@ -1246,6 +1247,17 @@ let lessons = [];
 
 function getCurrentCourse() {
   return courses.find(course => course.id === currentCourseId) || null;
+}
+
+function renderLessonSidebar() {
+  const container = document.getElementById("lessonList");
+  if (!container) return;
+
+  container.innerHTML = lessons.map((lesson, index) => `
+    <button class="side-item ${index === 0 ? "active" : ""}" data-video="${index}">
+      Aula ${index + 1}
+    </button>
+  `).join("");
 }
 
 function loadFeaturedLesson(index) {
@@ -1393,6 +1405,8 @@ if (!currentCourse) {
 }
 
 lessons = currentCourse.lessons || [];
+
+renderLessonSidebar();
 
 catalog.innerHTML = lessons.map((lesson, index) => `
   <article class="lesson-card" data-video="${index}">
