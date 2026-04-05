@@ -1,4 +1,5 @@
 const admin = require("firebase-admin");
+const fetch = require("node-fetch");
 
 if (!admin.apps.length) {
   const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
@@ -9,7 +10,6 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore();
-const fetch = require("node-fetch");
 
 const BUNNY_LIBRARY_ID = 625484;
 const BUNNY_CDN_HOST = "vz-da02adc7-ceb.b-cdn.net";
@@ -37,22 +37,25 @@ async function getBunnyThumbMap() {
   }
 
   const data = await response.json();
-
   const items = Array.isArray(data) ? data : (data.items || data.Items || []);
-
   const thumbMap = {};
 
   for (const video of items) {
     const title = (video.title || video.Title || "").trim();
     const guid = video.guid || video.Guid;
+    const thumbnailFileName =
+      video.thumbnailFileName || video.ThumbnailFileName || null;
 
     if (!title || !guid) continue;
 
-    thumbMap[title] = `https://${BUNNY_CDN_HOST}/${guid}/thumbnail.jpg`;
+    if (thumbnailFileName) {
+      thumbMap[title] = `https://${BUNNY_CDN_HOST}/${guid}/${thumbnailFileName}`;
+    }
   }
 
   return thumbMap;
 }
+
 exports.handler = async (event) => {
   try {
     const { email } = JSON.parse(event.body || "{}");
