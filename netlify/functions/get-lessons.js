@@ -263,6 +263,8 @@ exports.handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify({ courses }),
     };
+  } catch (error) {
+    console.error("Erro em get-lessons:", error);
 
     return {
       statusCode: 500,
