@@ -1962,7 +1962,7 @@ document.getElementById("backToCourses").addEventListener("click", () => {
 
       if (user) {
         infoMsg.textContent = "Verificando liberação de acesso...";
-        const autorizado = await isAuthorizedForLogin((user.email || "").toLowerCase());
+        const autorizado = await isAuthorized((user.email || "").toLowerCase());
 
         if (autorizado) {
         infoMsg.textContent = "";
