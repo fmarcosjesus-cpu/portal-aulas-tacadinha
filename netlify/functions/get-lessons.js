@@ -13,11 +13,12 @@ const db = admin.firestore();
 
 const BUNNY_LIBRARY_ID_TACADINHA = 625484;
 const BUNNY_LIBRARY_ID_8BALL = 630913;
-const BUNNY_CDN_HOST = "vz-da02adc7-ceb.b-cdn.net";
+const BUNNY_CDN_HOST_TACADINHA = "vz-da02adc7-ceb.b-cdn.net";
+const BUNNY_CDN_HOST_8BALL = "vz-875e3eb8-6c3.b-cdn.net";
 const BUNNY_API_KEY_TACADINHA = process.env.BUNNY_API_KEY_TACADINHA;
 const BUNNY_API_KEY_8BALL = process.env.BUNNY_API_KEY_8BALL;
 
-async function getBunnyThumbMap(libraryId, apiKey) {
+async function getBunnyThumbMap(libraryId, apiKey, cdnHost) {
   if (!apiKey) {
     throw new Error(`API key não configurada para a library ${libraryId}`);
   }
@@ -42,6 +43,8 @@ async function getBunnyThumbMap(libraryId, apiKey) {
   const items = Array.isArray(data) ? data : (data.items || data.Items || []);
   const thumbMap = {};
 
+  console.log("HOST USADO NA FUNÇÃO:", cdnHost);
+
   for (const video of items) {
     const title = (video.title || video.Title || "").trim();
     const guid = video.guid || video.Guid;
@@ -51,7 +54,7 @@ async function getBunnyThumbMap(libraryId, apiKey) {
     if (!title || !guid) continue;
 
     if (thumbnailFileName) {
-      thumbMap[title] = `https://${BUNNY_CDN_HOST}/${guid}/${thumbnailFileName}`;
+      thumbMap[title] = `https://${cdnHost}/${guid}/${thumbnailFileName}`;
     }
   }
 
@@ -96,8 +99,9 @@ exports.handler = async (event) => {
     try {
       bunnyThumbMapTacadinha = await getBunnyThumbMap(
   BUNNY_LIBRARY_ID_TACADINHA,
-  BUNNY_API_KEY_TACADINHA
-  );
+  BUNNY_API_KEY_TACADINHA,
+  BUNNY_CDN_HOST_TACADINHA
+);
       console.log("Thumbs carregadas do Tacadinha:", Object.keys(bunnyThumbMapTacadinha).length);
     } catch (err) {
       console.error("Falha ao buscar thumbs do Tacadinha:", err.message);
@@ -106,8 +110,9 @@ exports.handler = async (event) => {
     try {
   bunnyThumbMap8Ball = await getBunnyThumbMap(
   BUNNY_LIBRARY_ID_8BALL,
-  BUNNY_API_KEY_8BALL
-  );
+  BUNNY_API_KEY_8BALL,
+  BUNNY_CDN_HOST_8BALL
+);
   console.log("Thumbs carregadas do 8 Ball:", Object.keys(bunnyThumbMap8Ball).length);
   console.log("Títulos encontrados no mapa do 8 Ball:", Object.keys(bunnyThumbMap8Ball));
   } catch (err) {
