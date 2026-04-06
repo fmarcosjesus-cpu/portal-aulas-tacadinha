@@ -14,11 +14,12 @@ const db = admin.firestore();
 const BUNNY_LIBRARY_ID_TACADINHA = 625484;
 const BUNNY_LIBRARY_ID_8BALL = 630913;
 const BUNNY_CDN_HOST = "vz-da02adc7-ceb.b-cdn.net";
-const BUNNY_API_KEY = process.env.BUNNY_API_KEY;
+const BUNNY_API_KEY_TACADINHA = process.env.BUNNY_API_KEY_TACADINHA;
+const BUNNY_API_KEY_8BALL = process.env.BUNNY_API_KEY_8BALL;
 
-async function getBunnyThumbMap(libraryId) {
-  if (!BUNNY_API_KEY) {
-    throw new Error("BUNNY_API_KEY não configurada");
+async function getBunnyThumbMap(libraryId, apiKey) {
+  if (!apiKey) {
+    throw new Error(`API key não configurada para a library ${libraryId}`);
   }
 
   const response = await fetch(
@@ -26,7 +27,7 @@ async function getBunnyThumbMap(libraryId) {
     {
       method: "GET",
       headers: {
-        AccessKey: BUNNY_API_KEY,
+        AccessKey: apiKey,
         accept: "application/json",
       },
     }
@@ -93,14 +94,20 @@ exports.handler = async (event) => {
     let bunnyThumbMap8Ball = {};
 
     try {
-      bunnyThumbMapTacadinha = await getBunnyThumbMap(BUNNY_LIBRARY_ID_TACADINHA);
+      bunnyThumbMapTacadinha = await getBunnyThumbMap(
+  BUNNY_LIBRARY_ID_TACADINHA,
+  BUNNY_API_KEY_TACADINHA
+  );
       console.log("Thumbs carregadas do Tacadinha:", Object.keys(bunnyThumbMapTacadinha).length);
     } catch (err) {
       console.error("Falha ao buscar thumbs do Tacadinha:", err.message);
     }
 
     try {
-  bunnyThumbMap8Ball = await getBunnyThumbMap(BUNNY_LIBRARY_ID_8BALL);
+  bunnyThumbMap8Ball = await getBunnyThumbMap(
+  BUNNY_LIBRARY_ID_8BALL,
+  BUNNY_API_KEY_8BALL
+  );
   console.log("Thumbs carregadas do 8 Ball:", Object.keys(bunnyThumbMap8Ball).length);
   console.log("Títulos encontrados no mapa do 8 Ball:", Object.keys(bunnyThumbMap8Ball));
   } catch (err) {
