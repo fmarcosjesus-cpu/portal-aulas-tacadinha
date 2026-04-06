@@ -100,11 +100,12 @@ exports.handler = async (event) => {
     }
 
     try {
-      bunnyThumbMap8Ball = await getBunnyThumbMap(BUNNY_LIBRARY_ID_8BALL);
-      console.log("Thumbs carregadas do 8 Ball:", Object.keys(bunnyThumbMap8Ball).length);
-    } catch (err) {
-      console.error("Falha ao buscar thumbs do 8 Ball:", err.message);
-    }
+  bunnyThumbMap8Ball = await getBunnyThumbMap(BUNNY_LIBRARY_ID_8BALL);
+  console.log("Thumbs carregadas do 8 Ball:", Object.keys(bunnyThumbMap8Ball).length);
+  console.log("Títulos encontrados no mapa do 8 Ball:", Object.keys(bunnyThumbMap8Ball));
+  } catch (err) {
+  console.error("Falha ao buscar thumbs do 8 Ball:", err.message);
+  }
 
     const courses = [
   {
@@ -267,6 +268,14 @@ exports.handler = async (event) => {
   ]
 }
 ];
+
+console.log(
+  "Thumbs finais do 8 Ball:",
+  courses.find(course => course.id === "8ball")?.lessons.map(lesson => ({
+    title: lesson.title,
+    thumb: lesson.thumb
+  }))
+);
 
     return {
       statusCode: 200,
