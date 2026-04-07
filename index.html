@@ -2035,9 +2035,24 @@ document.getElementById("backToCourses").addEventListener("click", () => {
   }
 
   currentCourseId = null;
+  lessons = [];
 
-  document.getElementById("lessonSidebar").style.display = "none";
-  document.getElementById("featuredSection").style.display = "none";
+  const lessonSidebar = document.getElementById("lessonSidebar");
+  const featuredSection = document.getElementById("featuredSection");
+  const catalogSection = document.getElementById("catalogSection");
+
+  if (lessonSidebar) {
+    lessonSidebar.style.display = "none";
+    lessonSidebar.innerHTML = "";
+  }
+
+  if (featuredSection) {
+    featuredSection.style.display = "none";
+  }
+
+  if (catalogSection) {
+    catalogSection.style.display = "grid";
+  }
 
   renderCourseList();
   renderLessonCatalog();
