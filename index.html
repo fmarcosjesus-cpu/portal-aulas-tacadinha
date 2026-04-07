@@ -1671,6 +1671,17 @@ loadFeaturedLesson(0);
       setAllEmailFields(pendingEmail);
       }
 
+      const emailToResume = externalReference || pendingEmail;
+
+  if (emailToResume) {
+  setAllEmailFields(emailToResume);
+  document.getElementById("startRegisterBtn").style.display = "none";
+  showRegisterFlow();
+
+  paymentReturnNotice.style.display = "block";
+  paymentReturnNotice.textContent =
+    "Se você já concluiu o pagamento, crie sua conta com o mesmo e-mail usado na compra. Se o pagamento ainda não foi confirmado, aguarde alguns instantes e tente novamente.";
+  }
       if (status || collectionStatus || paymentId) {
   paymentReturnNotice.style.display = "block";
 
