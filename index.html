@@ -6,6 +6,46 @@
   <title>Giz do Taco | Sinuca Online</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+#appLoader {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #0b0502 0%, #020101 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.app-loader-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.app-loader-box p {
+  margin: 0;
+  color: #f0d27a;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.app-loader-spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.10);
+  border-top-color: #f0d27a;
+  animation: appSpin 0.9s linear infinite;
+  box-shadow: 0 0 20px rgba(240, 210, 122, 0.12);
+}
+
+@keyframes appSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
    :root {
   --bg-main: #020617;
   --bg-card: #0b1220;
@@ -969,6 +1009,13 @@ button,
   </style>
 </head>
 <body>
+<div id="appLoader">
+  <div class="app-loader-box">
+    <div class="app-loader-spinner"></div>
+    <p>Carregando...</p>
+  </div>
+</div>
+
   <div class="wrap">
   <div class="card">
 
@@ -1631,6 +1678,16 @@ loadFeaturedLesson(0);
     const registerEmail = document.getElementById("registerEmail");
     const loginEmail = document.getElementById("loginEmail");
 
+    function showAppLoader() {
+    const loader = document.getElementById("appLoader");
+    if (loader) loader.style.display = "flex";
+    }
+
+    function hideAppLoader() {
+    const loader = document.getElementById("appLoader");
+    if (loader) loader.style.display = "none";
+    }
+
     function clearMessages() {
       errorMsg.textContent = "";
       successMsg.textContent = "";
@@ -1969,26 +2026,33 @@ document.getElementById("backToCourses").addEventListener("click", () => {
 });
 
     onAuthStateChanged(auth, async (user) => {
-      clearMessages();
+  clearMessages();
 
-      if (user) {
-        infoMsg.textContent = "Verificando liberação de acesso...";
-        const autorizado = await isAuthorized((user.email || "").toLowerCase());
+  try {
+    if (user) {
+      infoMsg.textContent = "Verificando liberação de acesso...";
+      const autorizado = await isAuthorized((user.email || "").toLowerCase());
 
-        if (autorizado) {
+      if (autorizado) {
         infoMsg.textContent = "";
-        document.getElementById("startRegisterBtn").style.display = "none";        
+        document.getElementById("startRegisterBtn").style.display = "none";
         showDashboard(user);
         await renderLessonCatalog();
-       }
-
-       } else {
-          await signOut(auth);
-          showAuth();
-          errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
-        } 
-
-    });
+      } else {
+        await signOut(auth);
+        showAuth();
+        errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+      }
+    } else {
+      showAuth();
+    }
+  } catch (error) {
+    console.error("Erro na inicialização da autenticação:", error);
+    showAuth();
+  } finally {
+    hideAppLoader();
+  }
+});
 
     function traduzirErro(code) {
       const erros = {
