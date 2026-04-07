@@ -2047,8 +2047,8 @@ document.getElementById("backToCourses").addEventListener("click", () => {
   const catalogSection = document.getElementById("catalogSection");
 
   if (lessonSidebar) {
-    lessonSidebar.style.display = "none";
     lessonSidebar.innerHTML = "";
+    lessonSidebar.style.display = "none";
   }
 
   if (featuredSection) {
@@ -2056,11 +2056,11 @@ document.getElementById("backToCourses").addEventListener("click", () => {
   }
 
   if (catalogSection) {
+    catalogSection.innerHTML = "";
     catalogSection.style.display = "grid";
   }
 
   renderCourseList();
-  renderLessonCatalog();
 });
 
     onAuthStateChanged(auth, async (user) => {
