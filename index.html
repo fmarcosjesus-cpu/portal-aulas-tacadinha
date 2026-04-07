@@ -6,6 +6,15 @@
   <title>Giz do Taco | Sinuca Online</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+#dashboardSection,
+#lessonSidebar,
+#featuredSection,
+#catalogSection,
+#registerBox,
+#purchaseBox {
+  display: none;
+}
+
 #appLoader {
   position: fixed;
   inset: 0;
@@ -2020,7 +2029,16 @@ document.getElementById("toggleLoginPassword").addEventListener("click", () => {
 });
 
 document.getElementById("backToCourses").addEventListener("click", () => {
+  const featuredPlayer = document.getElementById("featuredPlayer");
+  if (featuredPlayer) {
+    featuredPlayer.innerHTML = "";
+  }
+
   currentCourseId = null;
+
+  document.getElementById("lessonSidebar").style.display = "none";
+  document.getElementById("featuredSection").style.display = "none";
+
   renderCourseList();
   renderLessonCatalog();
 });
