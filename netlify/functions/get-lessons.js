@@ -172,9 +172,8 @@ exports.handler = async (event) => {
     {
       title: "AULA 01 - PLANEJAMENTO DE JOGO - A ARTE DE NÃO ERRAR",
       description: "Aprenda a estruturar suas jogadas e reduzir erros com planejamento estratégico.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/849c4d54-54b0-41a6-94c4-84c32a512430",
-      thumb: bunnyThumbMap8Ball["AULA 01 - PLANEJAMENTO DE JOGO - A ARTE DE NÃO ERRAR"] || "capa.png"
-    },
+      embed: "https://iframe.mediadelivery.net/embed/630913/455a7ac9-6c2b-42c1-a306-b4dc6a9b97d0",
+thumb: bunnyThumbMap8Ball["AULA 01 - PLANEJAMENTO DE JOGO - A ARTE DE NÃO ERRAR"] || "https://vz-875e3eb8-6c3.b-cdn.net/455a7ac9-6c2b-42c1-a306-b4dc6a9b97d0/thumbnail.jpg"
     {
       title: "AULA 02 - APRENDA A DAR A TACADA MAIS IMPORTANTE DO JOGO - A TACADA INICIAL",
       description: "Domine a tacada inicial e comece cada partida com vantagem.",
