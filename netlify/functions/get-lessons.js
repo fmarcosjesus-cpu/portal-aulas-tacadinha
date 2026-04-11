@@ -190,7 +190,7 @@ exports.handler = async (event) => {
     {
       title: "AULA 04 - MIRA SECUNDÁRIA - APRENDA USÁ-LA",
       description: "Entenda e aplique a mira secundária para aumentar sua precisão.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/f2b11e22-2f6e-42b9-9ad6-70a607732e61",
+      embed: "https://iframe.mediadelivery.net/embed/c6722166-3794-44fe-84a2-9b3676e5cfbf",
       thumb: bunnyThumbMap8Ball["AULA 04 - MIRA SECUNDÁRIA - APRENDA USÁ-LA"] || "capa.png"
     },
     {
