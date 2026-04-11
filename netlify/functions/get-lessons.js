@@ -173,13 +173,13 @@ exports.handler = async (event) => {
     title: "AULA 01 - PLANEJAMENTO DE JOGO - A ARTE DE NÃO ERRAR",
     description: "Aprenda a estruturar suas jogadas e reduzir erros com planejamento estratégico.",
     embed: "https://iframe.mediadelivery.net/embed/630913/455a7ac9-6c2b-42c1-a306-b4dc6a9b97d0",
-    thumb: bunnyThumbMap8Ball["AULA 01 - PLANEJAMENTO DE JOGO - A ARTE DE NÃO ERRAR"] || "https://vz-875e3eb8-6c3.b-cdn.net/455a7ac9-6c2b-42c1-a306-b4dc6a9b97d0/thumbnail.jpg"
+    thumb: bunnyThumbMap8Ball["AULA 01 - PLANEJAMENTO DE JOGO - A ARTE DE NÃO ERRAR"] || "capa.png"
     },
     {
-      title: "AULA 02 - APRENDA A DAR A TACADA MAIS IMPORTANTE DO JOGO - A TACADA INICIAL",
-      description: "Domine a tacada inicial e comece cada partida com vantagem.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/48349713-acf5-4eba-bdb7-cff88c3e0e32",
-      thumb: bunnyThumbMap8Ball["AULA 02 - APRENDA A DAR A TACADA MAIS IMPORTANTE DO JOGO - A TACADA INICIAL"] || "capa.png"
+    title: "AULA 02 - APRENDA A DAR A TACADA MAIS IMPORTANTE DO JOGO - A TACADA INICIAL",
+    description: "Domine a tacada inicial e comece cada partida com vantagem.",
+    embed: "https://iframe.mediadelivery.net/embed/630913/6c36e354-f463-4f9c-a8e6-024bdcc9fb9c",
+    thumb: bunnyThumbMap8Ball["AULA 02 - APRENDA A DAR A TACADA MAIS IMPORTANTE DO JOGO - A TACADA INICIAL"] || "capa.png"
     },
     {
       title: "AULA 03 - COMO DAR TACADA INICIAL COM QUALQUER TACO",
@@ -188,10 +188,10 @@ exports.handler = async (event) => {
       thumb: bunnyThumbMap8Ball["AULA 03 - COMO DAR TACADA INICIAL COM QUALQUER TACO"] || "capa.png"
     },
     {
-      title: "AULA 04 - MIRA SECUNDÁRIA_ APRENDA USÁ-LA",
+      title: "AULA 04 - MIRA SECUNDÁRIA - APRENDA USÁ-LA",
       description: "Entenda e aplique a mira secundária para aumentar sua precisão.",
       embed: "https://iframe.mediadelivery.net/embed/630913/f2b11e22-2f6e-42b9-9ad6-70a607732e61",
-      thumb: bunnyThumbMap8Ball["AULA 04 - MIRA SECUNDÁRIA_ APRENDA USÁ-LA"] || "capa.png"
+      thumb: bunnyThumbMap8Ball["AULA 04 - MIRA SECUNDÁRIA - APRENDA USÁ-LA"] || "capa.png"
     },
     {
       title: "AULA 05 - EFEITO PARA TRÁS  - DOMÍNIO TOTAL",
