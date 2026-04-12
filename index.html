@@ -1818,8 +1818,8 @@ loadFeaturedLesson(0);
     const field = document.getElementById(fieldId);
     if (field) {
       setTimeout(() => {
-        field.focus();
-      }, 300);
+  field.focus({ preventScroll: true });
+}, 300);
     }
   }
 }
