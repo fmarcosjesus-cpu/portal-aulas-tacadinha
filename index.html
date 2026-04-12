@@ -1790,6 +1790,21 @@ loadFeaturedLesson(0);
       infoMsg.textContent = "";
     }
 
+    function showErrorAndFocus(message, fieldId) {
+  errorMsg.textContent = message;
+
+  errorMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  if (fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) {
+      setTimeout(() => {
+        field.focus();
+      }, 300);
+    }
+  }
+}
+    
     function setAllEmailFields(email) {
       if (!email) return;
       const normalizedEmail = email.trim().toLowerCase();
@@ -1946,15 +1961,15 @@ function togglePaymentOptions() {
   const termsCheckbox = document.getElementById("termsCheckbox");
 
 if (termsCheckbox && !termsCheckbox.checked) {
-  errorMsg.textContent = "Para prosseguir, é necessário concordar com os Termos de Uso.";
-  return;
+  showErrorAndScroll("Para prosseguir, é necessário concordar com os Termos de Uso.");
+return;
 }
 
   const email = getPreferredEmail();
 
   if (!email) {
-    errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
-    return;
+    showErrorAndScroll("Digite primeiro o e-mail que será usado no pagamento.");
+return;
   }
 
   const panel = document.getElementById("paymentOptions");
@@ -1972,19 +1987,19 @@ if (termsCheckbox && !termsCheckbox.checked) {
 
   const termsCheckbox = document.getElementById("termsCheckbox");
 
-if (termsCheckbox && !termsCheckbox.checked) {
-  errorMsg.textContent = "Para prosseguir, é necessário concordar com os Termos de Uso.";
-  return;
-}
+  if (termsCheckbox && !termsCheckbox.checked) {
+    showErrorAndFocus("Para prosseguir, é necessário concordar com os Termos de Uso.", "termsCheckbox");
+    return;
+  }
 
   const email = getPreferredEmail();
 
-  localStorage.setItem("pendingPurchaseEmail", email.trim());
-
   if (!email) {
-    errorMsg.textContent = "Digite primeiro o e-mail que será usado no pagamento.";
+    showErrorAndFocus("Digite primeiro o e-mail que será usado no pagamento.", "buyEmail");
     return;
   }
+
+  localStorage.setItem("pendingPurchaseEmail", email.trim());
 
   setAllEmailFields(email);
   infoMsg.textContent = "Iniciando pagamento...";
