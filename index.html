@@ -1927,18 +1927,18 @@ loadFeaturedLesson(0);
   dashboardSection.style.display = "none";
 }
 
-function toggleTerms() {
+window.toggleTerms = function () {
   const terms = document.getElementById("termsSection");
 
   if (!terms) return;
 
   if (terms.style.display === "none" || terms.style.display === "") {
     terms.style.display = "block";
-    terms.scrollIntoView({ behavior: "smooth" });
+    terms.scrollIntoView({ behavior: "smooth", block: "start" });
   } else {
     terms.style.display = "none";
   }
-}
+};
 
 function togglePaymentOptions() {
   clearMessages();
