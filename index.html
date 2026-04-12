@@ -2218,25 +2218,6 @@ document.getElementById("backToCourses").addEventListener("click", () => {
 
       const email = (user.email || "").toLowerCase();
 
-      const sessionRef = doc(db, "sessions", email);
-      const sessionDoc = await getDoc(sessionRef);
-
-      const newSessionId = Date.now().toString();
-
-      if (sessionDoc.exists()) {
-        const existingSessionId = sessionDoc.data().sessionId;
-
-        if (existingSessionId && existingSessionId !== newSessionId) {
-          await signOut(auth);
-          alert("Sua conta foi acessada em outro dispositivo.");
-          return;
-        }
-      }
-
-      await setDoc(sessionRef, {
-        sessionId: newSessionId
-      });
-
       const autorizado = await isAuthorized(email);
 
       if (autorizado) {
