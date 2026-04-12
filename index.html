@@ -1130,6 +1130,15 @@ button,
             <label class="label" for="buyEmail">E-mail para compra</label>
             <input class="input" type="email" id="buyEmail" placeholder="seuemail@exemplo.com" />
 
+            <label style="display: flex; gap: 10px; align-items: flex-start; margin: 16px 0 14px; font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+  <input type="checkbox" id="termsCheckbox" style="margin-top: 3px;" />
+  <span>
+    Li e concordo com os
+    <a href="#termsSection" style="color: #f4c95d; text-decoration: underline;">Termos de Uso</a>,
+    incluindo as condições de acesso, ausência de suporte individual e caráter educacional do conteúdo.
+  </span>
+</label>
+
             <button class="btn" id="buyBtn">Comprar acesso</button>
 
             <div id="paymentOptions" class="payment-options" style="display: none;">
@@ -1153,6 +1162,25 @@ button,
             <div class="small-note">
               Depois de pagar, volte a esta página e crie sua conta com o mesmo e-mail.
             </div>
+
+          <div class="small-note" style="margin-top: 14px; line-height: 1.6;">
+  Este treinamento possui caráter educacional, voltado ao aprimoramento técnico na sinuca online.
+  Os resultados dependem da prática e aplicação individual de cada aluno.
+</div>
+
+<div class="small-note" style="margin-top: 10px; line-height: 1.6;">
+  Por se tratar de um produto digital com valor acessível, o acesso não inclui suporte individual para dúvidas sobre as aulas.
+</div>
+
+<div class="small-note" style="margin-top: 10px; line-height: 1.6;">
+  Ao prosseguir com a compra, você declara estar ciente das condições de acesso e uso do conteúdo.
+</div>
+
+<div class="small-note" style="margin-top: 12px;">
+  <a href="#termsSection" style="color: #f4c95d; text-decoration: underline;">
+    Ler Termos de Uso
+  </a>
+</div>
           </div>
 
           <div class="box" id="registerBox">
@@ -1345,6 +1373,36 @@ button,
     </div>
   </div>
 </div>
+
+<section id="termsSection" class="content" style="margin-top: 28px;">
+  <div class="box">
+    <h3 style="margin-bottom: 16px;">Termos de Uso</h3>
+
+    <div class="small-note" style="line-height: 1.8;">
+      Este conteúdo possui caráter exclusivamente educacional e foi desenvolvido para aprimoramento técnico na sinuca online.
+    </div>
+
+    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+      Não há garantia de resultados específicos, desempenho, vitórias, ganhos ou qualquer retorno decorrente da aplicação das técnicas apresentadas.
+    </div>
+
+    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+      Os resultados dependem da prática, dedicação, interpretação e aplicação individual de cada aluno.
+    </div>
+
+    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+      O acesso ao conteúdo é individual e intransferível, não incluindo suporte individual, acompanhamento particular, mentoria ou esclarecimento personalizado de dúvidas sobre as aulas.
+    </div>
+
+    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+      É proibida a reprodução, redistribuição, gravação, compartilhamento ou comercialização do conteúdo disponibilizado na plataforma, total ou parcialmente, sem autorização expressa.
+    </div>
+
+    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+      Ao adquirir o acesso, o usuário declara estar ciente dessas condições e concorda com os termos de uso do conteúdo digital disponibilizado.
+    </div>
+  </div>
+</section>
 
           <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -1851,6 +1909,13 @@ loadFeaturedLesson(0);
 function togglePaymentOptions() {
   clearMessages();
 
+  const termsCheckbox = document.getElementById("termsCheckbox");
+
+if (termsCheckbox && !termsCheckbox.checked) {
+  errorMsg.textContent = "Para prosseguir, é necessário concordar com os Termos de Uso.";
+  return;
+}
+
   const email = getPreferredEmail();
 
   if (!email) {
@@ -1870,6 +1935,13 @@ function togglePaymentOptions() {
 
     async function pagar(valor) {
   clearMessages();
+
+  const termsCheckbox = document.getElementById("termsCheckbox");
+
+if (termsCheckbox && !termsCheckbox.checked) {
+  errorMsg.textContent = "Para prosseguir, é necessário concordar com os Termos de Uso.";
+  return;
+}
 
   const email = getPreferredEmail();
 
