@@ -2220,41 +2220,51 @@ document.getElementById("backToCourses").addEventListener("click", () => {
 
       const autorizado = await isAuthorized(email);
 
-      if (autorizado) {
-        infoMsg.textContent = "";
-        document.getElementById("startRegisterBtn").style.display = "none";
-        showDashboard(user);
-        await renderLessonCatalog();
-      } else {
-        await signOut(auth);
-        showAuth();
-        errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
-      }
+console.log("Usuário autenticado:", email);
+console.log("Resultado de autorizado:", autorizado);
+
+if (autorizado) {
+  console.log("Entrou no bloco AUTORIZADO");
+  infoMsg.textContent = "";
+  document.getElementById("startRegisterBtn").style.display = "none";
+  showDashboard(user);
+  await renderLessonCatalog();
+} else {
+  console.log("Entrou no bloco NÃO AUTORIZADO");
+  await signOut(auth);
+  showAuth();
+  showLoginFlow();
+  errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+}
 
     } else {
+      console.log("Entrou no bloco SEM USUÁRIO");
       showAuth();
+      showLoginFlow();
     }
   } catch (error) {
     console.error("Erro na inicialização da autenticação:", error);
+    console.log("Entrou no CATCH");
     showAuth();
+    showLoginFlow();
   } finally {
     hideAppLoader();
   }
 });
 
-    function traduzirErro(code) {
-      const erros = {
-        "auth/email-already-in-use": "Esse e-mail já está cadastrado. Se você já criou sua conta, use a área de login.",
-        "auth/invalid-email": "O e-mail informado é inválido.",
-        "auth/weak-password": "A senha está muito fraca. Use pelo menos 6 caracteres.",
-        "auth/missing-password": "Informe uma senha válida.",
-        "auth/invalid-credential": "E-mail ou senha incorretos.",
-        "auth/user-not-found": "Usuário não encontrado.",
-        "auth/network-request-failed": "Falha de conexão. Verifique sua internet.",
-        "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente."
-      };
-      return erros[code] || `Ocorreu um erro: ${code}`;
-    }
+function traduzirErro(code) {
+  const erros = {
+    "auth/email-already-in-use": "Esse e-mail já está cadastrado. Se você já criou sua conta, use a área de login.",
+    "auth/invalid-email": "O e-mail informado é inválido.",
+    "auth/weak-password": "A senha está muito fraca. Use pelo menos 6 caracteres.",
+    "auth/missing-password": "Informe uma senha válida.",
+    "auth/invalid-credential": "E-mail ou senha incorretos.",
+    "auth/user-not-found": "Usuário não encontrado.",
+    "auth/network-request-failed": "Falha de conexão. Verifique sua internet.",
+    "auth/too-many-requests": "Muitas tentativas. Aguarde um pouco e tente novamente."
+  };
+  return erros[code] || `Ocorreu um erro: ${code}`;
+}
 
 handleReturnFromPayment();
 
