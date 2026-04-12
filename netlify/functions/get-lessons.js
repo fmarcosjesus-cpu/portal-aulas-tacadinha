@@ -190,13 +190,13 @@ exports.handler = async (event) => {
     {
       title: "AULA 04 - MIRA SECUNDÁRIA - APRENDA USÁ-LA",
       description: "Entenda e aplique a mira secundária para aumentar sua precisão.",
-      embed: "https://iframe.mediadelivery.net/embed/c6722166-3794-44fe-84a2-9b3676e5cfbf",
+      embed: "https://iframe.mediadelivery.net/embed/630913/c6722166-3794-44fe-84a2-9b3676e5cfbf",
       thumb: bunnyThumbMap8Ball["AULA 04 - MIRA SECUNDÁRIA - APRENDA USÁ-LA"] || "capa.png"
     },
     {
       title: "AULA 05 - EFEITO PARA TRÁS  - DOMÍNIO TOTAL",
       description: "Domine o efeito para trás e controle melhor a posição da bola branca.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/f34b2334-c12f-4a21-801d-cdff02b9a6ae",
+      embed: "https://iframe.mediadelivery.net/embed/630913/c2fd7259-2fc5-4b14-9c1d-3a0d78762fbe",
       thumb: bunnyThumbMap8Ball["AULA 05 - EFEITO PARA TRÁS  - DOMÍNIO TOTAL"] || "capa.png"
     },
     {
@@ -208,7 +208,7 @@ exports.handler = async (event) => {
     {
       title: "AULA 07 - APRENDA A USAR EFEITOS COMBINADOS",
       description: "Combine diferentes efeitos para jogadas mais avançadas.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/6cf28833-e081-4da1-af9b-c82446f26647",
+      embed: "https://iframe.mediadelivery.net/embed/630913/8c07ae85-56e4-41cd-9749-415fe95c293a",
       thumb: bunnyThumbMap8Ball["AULA 07 - APRENDA A USAR EFEITOS COMBINADOS"] || "capa.png"
     },
     {
@@ -226,13 +226,13 @@ exports.handler = async (event) => {
     {
       title: "AULA 10 -COMO ENCAÇAPAR BOLAS NA CAÇAPA DO MEIO SEM ÂNGULO",
       description: "Domine jogadas difíceis nas caçapas do meio.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/cf5b9620-5ce8-44b9-ad40-8b62654895d3",
+      embed: "https://iframe.mediadelivery.net/embed/630913/038307c2-732c-488e-bcc3-8dcfd167b5d2",
       thumb: bunnyThumbMap8Ball["AULA 10 -COMO ENCAÇAPAR BOLAS NA CAÇAPA DO MEIO SEM ÂNGULO"] || "capa.png"
     },
     {
       title: "AULA 11 - APRENDA A BLOQUEAR SEU ADVERSÁRIO",
       description: "Estratégias defensivas para limitar o jogo do adversário.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/e549a7fb-c86c-4816-8364-d12e9975be98",
+      embed: "https://iframe.mediadelivery.net/embed/630913/05851878-49c6-4a36-8f28-f060f90e0889",
       thumb: bunnyThumbMap8Ball["AULA 11 - APRENDA A BLOQUEAR SEU ADVERSÁRIO"] || "capa.png"
     },
     {
@@ -268,13 +268,13 @@ exports.handler = async (event) => {
     {
       title: "AULA 17 -  COMO MATAR BOLAS SEM MIRA - APRENDA JOGAR SEM LINHA GUIA",
       description: "Aprenda a jogar sem linha guia e desenvolva percepção avançada.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/f3835791-5f3e-433e-b2f0-8b649528f050",
+      embed: "https://iframe.mediadelivery.net/embed/630913/7202c7d4-b67f-4ec6-8f73-93afeae9813c",
       thumb: bunnyThumbMap8Ball["AULA 17 -  COMO MATAR BOLAS SEM MIRA - APRENDA JOGAR SEM LINHA GUIA"] || "capa.png"
     },
     {
       title: "AULA 18 - A DIFERENÇA DO JOGO SEM MIRA (PLANEJAMENTO)",
       description: "Entenda o impacto do jogo sem mira no planejamento estratégico.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/cc4a9e4f-23a7-4560-9b92-76372dcc715c",
+      embed: "https://iframe.mediadelivery.net/embed/630913/1a438023-ac45-4e68-8ef0-6faa7e016474",
       thumb: bunnyThumbMap8Ball["AULA 18 - A DIFERENÇA DO JOGO SEM MIRA (PLANEJAMENTO)"] || "capa.png"
     }
   ]
