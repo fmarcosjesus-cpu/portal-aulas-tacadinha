@@ -1950,15 +1950,28 @@ loadFeaturedLesson(0);
     }
 
     function showDashboard(user) {
-      authSection.style.display = "none";
-      dashboardSection.style.display = "block";
-      const nome = user.displayName ? user.displayName : "Aluno";
-      userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
-    }
+  console.log("showDashboard EXECUTADO");
 
-    function showAuth() {
+  authSection.style.display = "none";
+  dashboardSection.style.display = "block";
+
+  const dashboardLayout = document.getElementById("dashboardLayout");
+  if (dashboardLayout) {
+    dashboardLayout.classList.remove("hidden");
+  }
+
+  const nome = user.displayName ? user.displayName : "Aluno";
+  userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
+}
+
+function showAuth() {
   authSection.style.display = "block";
   dashboardSection.style.display = "none";
+
+  const dashboardLayout = document.getElementById("dashboardLayout");
+  if (dashboardLayout) {
+    dashboardLayout.classList.add("hidden");
+  }
 }
 
 window.toggleTerms = function () {
