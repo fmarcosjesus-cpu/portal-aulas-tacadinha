@@ -202,7 +202,7 @@ exports.handler = async (event) => {
     {
       title: "AULA 06 - EFEITOS LATERAIS - APRENDA A USÁ-LOS",
       description: "Aprenda a utilizar efeitos laterais para posicionamento e estratégia.",
-      embed: "https://iframe.mediadelivery.net/embed/630913/ff044046-be0d-4284-81f9-5daffe856d6e",
+      embed: "https://iframe.mediadelivery.net/embed/630913/c2fd7259-2fc5-4b14-9c1d-3a0d78762fbe",
       thumb: bunnyThumbMap8Ball["AULA 06 - EFEITOS LATERAIS - APRENDA A USÁ-LOS"] || "capa.png"
     },
     {
