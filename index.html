@@ -1960,16 +1960,16 @@ function togglePaymentOptions() {
 
   const termsCheckbox = document.getElementById("termsCheckbox");
 
-if (termsCheckbox && !termsCheckbox.checked) {
-  showErrorAndScroll("Para prosseguir, é necessário concordar com os Termos de Uso.");
-return;
-}
+  if (termsCheckbox && !termsCheckbox.checked) {
+    showErrorAndFocus("Para prosseguir, é necessário concordar com os Termos de Uso.", "termsCheckbox");
+    return;
+  }
 
   const email = getPreferredEmail();
 
   if (!email) {
-    showErrorAndScroll("Digite primeiro o e-mail que será usado no pagamento.");
-return;
+    showErrorAndFocus("Digite primeiro o e-mail que será usado no pagamento.", "buyEmail");
+    return;
   }
 
   const panel = document.getElementById("paymentOptions");
