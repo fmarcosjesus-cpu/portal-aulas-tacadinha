@@ -1952,8 +1952,14 @@ loadFeaturedLesson(0);
     function showDashboard(user) {
   console.log("showDashboard EXECUTADO");
 
+  const brandHero = document.querySelector(".brand-hero");
+
   authSection.style.display = "none";
   dashboardSection.style.display = "block";
+
+  if (brandHero) {
+    brandHero.style.display = "none";
+  }
 
   const dashboardLayout = document.getElementById("dashboardLayout");
   if (dashboardLayout) {
@@ -1962,12 +1968,19 @@ loadFeaturedLesson(0);
 
   const nome = user.displayName ? user.displayName : "Aluno";
   userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+
+  dashboardSection.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function showAuth() {
+  const brandHero = document.querySelector(".brand-hero");
+
   authSection.style.display = "block";
   dashboardSection.style.display = "none";
+
+  if (brandHero) {
+    brandHero.style.display = "block";
+  }
 
   const dashboardLayout = document.getElementById("dashboardLayout");
   if (dashboardLayout) {
