@@ -1962,6 +1962,7 @@ loadFeaturedLesson(0);
 
   const nome = user.displayName ? user.displayName : "Aluno";
   userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 function showAuth() {
