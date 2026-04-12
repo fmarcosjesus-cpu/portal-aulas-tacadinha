@@ -66,6 +66,17 @@
   to {
     transform: rotate(360deg);
   }
+
+@keyframes errorFlash {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+.error-flash {
+  animation: errorFlash 0.4s ease-in-out 3;
+}
+
 }
    :root {
   --bg-main: #020617;
@@ -1794,6 +1805,10 @@ loadFeaturedLesson(0);
   errorMsg.textContent = message;
 
   errorMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  errorMsg.classList.remove("error-flash");
+  void errorMsg.offsetWidth; // reinicia animação
+  errorMsg.classList.add("error-flash");
 
   if (fieldId) {
     const field = document.getElementById(fieldId);
