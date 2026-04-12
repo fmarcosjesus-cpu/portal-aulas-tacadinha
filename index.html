@@ -19,6 +19,10 @@
   display: none !important;
 }
 
+#termsSection {
+  display: none;
+}
+
 #appLoader {
   position: fixed;
   inset: 0;
@@ -1134,7 +1138,9 @@ button,
   <input type="checkbox" id="termsCheckbox" style="margin-top: 3px;" />
   <span>
     Li e concordo com os
-    <a href="#termsSection" style="color: #f4c95d; text-decoration: underline;">Termos de Uso</a>,
+    <a href="#" onclick="toggleTerms(); return false;" style="color: #f4c95d; text-decoration: underline;">
+  Ler Termos de Uso
+</a>,
     incluindo as condições de acesso, ausência de suporte individual e caráter educacional do conteúdo.
   </span>
 </label>
@@ -1164,22 +1170,25 @@ button,
             </div>
 
           <div class="small-note" style="margin-top: 14px; line-height: 1.6;">
-  Este treinamento possui caráter educacional, voltado ao aprimoramento técnico na sinuca online.
-  Os resultados dependem da prática e aplicação individual de cada aluno.
+  Este treinamento possui caráter educacional, voltado ao aprimoramento técnico na sinuca online. Os resultados dependem da prática e aplicação individual de cada aluno.
 </div>
 
 <div class="small-note" style="margin-top: 10px; line-height: 1.6;">
-  Por se tratar de um produto digital com valor acessível, o acesso não inclui suporte individual para dúvidas sobre as aulas.
+  O acesso é INDIVIDUAL E INTRANSFERÍVEL e não inclui suporte individual para dúvidas sobre as aulas.
 </div>
 
 <div class="small-note" style="margin-top: 10px; line-height: 1.6;">
-  Ao prosseguir com a compra, você declara estar ciente das condições de acesso e uso do conteúdo.
+  NÃO COMPARTILHE OU COMERCIALIZE O ACESSO. Isso pode resultar no bloqueio permanente sem direito a reembolso.
+</div>
+
+<div class="small-note" style="margin-top: 10px; line-height: 1.6;">
+  Ao prosseguir com a compra, você declara estar ciente e de acordo com os Termos de Uso da plataforma.
 </div>
 
 <div class="small-note" style="margin-top: 12px;">
-  <a href="#termsSection" style="color: #f4c95d; text-decoration: underline;">
-    Ler Termos de Uso
-  </a>
+  <a href="#" onclick="toggleTerms(); return false;" style="color: #f4c95d; text-decoration: underline;">
+  Ler Termos de Uso
+</a>
 </div>
           </div>
 
@@ -1291,10 +1300,17 @@ button,
           </div>
         </div>
 
-        <div class="hint" id="infoMsg"></div>
-        <div class="success" id="successMsg"></div>
-        <div class="error" id="errorMsg"></div>
-      </div>
+        <div class="notice notice-warning" style="margin-top: 22px; line-height: 1.7;">
+  <strong>AVISO IMPORTANTE:</strong><br><br>
+
+  O acesso é <strong>INDIVIDUAL E INTRANSFERÍVEL</strong>. O compartilhamento ou comercialização pode resultar em <strong>BLOQUEIO IMEDIATO E PERMANENTE</strong>, sem direito a reembolso.<br><br>
+
+  Por se tratar de um produto digital com valor acessível, o acesso <strong>NÃO INCLUI SUPORTE INDIVIDUAL</strong> para dúvidas sobre as aulas.
+</div>
+
+<div class="hint" id="infoMsg"></div>
+<div class="success" id="successMsg"></div>
+<div class="error" id="errorMsg"></div>
 
       <div class="content dashboard" id="dashboardSection" style="
   background:
@@ -1379,28 +1395,32 @@ button,
     <h3 style="margin-bottom: 16px;">Termos de Uso</h3>
 
     <div class="small-note" style="line-height: 1.8;">
-      Este conteúdo possui caráter exclusivamente educacional e foi desenvolvido para aprimoramento técnico na sinuca online.
-    </div>
+  Este conteúdo possui caráter exclusivamente educacional e foi desenvolvido para aprimoramento técnico na sinuca online.
+</div>
 
-    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-      Não há garantia de resultados específicos, desempenho, vitórias, ganhos ou qualquer retorno decorrente da aplicação das técnicas apresentadas.
-    </div>
+<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+  NÃO HÁ GARANTIA DE RESULTADOS ESPECÍFICOS, DESEMPENHO, VITÓRIAS, GANHOS OU QUALQUER RETORNO decorrente da aplicação das técnicas apresentadas.
+</div>
 
-    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-      Os resultados dependem da prática, dedicação, interpretação e aplicação individual de cada aluno.
-    </div>
+<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+  Os resultados dependem da prática, dedicação, interpretação e aplicação individual de cada aluno.
+</div>
 
-    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-      O acesso ao conteúdo é individual e intransferível, não incluindo suporte individual, acompanhamento particular, mentoria ou esclarecimento personalizado de dúvidas sobre as aulas.
-    </div>
+<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+  O acesso ao conteúdo é INDIVIDUAL E INTRANSFERÍVEL, não incluindo suporte individual, acompanhamento particular, mentoria ou esclarecimento personalizado de dúvidas sobre as aulas.
+</div>
 
-    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-      É proibida a reprodução, redistribuição, gravação, compartilhamento ou comercialização do conteúdo disponibilizado na plataforma, total ou parcialmente, sem autorização expressa.
-    </div>
+<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+  É PROIBIDA a reprodução, redistribuição, gravação, compartilhamento ou comercialização do conteúdo disponibilizado na plataforma, total ou parcialmente, sem autorização expressa.
+</div>
 
-    <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-      Ao adquirir o acesso, o usuário declara estar ciente dessas condições e concorda com os termos de uso do conteúdo digital disponibilizado.
-    </div>
+<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+  NÃO COMPARTILHE OU COMERCIALIZE O ACESSO À PLATAFORMA. Tais práticas implicarão no BLOQUEIO IMEDIATO E PERMANENTE do usuário, SEM DIREITO A REEMBOLSO.
+</div>
+
+<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+  Ao adquirir o acesso, o usuário declara estar ciente dessas condições e concorda integralmente com os termos de uso do conteúdo digital disponibilizado.
+</div>
   </div>
 </section>
 
@@ -1416,10 +1436,11 @@ button,
       updateProfile
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import {
-      getFirestore,
-      doc,
-      getDoc
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
@@ -1906,6 +1927,19 @@ loadFeaturedLesson(0);
   dashboardSection.style.display = "none";
 }
 
+function toggleTerms() {
+  const terms = document.getElementById("termsSection");
+
+  if (!terms) return;
+
+  if (terms.style.display === "none" || terms.style.display === "") {
+    terms.style.display = "block";
+    terms.scrollIntoView({ behavior: "smooth" });
+  } else {
+    terms.style.display = "none";
+  }
+}
+
 function togglePaymentOptions() {
   clearMessages();
 
@@ -2147,7 +2181,29 @@ document.getElementById("backToCourses").addEventListener("click", () => {
   try {
     if (user) {
       infoMsg.textContent = "Verificando liberação de acesso...";
-      const autorizado = await isAuthorized((user.email || "").toLowerCase());
+
+      const email = (user.email || "").toLowerCase();
+
+      const sessionRef = doc(db, "sessions", email);
+      const sessionDoc = await getDoc(sessionRef);
+
+      const newSessionId = Date.now().toString();
+
+      if (sessionDoc.exists()) {
+        const existingSessionId = sessionDoc.data().sessionId;
+
+        if (existingSessionId && existingSessionId !== newSessionId) {
+          await signOut(auth);
+          alert("Sua conta foi acessada em outro dispositivo.");
+          return;
+        }
+      }
+
+      await setDoc(sessionRef, {
+        sessionId: newSessionId
+      });
+
+      const autorizado = await isAuthorized(email);
 
       if (autorizado) {
         infoMsg.textContent = "";
@@ -2159,6 +2215,7 @@ document.getElementById("backToCourses").addEventListener("click", () => {
         showAuth();
         errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
       }
+
     } else {
       showAuth();
     }
