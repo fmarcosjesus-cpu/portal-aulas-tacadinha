@@ -1619,6 +1619,7 @@ function setupLessonNavigation() {
 }
 
 function renderCourseList() {
+  console.log("renderCourseList EXECUTADO", courses);
   const container = document.getElementById("courseList");
   const backBtn = document.getElementById("backToCourses");
   const dashboardLayout = document.getElementById("dashboardLayout");
@@ -1770,16 +1771,23 @@ async function renderLessonCatalog() {
     const currentCourse = getCurrentCourse();
 
     if (!currentCourse) {
-      lessons = [];
-      renderLessonSidebar();
-      catalog.innerHTML = "";
+  console.log("Nenhum curso selecionado — exibindo lista");
 
-      document.getElementById("lessonSidebar").style.display = "none";
-      document.getElementById("featuredSection").style.display = "none";
-      document.getElementById("catalogSection").style.display = "none";
+  lessons = [];
+  renderLessonSidebar();
+  catalog.innerHTML = "";
 
-      return;
-    }
+  document.getElementById("lessonSidebar").style.display = "none";
+  document.getElementById("featuredSection").style.display = "none";
+  document.getElementById("catalogSection").style.display = "none";
+
+  const courseActions = document.getElementById("courseActions");
+  if (courseActions) {
+    courseActions.style.display = "flex";
+  }
+
+  return;
+}
 
     lessons = currentCourse.lessons || [];
 
