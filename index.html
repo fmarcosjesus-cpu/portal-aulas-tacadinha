@@ -2271,22 +2271,26 @@ document.getElementById("backToCourses").addEventListener("click", () => {
 
       const autorizado = await isAuthorized(email);
 
-console.log("Usuário autenticado:", email);
-console.log("Resultado de autorizado:", autorizado);
+      console.log("Usuário autenticado:", email);
+      console.log("Resultado de autorizado:", autorizado);
 
-if (autorizado) {
-  console.log("Entrou no bloco AUTORIZADO");
-  infoMsg.textContent = "";
-  document.getElementById("startRegisterBtn").style.display = "none";
-  showDashboard(user);
-  await renderLessonCatalog();
-} else {
-  console.log("Entrou no bloco NÃO AUTORIZADO");
-  await signOut(auth);
-  showAuth();
-  showLoginFlow();
-  errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
-}
+      if (autorizado) {
+        console.log("Entrou no bloco AUTORIZADO");
+        infoMsg.textContent = "";
+        document.getElementById("startRegisterBtn").style.display = "none";
+        showDashboard(user);
+
+        console.log("ANTES de renderLessonCatalog");
+        await renderLessonCatalog();
+        console.log("DEPOIS de renderLessonCatalog");
+
+      } else {
+        console.log("Entrou no bloco NÃO AUTORIZADO");
+        await signOut(auth);
+        showAuth();
+        showLoginFlow();
+        errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+      }
 
     } else {
       console.log("Entrou no bloco SEM USUÁRIO");
