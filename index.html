@@ -1658,75 +1658,32 @@ function renderCourseList() {
   }
 
   container.innerHTML = `
-    <div style="text-align:center; margin-bottom: 30px;">
-      <h2 style="
-        color: #f4c95d;
-        font-size: 30px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-shadow:
-          0 0 6px rgba(244,201,93,0.4),
-          0 0 18px rgba(244,201,93,0.2);
-        margin: 0;
-      ">
-        Selecione o curso
-      </h2>
-      <div style="
-        width: 200px;
-        height: 2px;
-        margin: 12px auto 0;
-        background: linear-gradient(to right, transparent, #f4c95d, transparent);
-      "></div>
-    </div>
+  <div style="padding: 20px; text-align: center; color: #fff;">
+    <h2 style="color: #f4c95d; margin-bottom: 20px;">Selecione o curso</h2>
 
-    <div style="
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      flex-wrap:wrap;
-      align-items:center;
-    ">
+    <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
       ${courses.map(course => `
         <button
-          class="course-image-btn"
           data-course="${course.id}"
           style="
-            background: rgba(20,12,6,0.6);
-            border: 1px solid rgba(244,201,93,0.12);
-            padding: 12px;
-            border-radius: 18px;
-            backdrop-filter: blur(8px);
+            width: 320px;
+            max-width: 90vw;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(244,201,93,0.35);
+            background: rgba(20,12,6,0.75);
+            color: #f4c95d;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
           "
-          onmouseover="
-            this.style.transform='scale(1.05)';
-            this.style.filter='drop-shadow(0 0 18px ${course.id === "tacadinha" ? "rgba(34,197,94,0.35)" : "rgba(244,201,93,0.35)"})';
-          "
-          onmouseout="
-            this.style.transform='scale(1)';
-            this.style.filter='none';
-          "
-          onmousedown="this.style.transform='scale(0.96)'"
-          onmouseup="this.style.transform='scale(1.05)'"
         >
-          <img
-            src="${course.id === "tacadinha" ? "assets-tacadinha-btn.png" : "assets-8ball-btn.png"}"
-            alt="${course.title}"
-            style="
-              display:block;
-              width: 320px;
-              max-width: 90vw;
-              height: auto;
-              border-radius: 14px;
-              box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-              transition: transform 0.25s ease, filter 0.25s ease;
-              transform: translateZ(0);
-              will-change: transform;
-            "
-          >
+          ${course.title}
         </button>
       `).join("")}
     </div>
-  `;
+  </div>
+`;
 
   document.querySelectorAll("[data-course]").forEach(btn => {
     btn.addEventListener("click", () => {
