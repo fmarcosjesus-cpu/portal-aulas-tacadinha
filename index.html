@@ -6,14 +6,21 @@
   <title>Giz do Taco | Sinuca Online</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-#termsSection,
-#purchaseBox,
-#registerBox {
+#dashboardSection,
+#lessonSidebar,
+#featuredSection,
+#catalogSection,
+#registerBox,
+#purchaseBox {
   display: none;
 }
 
 #lessonSidebar:empty {
   display: none !important;
+}
+
+#termsSection {
+  display: none;
 }
 
 #appLoader {
@@ -62,8 +69,8 @@
 }
 
 @keyframes errorFlash {
-  0% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.3; transform: scale(1.03); }
+  0%   { opacity: 1; transform: scale(1); }
+  50%  { opacity: 0.3; transform: scale(1.03); }
   100% { opacity: 1; transform: scale(1); }
 }
 
@@ -89,105 +96,67 @@
 
   --border-soft: rgba(255,255,255,0.08);
   --shadow-main: 0 20px 60px rgba(0,0,0,0.45);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,120,40,0.15), transparent 40%),
-    radial-gradient(circle at 80% 20%, rgba(255,80,20,0.12), transparent 45%),
-    radial-gradient(circle at 50% 80%, rgba(255,140,60,0.10), transparent 50%),
-    linear-gradient(180deg, #0b0502 0%, #020101 100%);
-  color: #e5e7eb;
-}
-
-.wrap {
-  min-height: 100vh;
-  display: block;
-  padding: 24px;
-}
-
-#courseList {
-  width: 100%;
-  min-height: 200px;
-  position: relative;
-  z-index: 10;
-  color: #ffffff;
-}
-
-#courseActions {
-  width: 100%;
-  min-height: 200px;
-  color: #ffffff;
-}
-
-#dashboardSection {
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  position: relative;
-  overflow: visible;
-  color: #ffffff;
-}
-
-.dashboard-layout {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 22px;
-  align-items: start;
-  width: 100%;
-  min-height: 100vh;
-}
-
-.content-area {
-  width: 100%;
-  min-height: 300px;
-  color: #ffffff;
-  display: grid;
-  gap: 22px;
-}
-
-.card {
+} 
+   
+   * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background:
+      radial-gradient(circle at 20% 30%, rgba(255,120,40,0.15), transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(255,80,20,0.12), transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(255,140,60,0.10), transparent 50%),
+      linear-gradient(180deg, #0b0502 0%, #020101 100%);
+      color: #e5e7eb;
+    }
+    .wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
   width: 100%;
   max-width: 1100px;
-  margin: 0 auto;
+
   background:
     radial-gradient(circle at top center, rgba(255,200,120,0.08), transparent 30%),
     linear-gradient(180deg, #120905 0%, #080403 45%, #030101 100%);
+
   border: 1px solid rgba(255,210,140,0.18);
+
   border-radius: 18px;
+
   box-shadow:
     0 40px 120px rgba(0,0,0,0.85),
     0 0 40px rgba(255,190,90,0.08),
     inset 0 1px 0 rgba(255,230,160,0.10);
+
   overflow: hidden;
 }
-
-.hero {
+    .hero {
   padding: 28px;
   background: linear-gradient(135deg, #2a140a, #0f0a08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      line-height: 1.15;
+    }
+    .brand-hero p {
+  color: #e0e6ed;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
-.hero h1 {
-  margin: 0 0 10px;
-  font-size: 32px;
-  line-height: 1.15;
-}
-
-.brand-hero {
+    .brand-hero {
   background-image: url("capa.png");
   background-size: cover;
   background-position: center;
   position: relative;
   padding: 40px 30px;
   border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
 .brand-hero::before {
@@ -197,49 +166,42 @@ body {
   background: rgba(0, 0, 0, 0.32);
 }
 
-.brand-hero p {
-  color: #e0e6ed;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+.brand-hero {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
 .brand-content {
   position: relative;
   z-index: 2;
 }
-
-.content {
-  padding: 28px;
-}
-
-.notice {
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-bottom: 18px;
-  font-size: 14px;
-  line-height: 1.6;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.notice-info {
-  background: rgba(56,189,248,0.08);
-  border-color: rgba(56,189,248,0.22);
-  color: #bae6fd;
-}
-
-.notice-warning {
-  background: rgba(234,179,8,0.08);
-  border-color: rgba(234,179,8,0.22);
-  color: #fde68a;
-}
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
-  margin-bottom: 20px;
-}
-
-.step {
+     .content {
+      padding: 28px;
+    }
+    .notice {
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.6;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .notice-info {
+      background: rgba(56,189,248,0.08);
+      border-color: rgba(56,189,248,0.22);
+      color: #bae6fd;
+    }
+    .notice-warning {
+      background: rgba(234,179,8,0.08);
+      border-color: rgba(234,179,8,0.22);
+      color: #fde68a;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .step {
   background:
     radial-gradient(circle at top, rgba(255,140,40,0.12), transparent 35%),
     linear-gradient(180deg, #2a140a 0%, #120c08 40%, #0d0907 100%);
@@ -260,78 +222,69 @@ body {
   transform: translateY(-2px);
 }
 
-.step-number {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  line-height: 28px;
-  text-align: center;
-  border-radius: 999px;
-  background: rgba(34,197,94,0.16);
-  color: #86efac;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.step h3 {
-  margin: 0 0 8px;
-  font-size: 16px;
-}
-
-.step p {
-  margin: 0;
-  font-size: 14px;
-  color: #cbd5e1;
-  line-height: 1.5;
-}
-
-.auth-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 18px;
-  align-items: start;
-}
-
-.box {
-  background:
+    .step-number {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.16);
+      color: #86efac;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+    .step p {
+      margin: 0;
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+    }
+    .auth-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    .box {
+    background:
     radial-gradient(circle at top, rgba(255,140,40,0.12), transparent 35%),
     linear-gradient(180deg, #2a140a 0%, #120c08 40%, #0d0907 100%);
-  border: 1px solid rgba(255,170,60,0.15);
-  border-radius: 16px;
-  padding: 22px;
-  box-shadow:
+    border: 1px solid rgba(255,170,60,0.15);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow:
     0 20px 60px rgba(0,0,0,0.6),
     0 0 25px rgba(255,140,40,0.10);
-  transition: border 0.2s ease, box-shadow 0.2s ease;
-}
-
-.box:hover {
-  border: 1px solid rgba(255,170,60,0.25);
-  box-shadow:
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+    .box:hover {
+    border: 1px solid rgba(255,170,60,0.25);
+    box-shadow:
     0 25px 70px rgba(0,0,0,0.65),
     0 0 30px rgba(255,140,40,0.14);
-}
-
-.box h2 {
-  margin: 0 0 8px;
-  font-size: 22px;
-}
-
-.box p {
-  margin: 0 0 16px;
-  color: #cbd5e1;
-  line-height: 1.55;
-  font-size: 14px;
-}
-
-.label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #cbd5e1;
-}
-
-.input {
+    }
+    .box h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .box p {
+      margin: 0 0 16px;
+      color: #cbd5e1;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .input {
   width: 100%;
   padding: 14px 15px;
   border-radius: 12px;
@@ -398,6 +351,16 @@ body {
   display: block;
 }
 
+.toggle-password:hover {
+  transform: translateY(-50%) scale(1.08);
+  filter: brightness(1.1);
+}
+
+.toggle-password:focus {
+  outline: none;
+  color: #f0d27a;
+}
+
 .input,
 .input:hover,
 .input:focus {
@@ -411,140 +374,114 @@ body {
     0 0 20px rgba(255,140,40,0.12);
   background: rgba(10,10,10,0.85);
 }
-
-.btn {
-  width: 100%;
-  border: 0;
-  border-radius: 12px;
-  padding: 14px 16px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 15px;
-  background: #22c55e;
-  color: #052e16;
-}
-
-.btn:hover {
-  filter: brightness(1.05);
-}
-
-.btn-secondary {
-  background: #38bdf8;
-  color: #082f49;
-}
-
-.btn-ghost {
-  width: auto;
-  background: transparent;
-  color: #cbd5e1;
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 10px 14px;
-}
-
-.hint,
-.error,
-.success {
-  margin-top: 12px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.hint {
-  color: #93c5fd;
-}
-
-.error {
+    .btn {
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+      background: #22c55e;
+      color: #052e16;
+    }
+    .btn:hover { filter: brightness(1.05); }
+    .btn-secondary {
+      background: #38bdf8;
+      color: #082f49;
+    }
+    .btn-ghost {
+      width: auto;
+      background: transparent;
+      color: #cbd5e1;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 14px;
+    }
+    .hint, .error, .success {
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .hint { color: #93c5fd; }
+    .error {
   color: #fca5a5;
   font-weight: 500;
   text-shadow: 0 0 6px rgba(252, 165, 165, 0.4);
-}
+    }
+    .success { color: #86efac; }
+    .small-note {
+      margin-top: 10px;
+      color: #94a3b8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .dashboard { display: none; }
+    .topbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(34,197,94,0.15);
+      color: #86efac;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .lesson {
+    background: #0b1220;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 18px;
+    overflow: hidden;
+    }
+    .lesson h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    .lesson p {
+      margin: 0 0 14px;
+      color: #cbd5e1;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    .lesson a {
+      display: inline-block;
+      text-decoration: none;
+      background: #38bdf8;
+      color: #082f49;
+      font-weight: 700;
+      padding: 11px 14px;
+      border-radius: 10px;
+    }
+    .footer-note {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
 
-.success {
-  color: #86efac;
-}
-
-.small-note {
-  margin-top: 10px;
-  color: #94a3b8;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.topbar {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.badge {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 999px;
-  background: rgba(34,197,94,0.15);
-  color: #86efac;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.grid {
+  .dashboard-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-}
-
-.lesson {
-  background: #0b1220;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 18px;
-  overflow: hidden;
-}
-
-.lesson h3 {
-  margin: 0 0 8px;
-  font-size: 19px;
-}
-
-.lesson p {
-  margin: 0 0 14px;
-  color: #cbd5e1;
-  line-height: 1.5;
-  font-size: 14px;
-}
-
-.lesson a {
-  display: inline-block;
-  text-decoration: none;
-  background: #38bdf8;
-  color: #082f49;
-  font-weight: 700;
-  padding: 11px 14px;
-  border-radius: 10px;
-}
-
-.footer-note {
-  margin-top: 24px;
-  font-size: 13px;
-  color: #94a3b8;
-  line-height: 1.6;
+  grid-template-columns: 240px 1fr;
+  gap: 22px;
+  align-items: start;
 }
 
 .sidebar {
-  background:
-    radial-gradient(circle at top, rgba(255,210,110,0.18), transparent 60%),
-    linear-gradient(180deg, #1c1007 0%, #0c0603 55%, #020101 100%) !important;
-  border: 1px solid rgba(255,220,140,0.55) !important;
-  box-shadow:
-    0 12px 35px rgba(0,0,0,0.6),
-    0 0 12px rgba(255,180,60,0.10),
-    inset 0 0 18px rgba(255,210,120,0.10),
-    inset 0 1px 0 rgba(255,245,210,0.35),
-    inset 0 -1px 0 rgba(120,70,20,0.18) !important;
-  border-radius: 16px;
-  backdrop-filter: blur(6px) !important;
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
   padding: 18px;
   position: sticky;
   top: 20px;
@@ -571,6 +508,10 @@ body {
   color: #cbd5e1;
   border: 1px solid rgba(255,255,255,0.05);
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar .side-item {
   transition: all 0.25s ease;
 }
 
@@ -585,25 +526,23 @@ body {
   background: rgba(212,175,55,0.15);
   border: 1px solid rgba(212,175,55,0.35);
   color: #f0d27a;
+
   box-shadow:
     0 10px 30px rgba(0,0,0,0.4),
     0 0 20px rgba(212,175,55,0.12);
+
   transform: scale(1.03);
 }
 
+.content-area {
+  display: grid;
+  gap: 22px;
+}
+
 .featured-player {
-  background:
-    radial-gradient(circle at top, rgba(255,205,110,0.18), transparent 50%),
-    linear-gradient(180deg, #1a0d06 0%, #0b0503 50%, #020101 100%) !important;
-  border: 1px solid rgba(255,225,150,0.60) !important;
-  box-shadow:
-    0 20px 55px rgba(0,0,0,0.58),
-    0 0 18px rgba(255,190,90,0.12),
-    inset 0 0 24px rgba(255,210,120,0.08),
-    inset 0 1px 0 rgba(255,245,210,0.30),
-    inset 0 -1px 0 rgba(120,70,20,0.12) !important;
-  border-radius: 16px;
-  backdrop-filter: blur(6px) !important;
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
   padding: 18px;
 }
 
@@ -622,10 +561,14 @@ body {
 #featuredPlayer {
   width: 100%;
   aspect-ratio: 16/9;
+
   background: #000;
+
   border-radius: 14px;
   overflow: hidden;
+
   box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+
   transition: opacity 0.25s ease;
 }
 
@@ -666,19 +609,13 @@ body {
 }
 
 .lesson-card {
-  background:
-    radial-gradient(circle at top, rgba(255,210,110,0.18), transparent 60%),
-    linear-gradient(180deg, #1c1007 0%, #0c0603 55%, #020101 100%) !important;
-  border: 1px solid rgba(255,220,140,0.55) !important;
-  box-shadow:
-    0 12px 35px rgba(0,0,0,0.6),
-    0 0 12px rgba(255,180,60,0.10),
-    inset 0 0 18px rgba(255,210,120,0.10),
-    inset 0 1px 0 rgba(255,245,210,0.35),
-    inset 0 -1px 0 rgba(120,70,20,0.18) !important;
+  background: linear-gradient(145deg, #0b1220, #111827);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: 16px;
-  backdrop-filter: blur(6px) !important;
   overflow: hidden;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
   transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
   cursor: pointer;
 }
@@ -689,35 +626,26 @@ body {
   border: 1px solid rgba(212,175,55,0.25);
 }
 
-.lesson-card.active {
-  background:
-    radial-gradient(circle at top, rgba(255,210,110,0.28), transparent 58%),
-    linear-gradient(180deg, #221208 0%, #120904 52%, #050202 100%) !important;
-  border: 1px solid rgba(255,225,150,0.72) !important;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.45),
-    0 0 18px rgba(255,190,90,0.16),
-    inset 0 0 18px rgba(255,210,120,0.12),
-    inset 0 1px 0 rgba(255,245,210,0.35),
-    inset 0 -1px 0 rgba(120,70,20,0.14) !important;
-}
-
 .lesson-thumb {
   width: 100%;
   aspect-ratio: 16/9;
+
   background-color: #0f172a;
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
   border-radius: 12px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   color: #93c5fd;
   font-weight: 700;
   font-size: 18px;
 }
-
 .lesson-body {
   padding: 16px;
 }
@@ -749,7 +677,9 @@ body {
   margin: 0;
   font-size: 30px;
   line-height: 1;
+
   color: #f5d06f;
+
   text-shadow:
     0 2px 6px rgba(0,0,0,0.6),
     0 0 12px rgba(212,175,55,0.4);
@@ -776,6 +706,26 @@ body {
   text-shadow:
     0 1px 4px rgba(0,0,0,0.7),
     0 0 8px rgba(212,175,55,0.25);
+}
+
+#purchaseBox,
+#registerBox {
+  display: none;
+}
+
+.lesson-card.active {
+  background:
+    radial-gradient(circle at top, rgba(255,210,110,0.28), transparent 58%),
+    linear-gradient(180deg, #221208 0%, #120904 52%, #050202 100%) !important;
+
+  border: 1px solid rgba(255,225,150,0.72) !important;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.45),
+    0 0 18px rgba(255,190,90,0.16),
+    inset 0 0 18px rgba(255,210,120,0.12),
+    inset 0 1px 0 rgba(255,245,210,0.35),
+    inset 0 -1px 0 rgba(120,70,20,0.14) !important;
 }
 
 button,
@@ -807,6 +757,42 @@ button,
   border: 1px solid rgba(255,170,60,0.15);
   box-shadow: 0 0 25px rgba(255,140,40,0.08);
   border-radius: 16px;
+}
+
+.sidebar,
+.lesson-card {
+  background:
+    radial-gradient(circle at top, rgba(255,210,110,0.18), transparent 60%),
+    linear-gradient(180deg, #1c1007 0%, #0c0603 55%, #020101 100%) !important;
+
+  border: 1px solid rgba(255,220,140,0.55) !important;
+
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.6),
+    0 0 12px rgba(255,180,60,0.10),
+    inset 0 0 18px rgba(255,210,120,0.10),
+    inset 0 1px 0 rgba(255,245,210,0.35),
+    inset 0 -1px 0 rgba(120,70,20,0.18) !important;
+
+  border-radius: 16px;
+  backdrop-filter: blur(6px) !important;
+}
+  section.featured-player {
+  background:
+    radial-gradient(circle at top, rgba(255,205,110,0.18), transparent 50%),
+    linear-gradient(180deg, #1a0d06 0%, #0b0503 50%, #020101 100%) !important;
+
+  border: 1px solid rgba(255,225,150,0.60) !important;
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,0.58),
+    0 0 18px rgba(255,190,90,0.12),
+    inset 0 0 24px rgba(255,210,120,0.08),
+    inset 0 1px 0 rgba(255,245,210,0.30),
+    inset 0 -1px 0 rgba(120,70,20,0.12) !important;
+
+  border-radius: 16px;
+  backdrop-filter: blur(6px) !important;
 }
 
 .payment-options {
@@ -872,68 +858,6 @@ button,
   filter: brightness(1.03);
 }
 
-@media (max-width: 900px) {
-  .dashboard-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .sidebar {
-    width: 100%;
-    position: relative;
-    top: 0;
-    padding: 16px;
-  }
-
-  .lesson-card {
-    padding: 14px;
-    font-size: 14px;
-  }
-
-  .featured-player {
-    width: 100%;
-    padding: 14px;
-  }
-
-  .featured-player iframe,
-  .featured-player video {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-  }
-
-  .featured-player h2 {
-    font-size: 18px;
-    line-height: 1.3;
-  }
-
-  .featured-player p {
-    font-size: 14px;
-  }
-
-  .card {
-    padding: 16px;
-  }
-
-  .hero {
-    padding: 18px;
-  }
-
-  .hero h1 {
-    font-size: 22px;
-  }
-
-  .brand-top h1 {
-    font-size: 24px;
-  }
-
-  .brand-logo {
-    width: 54px;
-    height: 54px;
-  }
-}
-
 @media (max-width: 640px) {
   .payment-options {
     padding: 14px;
@@ -953,7 +877,82 @@ button,
     font-size: 14px;
     padding: 12px 14px;
   }
+}
 
+@media (max-width: 900px) {
+
+  /* Layout geral */
+  .dashboard-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Sidebar vira topo */
+  .sidebar {
+    width: 100%;
+    position: relative;
+    top: 0;
+    padding: 16px;
+  }
+
+  /* Lista de aulas mais compacta */
+  .lesson-card {
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  /* Player principal */
+  .featured-player {
+    width: 100%;
+    padding: 14px;
+  }
+
+  /* Vídeo responsivo */
+  .featured-player iframe,
+  .featured-player video {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  /* Título da aula */
+  .featured-player h2 {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  /* Descrição */
+  .featured-player p {
+    font-size: 14px;
+  }
+
+  /* Card geral */
+  .card {
+    padding: 16px;
+  }
+
+  /* Hero (capa) */
+  .hero {
+    padding: 18px;
+  }
+
+  .hero h1 {
+    font-size: 22px;
+  }
+
+  .brand-top h1 {
+    font-size: 24px;
+  }
+
+  /* Logo */
+  .brand-logo {
+    width: 54px;
+    height: 54px;
+  }
+}
+
+@media (max-width: 640px) {
   .wrap {
     padding: 12px;
   }
@@ -965,7 +964,7 @@ button,
   .hero {
     padding: 10px !important;
     border-radius: 12px;
-    min-height: 220px;
+    height: 220px;
     display: flex;
     align-items: flex-end;
     background-size: cover;
@@ -1042,7 +1041,8 @@ button,
     line-height: 1.45;
   }
 }
-</style>
+
+  </style>
 </head>
 <body>
 <div id="appLoader">
@@ -1328,7 +1328,6 @@ button,
 <div class="error" id="errorMsg"></div>
 
       <div class="content dashboard" id="dashboardSection" style="
-  display: none;
   background:
     linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.82)),
     url('bg-dashboard.png');
@@ -1346,7 +1345,7 @@ button,
     <button class="btn btn-ghost" id="logoutBtn">Sair</button>
   </div>
 
-  <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:16px; align-items:center; margin-bottom:20px; width:100%;">
+  <div id="courseActions" style="display:flex; justify-content:center; gap:16px; align-items:center; margin-bottom:20px;">
   <button id="backToCourses"
   style="
     display: none;
@@ -1441,61 +1440,48 @@ button,
 </section>
 
           <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  onAuthStateChanged,
-  signOut,
-  updateProfile
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail,
+      onAuthStateChanged,
+      signOut,
+      updateProfile
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
   getFirestore,
   doc,
-  getDoc
+  getDoc,
+  setDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
-  authDomain: "tacadinha-aulas-9a75b.firebaseapp.com",
-  projectId: "tacadinha-aulas-9a75b",
-  storageBucket: "tacadinha-aulas-9a75b.firebasestorage.app",
-  messagingSenderId: "957514767572",
-  appId: "1:957514767572:web:d077b7169c6d5652b9ef41",
-  measurementId: "G-FEMHWYVMPZ"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqMxPbB1YAGUxXbo2L4KIpQd6jRH-Qeu8",
+      authDomain: "tacadinha-aulas-9a75b.firebaseapp.com",
+      projectId: "tacadinha-aulas-9a75b",
+      storageBucket: "tacadinha-aulas-9a75b.firebasestorage.app",
+      messagingSenderId: "957514767572",
+      appId: "1:957514767572:web:d077b7169c6d5652b9ef41",
+      measurementId: "G-FEMHWYVMPZ"
+    };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-const authSection = document.getElementById("authSection");
-const dashboardSection = document.getElementById("dashboardSection");
-const errorMsg = document.getElementById("errorMsg");
-const successMsg = document.getElementById("successMsg");
-const infoMsg = document.getElementById("infoMsg");
-const userInfo = document.getElementById("userInfo");
-const paymentReturnNotice = document.getElementById("paymentReturnNotice");
+    const authSection = document.getElementById("authSection");
+    const dashboardSection = document.getElementById("dashboardSection");
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+    const infoMsg = document.getElementById("infoMsg");
+    const userInfo = document.getElementById("userInfo");
+    const paymentReturnNotice = document.getElementById("paymentReturnNotice");
 const purchaseBox = document.getElementById("purchaseBox");
 const registerBox = document.getElementById("registerBox");
 const loginBox = document.getElementById("loginBox");
 const startRegisterBtn = document.getElementById("startRegisterBtn");
-
-const buyEmail = document.getElementById("buyEmail");
-const registerEmail = document.getElementById("registerEmail");
-const loginEmail = document.getElementById("loginEmail");
-
-let courses = [];
-let currentCourseId = null;
-let lessons = [];
-
-function clearMessages() {
-  errorMsg.textContent = "";
-  successMsg.textContent = "";
-  infoMsg.textContent = "";
-}
 
 function showOnlyBox(target) {
   purchaseBox.style.display = target === "purchase" ? "block" : "none";
@@ -1508,6 +1494,9 @@ function showLoginFlow() {
   startRegisterBtn.style.display = "block";
 }
 
+window.clearMessages = clearMessages;
+window.showLoginFlow = showLoginFlow;
+
 function showPurchaseFlow() {
   showOnlyBox("purchase");
   startRegisterBtn.style.display = "none";
@@ -1518,58 +1507,15 @@ function showRegisterFlow() {
   startRegisterBtn.style.display = "none";
 }
 
-window.clearMessages = clearMessages;
-window.showLoginFlow = showLoginFlow;
-
 startRegisterBtn.addEventListener("click", () => {
   clearMessages();
   showPurchaseFlow();
   infoMsg.textContent = "Informe o e-mail que será usado na compra. Após a confirmação do pagamento, o cadastro será liberado.";
 });
 
-function showAppLoader() {
-  const loader = document.getElementById("appLoader");
-  if (loader) loader.style.display = "flex";
-}
-
-function hideAppLoader() {
-  const loader = document.getElementById("appLoader");
-  if (loader) loader.style.display = "none";
-}
-
-function showErrorAndFocus(message, fieldId) {
-  errorMsg.textContent = message;
-  errorMsg.scrollIntoView({ behavior: "smooth", block: "center" });
-
-  errorMsg.classList.remove("error-flash");
-  void errorMsg.offsetWidth;
-  errorMsg.classList.add("error-flash");
-
-  if (fieldId) {
-    const field = document.getElementById(fieldId);
-    if (field) {
-      setTimeout(() => {
-        field.focus({ preventScroll: true });
-      }, 300);
-    }
-  }
-}
-
-function setAllEmailFields(email) {
-  if (!email) return;
-  const normalizedEmail = email.trim().toLowerCase();
-  buyEmail.value = normalizedEmail;
-  registerEmail.value = normalizedEmail;
-  loginEmail.value = normalizedEmail;
-}
-
-function getPreferredEmail() {
-  return (
-    buyEmail.value.trim().toLowerCase() ||
-    registerEmail.value.trim().toLowerCase() ||
-    loginEmail.value.trim().toLowerCase()
-  );
-}
+let courses = [];
+let currentCourseId = null;
+let lessons = [];
 
 function getCurrentCourse() {
   return courses.find(course => course.id === currentCourseId) || null;
@@ -1599,39 +1545,39 @@ function loadFeaturedLesson(index) {
 
   playerEl.classList.add("fade-out");
 
-  setTimeout(() => {
-    if (!lesson.embed) {
-      playerEl.innerHTML = `
-        <div style="
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          height:100%;
-          min-height:250px;
-          font-size:18px;
-          color:#cbd5e1;
-          background:#111827;
-          border-radius:12px;
-        ">
-          🔒 Aula disponível em breve
-        </div>
-      `;
-    } else {
-      playerEl.innerHTML = `
-        <iframe
-          src="${lesson.embed}"
-          loading="lazy"
-          allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
-          allowfullscreen>
-        </iframe>
-      `;
-    }
+setTimeout(() => {
+  if (!lesson.embed) {
+  playerEl.innerHTML = `
+    <div style="
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100%;
+      min-height:250px;
+      font-size:18px;
+      color:#cbd5e1;
+      background:#111827;
+      border-radius:12px;
+    ">
+      🔒 Aula disponível em breve
+    </div>
+  `;
+} else {
+  playerEl.innerHTML = `
+    <iframe
+      src="${lesson.embed}"
+      loading="lazy"
+      allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;"
+      allowfullscreen>
+    </iframe>
+  `;
+}
 
-    playerEl.classList.remove("fade-out");
-    playerEl.classList.remove("fade-in");
-    void playerEl.offsetWidth;
-    playerEl.classList.add("fade-in");
-  }, 200);
+  playerEl.classList.remove("fade-out");
+playerEl.classList.remove("fade-in");
+void playerEl.offsetWidth;
+playerEl.classList.add("fade-in");
+}, 200);
 
   document.querySelectorAll(".side-item").forEach((btn, i) => {
     btn.classList.toggle("active", i === index);
@@ -1642,71 +1588,48 @@ function setupLessonNavigation() {
   const items = document.querySelectorAll(".side-item, .lesson-card");
 
   items.forEach(item => {
-    item.addEventListener("click", () => {
-      const index = Number(item.dataset.video);
+  item.addEventListener("click", () => {
+    const index = Number(item.dataset.video);
 
-      document.querySelectorAll(".lesson-card").forEach(card => {
-        card.classList.remove("active");
-      });
-
-      if (item.classList.contains("lesson-card")) {
-        item.classList.add("active");
-      }
-
-      loadFeaturedLesson(index);
-
-      const featuredSection = document.querySelector(".featured-player");
-      if (featuredSection) {
-        featuredSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      }
+    // 🔥 REMOVE active de todos
+    document.querySelectorAll(".lesson-card").forEach(card => {
+      card.classList.remove("active");
     });
+
+    // 🔥 ADICIONA active no clicado (se for card)
+    if (item.classList.contains("lesson-card")) {
+      item.classList.add("active");
+    }
+
+    loadFeaturedLesson(index);
+
+    const featuredSection = document.querySelector(".featured-player");
+    if (featuredSection) {
+      featuredSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
   });
+});
 }
 
 function renderCourseList() {
   const container = document.getElementById("courseList");
   const backBtn = document.getElementById("backToCourses");
   const dashboardLayout = document.getElementById("dashboardLayout");
-  const courseActions = document.getElementById("courseActions");
 
-  if (!container || !backBtn || !dashboardLayout || !courseActions) return;
-
-  courseActions.style.display = "flex";
-  courseActions.style.flexDirection = "column";
-  courseActions.style.justifyContent = "center";
-  courseActions.style.alignItems = "center";
-  courseActions.style.gap = "16px";
-  courseActions.style.width = "100%";
-
-  container.style.display = "block";
-  container.style.visibility = "visible";
-  container.style.opacity = "1";
-  container.style.width = "100%";
+  if (!container || !backBtn || !dashboardLayout) return;
 
   if (currentCourseId) {
     container.innerHTML = "";
     backBtn.style.display = "inline-block";
     dashboardLayout.classList.remove("hidden");
-    dashboardLayout.style.display = "";
     return;
   }
 
   backBtn.style.display = "none";
   dashboardLayout.classList.add("hidden");
-  dashboardLayout.style.display = "none";
-
-  if (!Array.isArray(courses) || courses.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding: 30px 20px;">
-        <h2 style="color:#f4c95d; margin:0 0 10px;">Nenhum curso disponível</h2>
-        <p style="color:#cbd5e1; margin:0;">Não foi possível carregar os cursos agora.</p>
-      </div>
-    `;
-    return;
-  }
 
   container.innerHTML = `
     <div style="text-align:center; margin-bottom: 30px;">
@@ -1747,7 +1670,6 @@ function renderCourseList() {
             padding: 12px;
             border-radius: 18px;
             backdrop-filter: blur(8px);
-            cursor: pointer;
           "
           onmouseover="
             this.style.transform='scale(1.05)';
@@ -1809,172 +1731,228 @@ async function renderLessonCatalog() {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Acesso negado às aulas:", data.error);
-      courses = [];
-      lessons = [];
-      catalog.innerHTML = "";
-      return;
-    }
+    console.error("Acesso negado às aulas:", data.error);
+    courses = [];
+    lessons = [];
+    catalog.innerHTML = "";
+    return;
 
-    courses = data.courses || [];
+   }
 
-    renderCourseList();
+courses = data.courses || [];
 
-    const currentCourse = getCurrentCourse();
+renderCourseList();
 
-    if (!currentCourse) {
-      lessons = [];
-      renderLessonSidebar();
-      catalog.innerHTML = "";
+const currentCourse = getCurrentCourse();
 
-      document.getElementById("lessonSidebar").style.display = "none";
-      document.getElementById("featuredSection").style.display = "none";
-      document.getElementById("catalogSection").style.display = "none";
-      return;
-    }
+if (!currentCourse) {
+  lessons = [];
+  renderLessonSidebar();
+  catalog.innerHTML = "";
 
-    lessons = currentCourse.lessons || [];
+  document.getElementById("lessonSidebar").style.display = "none";
+  document.getElementById("featuredSection").style.display = "none";
+  document.getElementById("catalogSection").style.display = "none";
 
-    document.getElementById("lessonSidebar").style.display = "block";
-    document.getElementById("featuredSection").style.display = "block";
-    document.getElementById("catalogSection").style.display = "grid";
+  return;
+}
 
-    renderLessonSidebar();
+lessons = currentCourse.lessons || [];
 
-    catalog.innerHTML = lessons.map((lesson, index) => `
-      <article class="lesson-card ${index === 0 ? "active" : ""}" data-video="${index}">
-        <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
-          <span>Aula ${index + 1}</span>
-        </div>
-        <div class="lesson-body">
-          <h3>${lesson.title}</h3>
-          <p>${lesson.description}</p>
-        </div>
-      </article>
-    `).join("");
+document.getElementById("lessonSidebar").style.display = "block";
+document.getElementById("featuredSection").style.display = "block";
+document.getElementById("catalogSection").style.display = "grid";
 
-    setupLessonNavigation();
-    loadFeaturedLesson(0);
+renderLessonSidebar();
+
+catalog.innerHTML = lessons.map((lesson, index) => `
+  <article class="lesson-card ${index === 0 ? "active" : ""}" data-video="${index}">
+    <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
+      <span>Aula ${index + 1}</span>
+    </div>
+    <div class="lesson-body">
+      <h3>${lesson.title}</h3>
+      <p>${lesson.description}</p>
+    </div>
+  </article>
+`).join("");
+
+setupLessonNavigation();
+loadFeaturedLesson(0);
 
   } catch (error) {
-    console.error("Erro em renderLessonCatalog:", error);
+    console.error("Erro ao carregar aulas:", error);
   }
 }
 
-async function handleReturnFromPayment() {
-  const params = new URLSearchParams(window.location.search);
+    const buyEmail = document.getElementById("buyEmail");
+    const registerEmail = document.getElementById("registerEmail");
+    const loginEmail = document.getElementById("loginEmail");
 
-  const externalReference = (params.get("external_reference") || "").trim().toLowerCase();
-  const status = (params.get("status") || "").trim().toLowerCase();
-  const collectionStatus = (params.get("collection_status") || "").trim().toLowerCase();
-  const paymentId = (params.get("payment_id") || "").trim();
+    function showAppLoader() {
+    const loader = document.getElementById("appLoader");
+    if (loader) loader.style.display = "flex";
+    }
 
-  if (externalReference) {
-    setAllEmailFields(externalReference);
+    function hideAppLoader() {
+    const loader = document.getElementById("appLoader");
+    if (loader) loader.style.display = "none";
+    }
+
+    function clearMessages() {
+      errorMsg.textContent = "";
+      successMsg.textContent = "";
+      infoMsg.textContent = "";
+    }
+
+    function showErrorAndFocus(message, fieldId) {
+  errorMsg.textContent = message;
+
+  errorMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  errorMsg.classList.remove("error-flash");
+  void errorMsg.offsetWidth; // reinicia animação
+  errorMsg.classList.add("error-flash");
+
+  if (fieldId) {
+    const field = document.getElementById(fieldId);
+    if (field) {
+      setTimeout(() => {
+  field.focus({ preventScroll: true });
+}, 300);
+    }
   }
+}
+    
+    function setAllEmailFields(email) {
+      if (!email) return;
+      const normalizedEmail = email.trim().toLowerCase();
+      buyEmail.value = normalizedEmail;
+      registerEmail.value = normalizedEmail;
+      loginEmail.value = normalizedEmail;
+    }
 
-  const pendingEmail = localStorage.getItem("pendingPurchaseEmail");
+    function getPreferredEmail() {
+      return (
+        buyEmail.value.trim().toLowerCase() ||
+        registerEmail.value.trim().toLowerCase() ||
+        loginEmail.value.trim().toLowerCase()
+      );
+    }
 
-  if (pendingEmail && !externalReference) {
-    setAllEmailFields(pendingEmail);
-  }
+    async function handleReturnFromPayment() {
+      const params = new URLSearchParams(window.location.search);
 
-  const emailToResume = externalReference || pendingEmail;
+      const externalReference = (params.get("external_reference") || "").trim().toLowerCase();
+      const status = (params.get("status") || "").trim().toLowerCase();
+      const collectionStatus = (params.get("collection_status") || "").trim().toLowerCase();
+      const paymentId = (params.get("payment_id") || "").trim();
 
-  if (emailToResume) {
-    setAllEmailFields(emailToResume);
-    document.getElementById("startRegisterBtn").style.display = "none";
-    showRegisterFlow();
-
-    paymentReturnNotice.style.display = "block";
-    paymentReturnNotice.textContent =
-      "Se você já concluiu o pagamento, crie sua conta com o mesmo e-mail usado na compra. Se o pagamento ainda não foi confirmado, aguarde alguns instantes e tente novamente.";
-  }
-
-  if (status || collectionStatus || paymentId) {
-    paymentReturnNotice.style.display = "block";
-
-    if (status === "approved" || collectionStatus === "approved") {
-      document.getElementById("startRegisterBtn").style.display = "none";
-      showRegisterFlow();
-      successMsg.textContent = "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
-
-      paymentReturnNotice.textContent =
-        "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
-
-    } else if (status === "pending" || collectionStatus === "pending") {
-      const emailToCheck = externalReference || pendingEmail;
-
-      if (emailToCheck) {
-        const autorizado = await isAuthorized(emailToCheck);
-
-        if (autorizado) {
-          document.getElementById("startRegisterBtn").style.display = "none";
-          showRegisterFlow();
-          successMsg.textContent = "Pagamento confirmado. Agora crie sua conta.";
-          return;
-        }
+      if (externalReference) {
+        setAllEmailFields(externalReference);
       }
 
-      paymentReturnNotice.textContent =
-        "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
+      const pendingEmail = localStorage.getItem("pendingPurchaseEmail");
 
-    } else {
-      paymentReturnNotice.textContent =
-        "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
+      if (pendingEmail && !externalReference) {
+      setAllEmailFields(pendingEmail);
+      }
+
+      const emailToResume = externalReference || pendingEmail;
+
+  if (emailToResume) {
+  setAllEmailFields(emailToResume);
+  document.getElementById("startRegisterBtn").style.display = "none";
+  showRegisterFlow();
+
+  paymentReturnNotice.style.display = "block";
+  paymentReturnNotice.textContent =
+    "Se você já concluiu o pagamento, crie sua conta com o mesmo e-mail usado na compra. Se o pagamento ainda não foi confirmado, aguarde alguns instantes e tente novamente.";
+  }
+      if (status || collectionStatus || paymentId) {
+  paymentReturnNotice.style.display = "block";
+
+  if (status === "approved" || collectionStatus === "approved") {
+    document.getElementById("startRegisterBtn").style.display = "none";
+    showRegisterFlow();
+    successMsg.textContent = "Pagamento confirmado. Agora crie sua conta com o mesmo e-mail usado na compra.";
+
+    paymentReturnNotice.textContent =
+      "Após o pagamento, volte aqui e crie sua conta com o mesmo e-mail usado na compra para liberar seu acesso.";
+
+  } else if (status === "pending" || collectionStatus === "pending") {
+    const emailToCheck = externalReference || pendingEmail;
+
+    if (emailToCheck) {
+  const autorizado = await isAuthorized(emailToCheck);
+
+  if (autorizado) {
+    document.getElementById("startRegisterBtn").style.display = "none";
+    showRegisterFlow();
+    successMsg.textContent = "Pagamento confirmado. Agora crie sua conta.";
+    return;
+  }
+}
+
+    paymentReturnNotice.textContent =
+      "Seu pagamento está sendo processado. Assim que for confirmado, seu e-mail será liberado automaticamente para criar a conta.";
+
+  } else {
+    paymentReturnNotice.textContent =
+      "Se o pagamento já foi concluído, use o mesmo e-mail da compra para criar sua conta assim que a confirmação ocorrer.";
+  }
+}
+}
+    async function isAuthorized(email) {
+      if (!email) return false;
+
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
+
+        const response = await fetch("/.netlify/functions/check-access", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email: normalizedEmail })
+        });
+
+        const data = await response.json();
+
+        console.log("Verificando acesso para:", normalizedEmail);
+        console.log("Resposta da função:", data);
+
+        return data.authorized === true;
+      } catch (error) {
+        console.error("Erro ao verificar acesso:", error);
+        return false;
+      }
     }
-  }
-}
 
-async function isAuthorized(email) {
-  if (!email) return false;
+    async function isAuthorizedForLogin(email) {
+      if (!email) return false;
 
-  try {
-    const normalizedEmail = email.trim().toLowerCase();
+      try {
+        const normalizedEmail = email.trim().toLowerCase();
+        const ref = doc(db, "access", normalizedEmail);
+        const snap = await getDoc(ref);
 
-    const response = await fetch("/.netlify/functions/check-access", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email: normalizedEmail })
-    });
+        if (!snap.exists()) {
+          return false;
+        }
 
-    const data = await response.json();
-
-    console.log("Verificando acesso para:", normalizedEmail);
-    console.log("Resposta da função:", data);
-
-    return data.authorized === true;
-  } catch (error) {
-    console.error("Erro ao verificar acesso:", error);
-    return false;
-  }
-}
-
-async function isAuthorizedForLogin(email) {
-  if (!email) return false;
-
-  try {
-    const normalizedEmail = email.trim().toLowerCase();
-    const ref = doc(db, "access", normalizedEmail);
-    const snap = await getDoc(ref);
-
-    if (!snap.exists()) {
-      return false;
+        const data = snap.data();
+        return data.paid === true;
+      } catch (error) {
+        console.error("Erro ao verificar acesso no login:", error);
+        return false;
+      }
     }
 
-    const data = snap.data();
-    return data.paid === true;
-  } catch (error) {
-    console.error("Erro ao verificar acesso no login:", error);
-    return false;
-  }
-}
+    function showDashboard(user) {
+  console.log("showDashboard EXECUTADO");
 
-function showDashboard(user) {
   const brandHero = document.querySelector(".brand-hero");
-  const dashboardLayout = document.getElementById("dashboardLayout");
 
   authSection.style.display = "none";
   dashboardSection.style.display = "block";
@@ -1983,18 +1961,19 @@ function showDashboard(user) {
     brandHero.style.display = "none";
   }
 
+  const dashboardLayout = document.getElementById("dashboardLayout");
   if (dashboardLayout) {
-    dashboardLayout.classList.add("hidden");
-    dashboardLayout.style.display = "none";
+    dashboardLayout.classList.remove("hidden");
   }
 
   const nome = user.displayName ? user.displayName : "Aluno";
   userInfo.textContent = `Logado como: ${nome} | ${user.email}`;
+
+  dashboardSection.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function showAuth() {
   const brandHero = document.querySelector(".brand-hero");
-  const dashboardLayout = document.getElementById("dashboardLayout");
 
   authSection.style.display = "block";
   dashboardSection.style.display = "none";
@@ -2003,9 +1982,9 @@ function showAuth() {
     brandHero.style.display = "block";
   }
 
+  const dashboardLayout = document.getElementById("dashboardLayout");
   if (dashboardLayout) {
     dashboardLayout.classList.add("hidden");
-    dashboardLayout.style.display = "none";
   }
 }
 
@@ -2049,7 +2028,7 @@ function togglePaymentOptions() {
       : "none";
 }
 
-async function pagar(valor) {
+    async function pagar(valor) {
   clearMessages();
 
   const termsCheckbox = document.getElementById("termsCheckbox");
@@ -2130,90 +2109,90 @@ document.getElementById("toggleLoginPassword").addEventListener("click", () => {
     eyeClosed.style.display = "none";
   }
 });
+    
+    document.getElementById("registerBtn").addEventListener("click", async () => {
+      clearMessages();
 
-document.getElementById("registerBtn").addEventListener("click", async () => {
-  clearMessages();
+      const name = document.getElementById("registerName").value.trim();
+      const email = registerEmail.value.trim().toLowerCase();
+      const password = document.getElementById("registerPassword").value.trim();
 
-  const name = document.getElementById("registerName").value.trim();
-  const email = registerEmail.value.trim().toLowerCase();
-  const password = document.getElementById("registerPassword").value.trim();
+      if (!name || !email || !password) {
+        errorMsg.textContent = "Preencha nome, e-mail e senha para criar sua conta.";
+        return;
+      }
 
-  if (!name || !email || !password) {
-    errorMsg.textContent = "Preencha nome, e-mail e senha para criar sua conta.";
-    return;
-  }
+      setAllEmailFields(email);
+      infoMsg.textContent = "Verificando se o pagamento já foi confirmado...";
 
-  setAllEmailFields(email);
-  infoMsg.textContent = "Verificando se o pagamento já foi confirmado...";
+      try {
+        const autorizado = await isAuthorized(email);
 
-  try {
-    const autorizado = await isAuthorized(email);
+        if (!autorizado) {
+          infoMsg.textContent = "";
+          errorMsg.textContent = "Esse e-mail ainda não está liberado para cadastro. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+          return;
+        }
 
-    if (!autorizado) {
-      infoMsg.textContent = "";
-      errorMsg.textContent = "Esse e-mail ainda não está liberado para cadastro. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
-      return;
-    }
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, { displayName: name });
 
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await updateProfile(userCredential.user, { displayName: name });
+        infoMsg.textContent = "";
+        localStorage.removeItem("pendingPurchaseEmail");
 
-    infoMsg.textContent = "";
-    localStorage.removeItem("pendingPurchaseEmail");
+       await signInWithEmailAndPassword(auth, email, password);
 
-    await signInWithEmailAndPassword(auth, email, password);
+       successMsg.textContent = "Conta criada e login realizado com sucesso.";
+      } catch (error) {
+        infoMsg.textContent = "";
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
 
-    successMsg.textContent = "Conta criada e login realizado com sucesso.";
-  } catch (error) {
-    infoMsg.textContent = "";
-    errorMsg.textContent = traduzirErro(error.code);
-  }
-});
+    document.getElementById("loginBtn").addEventListener("click", async () => {
+      clearMessages();
 
-document.getElementById("loginBtn").addEventListener("click", async () => {
-  clearMessages();
+      const email = loginEmail.value.trim().toLowerCase();
+      const password = document.getElementById("loginPassword").value.trim();
 
-  const email = loginEmail.value.trim().toLowerCase();
-  const password = document.getElementById("loginPassword").value.trim();
+      if (!email || !password) {
+        errorMsg.textContent = "Informe seu e-mail e sua senha para entrar.";
+        return;
+      }
 
-  if (!email || !password) {
-    errorMsg.textContent = "Informe seu e-mail e sua senha para entrar.";
-    return;
-  }
+      setAllEmailFields(email);
+      infoMsg.textContent = "Verificando seus dados...";
 
-  setAllEmailFields(email);
-  infoMsg.textContent = "Verificando seus dados...";
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        successMsg.textContent = "Login realizado com sucesso.";
+      } catch (error) {
+        infoMsg.textContent = "";
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
 
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    successMsg.textContent = "Login realizado com sucesso.";
-  } catch (error) {
-    infoMsg.textContent = "";
-    errorMsg.textContent = traduzirErro(error.code);
-  }
-});
+    document.getElementById("resetBtn").addEventListener("click", async () => {
+      clearMessages();
 
-document.getElementById("resetBtn").addEventListener("click", async () => {
-  clearMessages();
+      const email = getPreferredEmail();
 
-  const email = getPreferredEmail();
+      if (!email) {
+        errorMsg.textContent = "Informe o e-mail para redefinir a senha.";
+        return;
+      }
 
-  if (!email) {
-    errorMsg.textContent = "Informe o e-mail para redefinir a senha.";
-    return;
-  }
+      setAllEmailFields(email);
 
-  setAllEmailFields(email);
+      try {
+        await sendPasswordResetEmail(auth, email);
+        successMsg.textContent = "Enviamos um e-mail para redefinição de senha. Verifique também a caixa de spam.";
+      } catch (error) {
+        errorMsg.textContent = traduzirErro(error.code);
+      }
+    });
 
-  try {
-    await sendPasswordResetEmail(auth, email);
-    successMsg.textContent = "Enviamos um e-mail para redefinição de senha. Verifique também a caixa de spam.";
-  } catch (error) {
-    errorMsg.textContent = traduzirErro(error.code);
-  }
-});
-
-document.getElementById("logoutBtn").addEventListener("click", async () => {
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
   clearMessages();
   await signOut(auth);
 
@@ -2257,7 +2236,7 @@ document.getElementById("backToCourses").addEventListener("click", () => {
   renderCourseList();
 });
 
-onAuthStateChanged(auth, async (user) => {
+    onAuthStateChanged(auth, async (user) => {
   clearMessages();
 
   try {
@@ -2265,26 +2244,34 @@ onAuthStateChanged(auth, async (user) => {
       infoMsg.textContent = "Verificando liberação de acesso...";
 
       const email = (user.email || "").toLowerCase();
+
       const autorizado = await isAuthorized(email);
 
-      if (autorizado) {
-        infoMsg.textContent = "";
-        document.getElementById("startRegisterBtn").style.display = "none";
-        showDashboard(user);
-        await renderLessonCatalog();
-      } else {
-        await signOut(auth);
-        showAuth();
-        showLoginFlow();
-        errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
-      }
+console.log("Usuário autenticado:", email);
+console.log("Resultado de autorizado:", autorizado);
+
+if (autorizado) {
+  console.log("Entrou no bloco AUTORIZADO");
+  infoMsg.textContent = "";
+  document.getElementById("startRegisterBtn").style.display = "none";
+  showDashboard(user);
+  await renderLessonCatalog();
+} else {
+  console.log("Entrou no bloco NÃO AUTORIZADO");
+  await signOut(auth);
+  showAuth();
+  showLoginFlow();
+  errorMsg.textContent = "Seu cadastro foi encontrado, mas o acesso ainda não foi liberado. Use o mesmo e-mail do pagamento e aguarde a confirmação, se necessário.";
+}
 
     } else {
+      console.log("Entrou no bloco SEM USUÁRIO");
       showAuth();
       showLoginFlow();
     }
   } catch (error) {
     console.error("Erro na inicialização da autenticação:", error);
+    console.log("Entrou no CATCH");
     showAuth();
     showLoginFlow();
   } finally {
@@ -2307,6 +2294,7 @@ function traduzirErro(code) {
 }
 
 handleReturnFromPayment();
+
 </script>
 </body>
 </html>
