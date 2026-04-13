@@ -1711,11 +1711,19 @@ function renderCourseList() {
 }
 
 async function renderLessonCatalog() {
+  console.log("renderLessonCatalog INICIO");
+
   const catalog = document.querySelector(".catalog-grid");
-  if (!catalog) return;
+  console.log("catalog encontrado:", catalog);
+
+  if (!catalog) {
+    console.warn("catalog NÃO encontrado");
+    return;
+  }
 
   try {
     const user = auth.currentUser;
+    console.log("auth.currentUser:", user);
 
     if (!user) {
       console.log("Usuário não logado — não carregar aulas");
@@ -1727,54 +1735,68 @@ async function renderLessonCatalog() {
       body: JSON.stringify({ email: user.email })
     });
 
+    console.log("response recebida:", response);
+
     const data = await response.json();
+    console.log("dados recebidos do get-lessons:", data);
 
     if (!response.ok) {
-    console.error("Acesso negado às aulas:", data.error);
-    courses = [];
-    lessons = [];
-    catalog.innerHTML = "";
-    return;
+      console.error("Acesso negado às aulas:", data.error);
+      courses = [];
+      lessons = [];
+      catalog.innerHTML = "";
+      return;
+    }
 
-   }
+    courses = data.courses || [];
+    console.log("courses definidas:", courses);
 
-courses = data.courses || [];
+    renderCourseList();
+    console.log("renderCourseList EXECUTADO");
 
-renderCourseList();
+    const currentCourse = getCurrentCourse();
+    console.log("currentCourse:", currentCourse);
 
-const currentCourse = getCurrentCourse();
+    if (!currentCourse) {
+      console.log("Nenhum curso atual selecionado");
+      lessons = [];
+      renderLessonSidebar();
+      catalog.innerHTML = "";
 
-if (!currentCourse) {
-  lessons = [];
-  renderLessonSidebar();
-  catalog.innerHTML = "";
+      document.getElementById("lessonSidebar").style.display = "none";
+      document.getElementById("featuredSection").style.display = "none";
+      document.getElementById("catalogSection").style.display = "none";
 
-  document.getElementById("lessonSidebar").style.display = "none";
-  document.getElementById("featuredSection").style.display = "none";
-  document.getElementById("catalogSection").style.display = "none";
+      return;
+    }
 
-  return;
+    lessons = currentCourse.lessons || [];
+    console.log("lessons:", lessons);
+
+    document.getElementById("lessonSidebar").style.display = "block";
+    document.getElementById("featuredSection").style.display = "block";
+    document.getElementById("catalogSection").style.display = "grid";
+
+    renderLessonSidebar();
+    console.log("renderLessonSidebar EXECUTADO");
+
+    catalog.innerHTML = lessons.map((lesson, index) => `
+      <article class="lesson-card ${index === 0 ? "active" : ""}" data-video="${index}">
+        <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
+          <span>Aula ${index + 1}</span>
+        </div>
+        <div class="lesson-body">
+          <h3>${lesson.title}</h3>
+          <p>${lesson.description}</p>
+        </div>
+      </article>
+    `).join("");
+
+    console.log("catalog.innerHTML preenchido com aulas");
+  } catch (error) {
+    console.error("Erro em renderLessonCatalog:", error);
+  }
 }
-
-lessons = currentCourse.lessons || [];
-
-document.getElementById("lessonSidebar").style.display = "block";
-document.getElementById("featuredSection").style.display = "block";
-document.getElementById("catalogSection").style.display = "grid";
-
-renderLessonSidebar();
-
-catalog.innerHTML = lessons.map((lesson, index) => `
-  <article class="lesson-card ${index === 0 ? "active" : ""}" data-video="${index}">
-    <div class="lesson-thumb" style="background-image: url('${lesson.thumb}')">
-      <span>Aula ${index + 1}</span>
-    </div>
-    <div class="lesson-body">
-      <h3>${lesson.title}</h3>
-      <p>${lesson.description}</p>
-    </div>
-  </article>
-`).join("");
 
 setupLessonNavigation();
 loadFeaturedLesson(0);
