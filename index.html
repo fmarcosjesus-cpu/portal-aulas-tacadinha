@@ -480,7 +480,7 @@ body {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .badge {
@@ -1352,12 +1352,12 @@ button,
         <button class="btn btn-ghost" id="logoutBtn">Sair</button>
       </div>
 
-      <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:8px; align-items:center; margin-bottom:8px; width:100%;">
+      <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:4px; align-items:center; margin-bottom:2px; width:100%;">
         <button
           id="backToCourses"
           style="
             display: none;
-            margin: 6px auto 10px;
+            margin: 2px auto 6px;
             padding: 10px 22px;
             font-size: 14px;
             font-weight: 600;
@@ -2226,6 +2226,13 @@ document.getElementById("resetBtn").addEventListener("click", async () => {
 
 document.getElementById("logoutBtn").addEventListener("click", async () => {
   clearMessages();
+
+  localStorage.removeItem("pendingPurchaseEmail");
+  sessionStorage.setItem("forceLoginAfterLogout", "1");
+
+  const cleanUrl = window.location.origin + window.location.pathname;
+  window.history.replaceState({}, document.title, cleanUrl);
+
   await signOut(auth);
 
   showAuth();
@@ -2300,19 +2307,25 @@ onAuthStateChanged(auth, async (user) => {
       const paymentId = (params.get("payment_id") || "").trim();
       const pendingEmail = localStorage.getItem("pendingPurchaseEmail");
 
-      const veioDoPagamento =
-        !!externalReference ||
-        !!status ||
-        !!collectionStatus ||
-        !!paymentId ||
-        !!pendingEmail;
+      const forceLoginAfterLogout = sessionStorage.getItem("forceLoginAfterLogout") === "1";
 
-      if (veioDoPagamento) {
-        showRegisterFlow();
-      } else {
-        showLoginFlow();
-      }
-    }
+if (forceLoginAfterLogout) {
+  sessionStorage.removeItem("forceLoginAfterLogout");
+  showLoginFlow();
+} else {
+  const veioDoPagamento =
+    !!externalReference ||
+    !!status ||
+    !!collectionStatus ||
+    !!paymentId ||
+    !!pendingEmail;
+
+  if (veioDoPagamento) {
+    showRegisterFlow();
+  } else {
+    showLoginFlow();
+  }
+  }
   } catch (error) {
     console.error("Erro na inicialização da autenticação:", error);
     showAuth();
