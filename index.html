@@ -1117,7 +1117,7 @@ button,
 
           <button
             id="backToLoginBtnPurchase"
-            onclick="clearMessages(); showLoginFlow(); window.scrollTo(0,0);"
+            onclick="clearMessages(); showRegisterFlow(); window.scrollTo(0,0);"
             style="
               display: inline-block;
               margin-bottom: 16px;
@@ -1320,7 +1320,7 @@ button,
 
       <div class="notice notice-warning" style="margin-top: 22px; line-height: 1.7;">
         <strong>AVISO IMPORTANTE:</strong><br><br>
-        O acesso é <strong>INDIVIDUAL E INTRANSFERÍVEL</strong>. O compartilhamento ou comercialização pode resultar em <strong>BLOQUEIO IMEDIATO E PERMANENTE</strong>, sem direito a reembolso.<br><br>
+        O acesso é <strong>INDIVIDUAL E INTRANSFERÍVEL</strong>. O compartilhamento ou comercialização pode resultar em <strong>BLOQUEIO IMEDIATO E PERMANENTE do usuário</strong>, sem direito a reembolso.<br><br>
         Por se tratar de um produto digital com valor acessível, o acesso <strong>NÃO INCLUI SUPORTE INDIVIDUAL</strong> para dúvidas sobre as aulas.
       </div>
 
@@ -1348,12 +1348,12 @@ button,
         <button class="btn btn-ghost" id="logoutBtn">Sair</button>
       </div>
 
-      <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:16px; align-items:center; margin-bottom:20px; width:100%;">
+      <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:8px; align-items:center; margin-bottom:8px; width:100%;">
         <button
           id="backToCourses"
           style="
             display: none;
-            margin: 20px auto;
+            margin: 6px auto 10px;
             padding: 10px 22px;
             font-size: 14px;
             font-weight: 600;
@@ -1526,6 +1526,7 @@ function showRegisterFlow() {
 
 window.clearMessages = clearMessages;
 window.showLoginFlow = showLoginFlow;
+window.showRegisterFlow = showRegisterFlow;
 
 startRegisterBtn.addEventListener("click", () => {
   clearMessages();
