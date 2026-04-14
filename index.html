@@ -2309,23 +2309,24 @@ onAuthStateChanged(auth, async (user) => {
 
       const forceLoginAfterLogout = sessionStorage.getItem("forceLoginAfterLogout") === "1";
 
-if (forceLoginAfterLogout) {
-  sessionStorage.removeItem("forceLoginAfterLogout");
-  showLoginFlow();
-} else {
-  const veioDoPagamento =
-    !!externalReference ||
-    !!status ||
-    !!collectionStatus ||
-    !!paymentId ||
-    !!pendingEmail;
+      if (forceLoginAfterLogout) {
+        sessionStorage.removeItem("forceLoginAfterLogout");
+        showLoginFlow();
+      } else {
+        const veioDoPagamento =
+          !!externalReference ||
+          !!status ||
+          !!collectionStatus ||
+          !!paymentId ||
+          !!pendingEmail;
 
-  if (veioDoPagamento) {
-    showRegisterFlow();
-  } else {
-    showLoginFlow();
-  }
-  }
+        if (veioDoPagamento) {
+          showRegisterFlow();
+        } else {
+          showLoginFlow();
+        }
+      }
+    }
   } catch (error) {
     console.error("Erro na inicialização da autenticação:", error);
     showAuth();
