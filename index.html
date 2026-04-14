@@ -114,9 +114,13 @@ body {
 
 #courseList {
   width: 100%;
-  min-height: 200px;
   position: relative;
   z-index: 10;
+  color: #ffffff;
+}
+
+#courseActions {
+  width: 100%;
   color: #ffffff;
 }
 
@@ -1987,8 +1991,8 @@ function showDashboard(user) {
   dashboardSection.style.display = "block";
 
   if (brandHero) {
-    brandHero.style.display = "none";
-  }
+  brandHero.style.display = "block";
+}
 
   if (dashboardLayout) {
     dashboardLayout.classList.add("hidden");
