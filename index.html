@@ -2288,7 +2288,26 @@ onAuthStateChanged(auth, async (user) => {
 
     } else {
       showAuth();
-      showLoginFlow();
+
+      const params = new URLSearchParams(window.location.search);
+      const externalReference = (params.get("external_reference") || "").trim().toLowerCase();
+      const status = (params.get("status") || "").trim().toLowerCase();
+      const collectionStatus = (params.get("collection_status") || "").trim().toLowerCase();
+      const paymentId = (params.get("payment_id") || "").trim();
+      const pendingEmail = localStorage.getItem("pendingPurchaseEmail");
+
+      const veioDoPagamento =
+        !!externalReference ||
+        !!status ||
+        !!collectionStatus ||
+        !!paymentId ||
+        !!pendingEmail;
+
+      if (veioDoPagamento) {
+        showRegisterFlow();
+      } else {
+        showLoginFlow();
+      }
     }
   } catch (error) {
     console.error("Erro na inicialização da autenticação:", error);
@@ -2296,6 +2315,7 @@ onAuthStateChanged(auth, async (user) => {
     showLoginFlow();
   } finally {
     hideAppLoader();
+    handleReturnFromPayment();
   }
 });
 
