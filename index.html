@@ -1052,14 +1052,13 @@ button,
   </div>
 </div>
 
-  <div class="wrap">
+<div class="wrap">
   <div class="card">
 
     <div class="hero brand-hero">
       <div class="brand-content">
-
         <div class="brand-top">
-          <img src="logo.png" class="brand-logo">
+          <img src="logo.png" class="brand-logo" alt="Logo Giz do Taco">
           <div>
             <h1>Giz do Taco</h1>
             <h2>Sinuca Online</h2>
@@ -1069,376 +1068,383 @@ button,
         <p class="brand-sub">
           Domine a partida. Controle o jogo. Aprenda técnica, efeitos e estratégia com método profissional.
         </p>
-
       </div>
     </div>
 
-      <div class="content" id="authSection">
-        <div class="notice notice-info">
-          *Importante:* use sempre o *mesmo e-mail* em todo o processo:
-          informar no site, pagar, criar conta e fazer login.
+    <div class="content" id="authSection">
+      <div class="notice notice-info">
+        *Importante:* use sempre o *mesmo e-mail* em todo o processo:
+        informar no site, pagar, criar conta e fazer login.
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Informe seu e-mail</h3>
+          <p>Digite o e-mail que você vai usar no pagamento. Esse mesmo e-mail será usado depois no cadastro e no login.</p>
         </div>
 
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">1</div>
-            <h3>Informe seu e-mail</h3>
-            <p>Digite o e-mail que você vai usar no pagamento. Esse mesmo e-mail será usado depois no cadastro e no login.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">2</div>
-            <h3>Conclua o pagamento</h3>
-            <p>Após pagar, aguarde a confirmação. Quando ela ocorrer, seu e-mail ficará liberado para criar a conta.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">3</div>
-            <h3>Crie sua conta</h3>
-            <p>Depois da confirmação, volte ao portal e crie sua senha usando o mesmo e-mail do pagamento.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">4</div>
-            <h3>Entre no portal</h3>
-            <p>Faça login e acesse suas aulas normalmente.</p>
-          </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Conclua o pagamento</h3>
+          <p>Após pagar, aguarde a confirmação. Quando ela ocorrer, seu e-mail ficará liberado para criar a conta.</p>
         </div>
 
-        <div class="notice notice-warning" id="paymentReturnNotice" style="display:none;"></div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Crie sua conta</h3>
+          <p>Depois da confirmação, volte ao portal e crie sua senha usando o mesmo e-mail do pagamento.</p>
+        </div>
 
-        <div style="margin-bottom: 12px;">
-            <button class="btn" id="startRegisterBtn" style="background: #22c55e;"> Criar conta
-            </button>
-          </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Entre no portal</h3>
+          <p>Faça login e acesse suas aulas normalmente.</p>
+        </div>
+      </div>
 
-        <div class="auth-grid">
-          <div class="box" id="purchaseBox">
-            <p>Digite primeiro o e-mail que será usado no pagamento. Depois clique no botão abaixo para iniciar sua compra.</p>
-            
-            <button id="backToLoginBtnPurchase"
-  onclick="clearMessages(); showLoginFlow(); window.scrollTo(0,0);"
-  style="
-    display: inline-block;
-    margin-bottom: 16px;
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #f4c95d;
-    background: rgba(244,201,93,0.08);
-    border: 1px solid rgba(244,201,93,0.4);
-    border-radius: 10px;
-    cursor: pointer;
-    backdrop-filter: blur(6px);
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  "
-  onmouseover="
-    this.style.background='rgba(244,201,93,0.18)';
-    this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
-    this.style.transform='scale(1.02)';
-  "
-  onmouseout="
-    this.style.background='rgba(244,201,93,0.08)';
-    this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
-    this.style.transform='translateY(0)';
-  "
-  onmousedown="this.style.transform='scale(0.95)'"
-  onmouseup="this.style.transform='translateY(-1px)'"
->
-  ← Voltar ao login
-</button>
-    
-            <label class="label" for="buyEmail">E-mail para compra</label>
-            <input class="input" type="email" id="buyEmail" placeholder="seuemail@exemplo.com" />
+      <div class="notice notice-warning" id="paymentReturnNotice" style="display:none;"></div>
 
-            <label style="display: flex; gap: 10px; align-items: flex-start; margin: 16px 0 14px; font-size: 13px; color: #cbd5e1; line-height: 1.5;">
-  <input type="checkbox" id="termsCheckbox" style="margin-top: 3px;" />
-  <span>
-    Li e concordo com os
-    <a href="#" onclick="toggleTerms(); return false;" style="color: #f4c95d; text-decoration: underline;">
-  Ler Termos de Uso
-</a>,
-    incluindo as condições de acesso, ausência de suporte individual e caráter educacional do conteúdo.
-  </span>
-</label>
+      <div style="margin-bottom: 12px;">
+        <button class="btn" id="startRegisterBtn" style="background: #22c55e;">
+          Criar conta
+        </button>
+      </div>
 
-            <button class="btn" id="buyBtn">Comprar acesso</button>
+      <div class="auth-grid">
+        <div class="box" id="purchaseBox">
+          <p>Digite primeiro o e-mail que será usado no pagamento. Depois clique no botão abaixo para iniciar sua compra.</p>
 
-            <div id="paymentOptions" class="payment-options" style="display: none;">
+          <button
+            id="backToLoginBtnPurchase"
+            onclick="clearMessages(); showLoginFlow(); window.scrollTo(0,0);"
+            style="
+              display: inline-block;
+              margin-bottom: 16px;
+              padding: 10px 22px;
+              font-size: 14px;
+              font-weight: 600;
+              color: #f4c95d;
+              background: rgba(244,201,93,0.08);
+              border: 1px solid rgba(244,201,93,0.4);
+              border-radius: 10px;
+              cursor: pointer;
+              backdrop-filter: blur(6px);
+              transition: all 0.25s ease;
+              box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            "
+            onmouseover="
+              this.style.background='rgba(244,201,93,0.18)';
+              this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
+              this.style.transform='scale(1.02)';
+            "
+            onmouseout="
+              this.style.background='rgba(244,201,93,0.08)';
+              this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
+              this.style.transform='translateY(0)';
+            "
+            onmousedown="this.style.transform='scale(0.95)'"
+            onmouseup="this.style.transform='translateY(-1px)'"
+          >
+            ← Voltar ao login
+          </button>
+
+          <label class="label" for="buyEmail">E-mail para compra</label>
+          <input class="input" type="email" id="buyEmail" placeholder="seuemail@exemplo.com" />
+
+          <label style="display: flex; gap: 10px; align-items: flex-start; margin: 16px 0 14px; font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+            <input type="checkbox" id="termsCheckbox" style="margin-top: 3px;" />
+            <span>
+              Li e concordo com os
+              <a href="#" onclick="toggleTerms(); return false;" style="color: #f4c95d; text-decoration: underline;">
+                Ler Termos de Uso
+              </a>,
+              incluindo as condições de acesso, ausência de suporte individual e caráter educacional do conteúdo.
+            </span>
+          </label>
+
+          <button class="btn" id="buyBtn">Comprar acesso</button>
+
+          <div id="paymentOptions" class="payment-options" style="display: none;">
             <p class="payment-options-title">
-            Aqui, você decide o valor que deseja pagar.
+              Aqui, você decide o valor que deseja pagar.
             </p>
 
             <p class="payment-options-subtitle">
-            O acesso ao curso é exatamente o mesmo em qualquer opção.
+              O acesso ao curso é exatamente o mesmo em qualquer opção.
             </p>
 
             <button type="button" class="btn btn-gold-option" onclick="pagar(99)">
-           🎱 Fortalecer – R$ 99
+              🎱 Fortalecer – R$ 99
             </button>
 
             <button type="button" class="btn btn-green-option" onclick="pagar(50)">
-            Valor com desconto – R$ 50
-           </button>
-           </div>
+              Valor com desconto – R$ 50
+            </button>
+          </div>
 
-            <div class="small-note">
-              Depois de pagar, volte a esta página e crie sua conta com o mesmo e-mail.
-            </div>
+          <div class="small-note">
+            Depois de pagar, volte a esta página e crie sua conta com o mesmo e-mail.
+          </div>
 
           <div class="small-note" style="margin-top: 14px; line-height: 1.6;">
-  Este treinamento possui caráter educacional, voltado ao aprimoramento técnico na sinuca online. Os resultados dependem da prática e aplicação individual de cada aluno.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.6;">
-  O acesso é INDIVIDUAL E INTRANSFERÍVEL e não inclui suporte individual para dúvidas sobre as aulas.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.6;">
-  NÃO COMPARTILHE OU COMERCIALIZE O ACESSO. Isso pode resultar no bloqueio permanente sem direito a reembolso.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.6;">
-  Ao prosseguir com a compra, você declara estar ciente e de acordo com os Termos de Uso da plataforma.
-</div>
-
-<div class="small-note" style="margin-top: 12px;">
-  <a href="#" onclick="toggleTerms(); return false;" style="color: #f4c95d; text-decoration: underline;">
-  Ler Termos de Uso
-</a>
-</div>
+            Este treinamento possui caráter educacional, voltado ao aprimoramento técnico na sinuca online. Os resultados dependem da prática e aplicação individual de cada aluno.
           </div>
 
-          <div class="box" id="registerBox">
-
-          <button id="backToLoginBtnRegister" 
-  onclick="clearMessages(); showLoginFlow(); window.scrollTo(0,0);"
-  style="
-    display: inline-block;
-    margin-bottom: 16px;
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #f4c95d;
-    background: rgba(244,201,93,0.08);
-    border: 1px solid rgba(244,201,93,0.4);
-    border-radius: 10px;
-    cursor: pointer;
-    backdrop-filter: blur(6px);
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  "
-  onmouseover="
-    this.style.background='rgba(244,201,93,0.18)';
-    this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
-    this.style.transform='scale(1.02)';
-  "
-  onmouseout="
-    this.style.background='rgba(244,201,93,0.08)';
-    this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
-    this.style.transform='translateY(0)';
-  "
-  onmousedown="this.style.transform='scale(0.95)'"
-  onmouseup="this.style.transform='translateY(-1px)'"
->
-  ← Voltar ao login
-</button>            
-
-            <label class="label" for="registerName">Nome</label>
-            <input class="input" type="text" id="registerName" placeholder="Seu nome" />
-
-            <label class="label" for="registerEmail">E-mail</label>
-            <input class="input" type="email" id="registerEmail" placeholder="seuemail@exemplo.com" />
-
-            <div class="small-note">
-            ⚠️ Use exatamente o mesmo e-mail utilizado no pagamento.
-            </div>
-
-            <label class="label" for="registerPassword">Senha</label>
-            <div class="password-wrap">
-            <input class="input password-input" type="password" id="registerPassword" placeholder="Crie uma senha" />
-            <button type="button" id="togglePassword" class="toggle-password" aria-label="Mostrar ou ocultar senha">
-  <span class="eye-icon">
-    <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
-      <circle cx="12" cy="12" r="3"></circle>
-    </svg>
-
-    <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="display: none;">
-      <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94"></path>
-      <path d="M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.79 21.79 0 0 1-3.22 4.19"></path>
-      <path d="M1 1l22 22"></path>
-      <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"></path>
-    </svg>
-  </span>
-</button>
-            </div>
-
-            <button class="btn" id="registerBtn">Criar conta</button>
-
-            <div class="small-note">
-              Se o sistema informar que o e-mail ainda não está liberado, aguarde a confirmação do pagamento e tente novamente.
-            </div>
+          <div class="small-note" style="margin-top: 10px; line-height: 1.6;">
+            O acesso é INDIVIDUAL E INTRANSFERÍVEL e não inclui suporte individual para dúvidas sobre as aulas.
           </div>
 
-          <div class="box" id="loginBox">
-            <p>Se você já criou sua conta, use seu e-mail e senha para acessar as aulas.</p>
+          <div class="small-note" style="margin-top: 10px; line-height: 1.6;">
+            NÃO COMPARTILHE OU COMERCIALIZE O ACESSO. Isso pode resultar no bloqueio permanente sem direito a reembolso.
+          </div>
 
-            <label class="label" for="loginEmail">E-mail</label>
-            <input class="input" type="email" id="loginEmail" placeholder="seuemail@exemplo.com" />
+          <div class="small-note" style="margin-top: 10px; line-height: 1.6;">
+            Ao prosseguir com a compra, você declara estar ciente e de acordo com os Termos de Uso da plataforma.
+          </div>
 
-            <label class="label" for="loginPassword">Senha</label>
-            <div class="password-wrap">
-  <input class="input password-input" type="password" id="loginPassword" placeholder="Digite sua senha" />
-
-  <button type="button" id="toggleLoginPassword" class="toggle-password" aria-label="Mostrar ou ocultar senha">
-    <span class="eye-icon">
-      <svg id="eyeOpenLogin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
-        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      </svg>
-
-      <svg id="eyeClosedLogin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="display: none;">
-        <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94"></path>
-        <path d="M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.79 21.79 0 0 1-3.22 4.19"></path>
-        <path d="M1 1l22 22"></path>
-        <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"></path>
-      </svg>
-    </span>
-  </button>
-</div>
-
-            <button class="btn btn-secondary" id="loginBtn">Entrar no portal</button>
-            <button class="btn btn-ghost" id="resetBtn" style="margin-top:12px;">Esqueci minha senha</button>
-
-            <div class="small-note">
-              Use exatamente o mesmo e-mail que você utilizou no pagamento e no cadastro.
-            </div>
+          <div class="small-note" style="margin-top: 12px;">
+            <a href="#" onclick="toggleTerms(); return false;" style="color: #f4c95d; text-decoration: underline;">
+              Ler Termos de Uso
+            </a>
           </div>
         </div>
 
-        <div class="notice notice-warning" style="margin-top: 22px; line-height: 1.7;">
-  <strong>AVISO IMPORTANTE:</strong><br><br>
+        <div class="box" id="registerBox">
+          <button
+            id="backToLoginBtnRegister"
+            onclick="clearMessages(); showLoginFlow(); window.scrollTo(0,0);"
+            style="
+              display: inline-block;
+              margin-bottom: 16px;
+              padding: 10px 22px;
+              font-size: 14px;
+              font-weight: 600;
+              color: #f4c95d;
+              background: rgba(244,201,93,0.08);
+              border: 1px solid rgba(244,201,93,0.4);
+              border-radius: 10px;
+              cursor: pointer;
+              backdrop-filter: blur(6px);
+              transition: all 0.25s ease;
+              box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            "
+            onmouseover="
+              this.style.background='rgba(244,201,93,0.18)';
+              this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
+              this.style.transform='scale(1.02)';
+            "
+            onmouseout="
+              this.style.background='rgba(244,201,93,0.08)';
+              this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
+              this.style.transform='translateY(0)';
+            "
+            onmousedown="this.style.transform='scale(0.95)'"
+            onmouseup="this.style.transform='translateY(-1px)'"
+          >
+            ← Voltar ao login
+          </button>
 
-  O acesso é <strong>INDIVIDUAL E INTRANSFERÍVEL</strong>. O compartilhamento ou comercialização pode resultar em <strong>BLOQUEIO IMEDIATO E PERMANENTE</strong>, sem direito a reembolso.<br><br>
+          <label class="label" for="registerName">Nome</label>
+          <input class="input" type="text" id="registerName" placeholder="Seu nome" />
 
-  Por se tratar de um produto digital com valor acessível, o acesso <strong>NÃO INCLUI SUPORTE INDIVIDUAL</strong> para dúvidas sobre as aulas.
-</div>
+          <label class="label" for="registerEmail">E-mail</label>
+          <input class="input" type="email" id="registerEmail" placeholder="seuemail@exemplo.com" />
 
-<div class="hint" id="infoMsg"></div>
-<div class="success" id="successMsg"></div>
-<div class="error" id="errorMsg"></div>
+          <div class="small-note">
+            ⚠️ Use exatamente o mesmo e-mail utilizado no pagamento.
+          </div>
 
-      <div class="content dashboard" id="dashboardSection" style="
-  display: none;
-  background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.82)),
-    url('bg-dashboard.png');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-">
+          <label class="label" for="registerPassword">Senha</label>
+          <div class="password-wrap">
+            <input class="input password-input" type="password" id="registerPassword" placeholder="Crie uma senha" />
+            <button type="button" id="togglePassword" class="toggle-password" aria-label="Mostrar ou ocultar senha">
+              <span class="eye-icon">
+                <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
 
-  <div class="topbar">
-    <div>
-      <span class="badge">Acesso liberado</span>
-      <div class="small-note" id="userInfo"></div>
+                <svg id="eyeClosed" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="display: none;">
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94"></path>
+                  <path d="M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.79 21.79 0 0 1-3.22 4.19"></path>
+                  <path d="M1 1l22 22"></path>
+                  <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <button class="btn" id="registerBtn">Criar conta</button>
+
+          <div class="small-note">
+            Se o sistema informar que o e-mail ainda não está liberado, aguarde a confirmação do pagamento e tente novamente.
+          </div>
+        </div>
+
+        <div class="box" id="loginBox">
+          <p>Se você já criou sua conta, use seu e-mail e senha para acessar as aulas.</p>
+
+          <label class="label" for="loginEmail">E-mail</label>
+          <input class="input" type="email" id="loginEmail" placeholder="seuemail@exemplo.com" />
+
+          <label class="label" for="loginPassword">Senha</label>
+          <div class="password-wrap">
+            <input class="input password-input" type="password" id="loginPassword" placeholder="Digite sua senha" />
+
+            <button type="button" id="toggleLoginPassword" class="toggle-password" aria-label="Mostrar ou ocultar senha">
+              <span class="eye-icon">
+                <svg id="eyeOpenLogin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+
+                <svg id="eyeClosedLogin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="display: none;">
+                  <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-7 0-11-7-11-7a21.77 21.77 0 0 1 5.06-5.94"></path>
+                  <path d="M9.9 4.24A10.94 10.94 0 0 1 12 5c7 0 11 7 11 7a21.79 21.79 0 0 1-3.22 4.19"></path>
+                  <path d="M1 1l22 22"></path>
+                  <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <button class="btn btn-secondary" id="loginBtn">Entrar no portal</button>
+          <button class="btn btn-ghost" id="resetBtn" style="margin-top:12px;">Esqueci minha senha</button>
+
+          <div class="small-note">
+            Use exatamente o mesmo e-mail que você utilizou no pagamento e no cadastro.
+          </div>
+        </div>
+      </div>
+
+      <div class="notice notice-warning" style="margin-top: 22px; line-height: 1.7;">
+        <strong>AVISO IMPORTANTE:</strong><br><br>
+        O acesso é <strong>INDIVIDUAL E INTRANSFERÍVEL</strong>. O compartilhamento ou comercialização pode resultar em <strong>BLOQUEIO IMEDIATO E PERMANENTE</strong>, sem direito a reembolso.<br><br>
+        Por se tratar de um produto digital com valor acessível, o acesso <strong>NÃO INCLUI SUPORTE INDIVIDUAL</strong> para dúvidas sobre as aulas.
+      </div>
+
+      <div class="hint" id="infoMsg"></div>
+      <div class="success" id="successMsg"></div>
+      <div class="error" id="errorMsg"></div>
     </div>
-    <button class="btn btn-ghost" id="logoutBtn">Sair</button>
-  </div>
 
-  <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:16px; align-items:center; margin-bottom:20px; width:100%;">
-  <button id="backToCourses"
-  style="
-    display: none;
-    margin: 20px auto;
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #f4c95d;
-    background: rgba(244,201,93,0.08);
-    border: 1px solid rgba(244,201,93,0.4);
-    border-radius: 10px;
-    cursor: pointer;
-    backdrop-filter: blur(6px);
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  "
-  onmouseover="
-    this.style.background='rgba(244,201,93,0.18)';
-    this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
-    this.style.transform='translateY(-1px)';
-  "
-  onmouseout="
-    this.style.background='rgba(244,201,93,0.08)';
-    this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
-    this.style.transform='translateY(0)';
-  "
-  onmousedown="this.style.transform='scale(0.95)'"
-  onmouseup="this.style.transform='translateY(-1px)'"
->
-  ← Voltar aos cursos
-</button>
-  <div id="courseList"></div>
-</div>
+<div class="content dashboard" id="dashboardSection" style="
+      display: none;
+      background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.82)),
+        url('bg-dashboard.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    ">
 
-  <div class="dashboard-layout hidden" id="dashboardLayout">
-    <aside class="sidebar" id="lessonSidebar">
-  <h3>Suas aulas</h3>
+      <div class="topbar">
+        <div>
+          <span class="badge">Acesso liberado</span>
+          <div class="small-note" id="userInfo"></div>
+        </div>
+        <button class="btn btn-ghost" id="logoutBtn">Sair</button>
+      </div>
 
-  <div class="side-note">
-    Selecione uma aula para assistir.
-  </div>
-  
-  <div id="lessonList"></div>
-  </aside>
+      <div id="courseActions" style="display:flex; flex-direction:column; justify-content:center; gap:16px; align-items:center; margin-bottom:20px; width:100%;">
+        <button
+          id="backToCourses"
+          style="
+            display: none;
+            margin: 20px auto;
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #f4c95d;
+            background: rgba(244,201,93,0.08);
+            border: 1px solid rgba(244,201,93,0.4);
+            border-radius: 10px;
+            cursor: pointer;
+            backdrop-filter: blur(6px);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+          "
+          onmouseover="
+            this.style.background='rgba(244,201,93,0.18)';
+            this.style.boxShadow='0 0 12px rgba(244,201,93,0.4)';
+            this.style.transform='translateY(-1px)';
+          "
+          onmouseout="
+            this.style.background='rgba(244,201,93,0.08)';
+            this.style.boxShadow='0 4px 15px rgba(0,0,0,0.4)';
+            this.style.transform='translateY(0)';
+          "
+          onmousedown="this.style.transform='scale(0.95)'"
+          onmouseup="this.style.transform='translateY(-1px)'"
+        >
+          ← Voltar aos cursos
+        </button>
 
-    <div class="content-area">
-      <section class="featured-player" id="featuredSection">
-        <h2 id="featuredTitle">Aula 1 — Fundamentos da Mira e Introdução ao Curso</h2>
-        <p id="featuredDescription">Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
+        <div id="courseList"></div>
+      </div>
 
-        <div class="player-shell" id="featuredPlayer"></div>
-      </section>
+      <div class="dashboard-layout hidden" id="dashboardLayout">
+        <aside class="sidebar" id="lessonSidebar">
+          <h3>Suas aulas</h3>
 
-      <section class="catalog-grid" id="catalogSection">
-              </section>
+          <div class="side-note">
+            Selecione uma aula para assistir.
+          </div>
+
+          <div id="lessonList"></div>
+        </aside>
+
+        <div class="content-area">
+          <section class="featured-player" id="featuredSection">
+            <h2 id="featuredTitle">Aula 1 — Fundamentos da Mira e Introdução ao Curso</h2>
+            <p id="featuredDescription">Base inicial do curso, com os fundamentos da mira e a introdução ao método.</p>
+
+            <div class="player-shell" id="featuredPlayer"></div>
+          </section>
+
+          <section class="catalog-grid" id="catalogSection"></section>
+        </div>
+      </div>
     </div>
+
+    <section id="termsSection" class="content" style="margin-top: 28px;">
+      <div class="box">
+        <h3 style="margin-bottom: 16px;">Termos de Uso</h3>
+
+        <div class="small-note" style="line-height: 1.8;">
+          Este conteúdo possui caráter exclusivamente educacional e foi desenvolvido para aprimoramento técnico na sinuca online.
+        </div>
+
+        <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+          NÃO HÁ GARANTIA DE RESULTADOS ESPECÍFICOS, DESEMPENHO, VITÓRIAS, GANHOS OU QUALQUER RETORNO decorrente da aplicação das técnicas apresentadas.
+        </div>
+
+        <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+          Os resultados dependem da prática, dedicação, interpretação e aplicação individual de cada aluno.
+        </div>
+
+        <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+          O acesso ao conteúdo é INDIVIDUAL E INTRANSFERÍVEL, não incluindo suporte individual, acompanhamento particular, mentoria ou esclarecimento personalizado de dúvidas sobre as aulas.
+        </div>
+
+        <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+          É PROIBIDA a reprodução, redistribuição, gravação, compartilhamento ou comercialização do conteúdo disponibilizado na plataforma, total ou parcialmente, sem autorização expressa.
+        </div>
+
+        <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+          NÃO COMPARTILHE OU COMERCIALIZE O ACESSO À PLATAFORMA. Tais práticas implicarão no BLOQUEIO IMEDIATO E PERMANENTE do usuário, SEM DIREITO A REEMBOLSO.
+        </div>
+
+        <div class="small-note" style="margin-top: 10px; line-height: 1.8;">
+          Ao adquirir o acesso, o usuário declara estar ciente dessas condições e concorda integralmente com os termos de uso do conteúdo digital disponibilizado.
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
-
-<section id="termsSection" class="content" style="margin-top: 28px;">
-  <div class="box">
-    <h3 style="margin-bottom: 16px;">Termos de Uso</h3>
-
-    <div class="small-note" style="line-height: 1.8;">
-  Este conteúdo possui caráter exclusivamente educacional e foi desenvolvido para aprimoramento técnico na sinuca online.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-  NÃO HÁ GARANTIA DE RESULTADOS ESPECÍFICOS, DESEMPENHO, VITÓRIAS, GANHOS OU QUALQUER RETORNO decorrente da aplicação das técnicas apresentadas.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-  Os resultados dependem da prática, dedicação, interpretação e aplicação individual de cada aluno.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-  O acesso ao conteúdo é INDIVIDUAL E INTRANSFERÍVEL, não incluindo suporte individual, acompanhamento particular, mentoria ou esclarecimento personalizado de dúvidas sobre as aulas.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-  É PROIBIDA a reprodução, redistribuição, gravação, compartilhamento ou comercialização do conteúdo disponibilizado na plataforma, total ou parcialmente, sem autorização expressa.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-  NÃO COMPARTILHE OU COMERCIALIZE O ACESSO À PLATAFORMA. Tais práticas implicarão no BLOQUEIO IMEDIATO E PERMANENTE do usuário, SEM DIREITO A REEMBOLSO.
-</div>
-
-<div class="small-note" style="margin-top: 10px; line-height: 1.8;">
-  Ao adquirir o acesso, o usuário declara estar ciente dessas condições e concorda integralmente com os termos de uso do conteúdo digital disponibilizado.
-</div>
-  </div>
-</section>
 
           <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
